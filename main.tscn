@@ -1,3 +1,29 @@
 [gd_scene format=3 uid="uid://b2fmexmangpdu"]
 
+[ext_resource type="PackedScene" uid="uid://ufvrqekr7ija" path="res://game.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bc6tax3l3nwu8" path="res://game.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://c2maoiq75ypwp" path="res://HUD/hud.gd" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://clxaq1ltk85ul" path="res://HUD/hud_right.tscn" id="5_272bh"]
+[ext_resource type="Script" uid="uid://csrkrtmhvwk63" path="res://HUD/hud_right.gd" id="7_272bh"]
+
 [node name="Main" type="Node" unique_id=665793303]
+
+[node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
+script = ExtResource("2_0xm2m")
+
+[node name="HUD" type="Control" parent="." unique_id=1414466547]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_lquwl")
+
+[node name="HUDLeft" parent="HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
+layout_mode = 0
+script = ExtResource("5_7mycd")
+
+[node name="HUDRight" parent="HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
+layout_mode = 0
+script = ExtResource("7_272bh")
