@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qjj6t7nh1atq"
-path="res://.godot/imported/placeholder_talking_2.png-fea5816f150575ee58346110ada9a7d9.ctex"
+uid="uid://bthsgbfx76kst"
+path="res://.godot/imported/placeholder_3_talking_1.png-6ad5b849248ec031e906a86ef13508b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/placeholder_talking_2.png"
-dest_files=["res://.godot/imported/placeholder_talking_2.png-fea5816f150575ee58346110ada9a7d9.ctex"]
+source_file="res://img/placeholder_3_talking_1.png"
+dest_files=["res://.godot/imported/placeholder_3_talking_1.png-6ad5b849248ec031e906a86ef13508b8.ctex"]
 
 [params]
 

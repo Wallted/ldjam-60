@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://clxaq1ltk85ul"]
 
 [ext_resource type="Script" uid="uid://30j2hlyt3x6d" path="res://HUD/hud_right.gd" id="1_t4b6d"]
+[ext_resource type="PackedScene" uid="uid://bwbjcj7gutp42" path="res://HUD/person.tscn" id="2_ccku2"]
 
 [sub_resource type="Theme" id="Theme_nkh55"]
 
@@ -42,3 +43,15 @@ grow_vertical = 0
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
+
+[node name="Person" parent="GridContainer" unique_id=1468336816 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = 1
+
+[node name="Person2" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = 2
+
+[node name="Person3" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = 3
