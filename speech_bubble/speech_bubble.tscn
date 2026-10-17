@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dsg5bxkh2cocg"]
+
+[ext_resource type="Script" uid="uid://duawx1lpcrybo" path="res://speech_bubble/speech_bubble.gd" id="1_ti646"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a23f0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.84281015, 0, 0.0017037323, 1)
+
+[node name="SpeechBubble" type="Control" unique_id=197747971]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ti646")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1933849306]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="PanelContainer" unique_id=2053433856]
+custom_minimum_size = Vector2(30, 30)
+clip_contents = false
+layout_mode = 2
+text = "<placeholder text>"
+fit_content = true
+scroll_active = false
+
+[node name="Border" type="PanelContainer" parent="." unique_id=1168419180]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a23f0")
