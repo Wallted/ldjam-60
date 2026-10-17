@@ -1,31 +1,87 @@
 [gd_scene format=3 uid="uid://bwbjcj7gutp42"]
 
 [ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
-[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_idle.png" id="1_yuk71"]
-[ext_resource type="Texture2D" uid="uid://kbciljqqdhvi" path="res://img/placeholder_talking_1.png" id="2_w2xfa"]
-[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_talking_2.png" id="3_r73l3"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="2_w2xfa"]
+[ext_resource type="Texture2D" uid="uid://gb72nd0ogcis" path="res://img/placeholder_2_idle.png" id="3_dwhfs"]
+[ext_resource type="Texture2D" uid="uid://kbciljqqdhvi" path="res://img/placeholder_1_talking_1.png" id="3_r73l3"]
+[ext_resource type="Texture2D" uid="uid://djt4o420wvuig" path="res://img/placeholder_3_idle.png" id="4_qvx2b"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="4_wxnko"]
+[ext_resource type="Texture2D" uid="uid://d3kvq5113d84l" path="res://img/placeholder_2_talking_1.png" id="6_mfyg2"]
+[ext_resource type="Texture2D" uid="uid://c6ycp27o1x2q" path="res://img/placeholder_2_talking_2.png" id="7_icjey"]
+[ext_resource type="Texture2D" uid="uid://bthsgbfx76kst" path="res://img/placeholder_3_talking_1.png" id="9_3jopy"]
+[ext_resource type="Texture2D" uid="uid://cukcb1drnxbb5" path="res://img/placeholder_3_talking_2.png" id="10_3cu1k"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nkh55"]
+[sub_resource type="GDScript" id="GDScript_vpyfa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5813k"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_yuk71")
+"texture": ExtResource("2_w2xfa")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"idle_1",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dwhfs")
+}],
+"loop": 1,
+"name": &"idle_2",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qvx2b")
+}],
+"loop": 1,
+"name": &"idle_3",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_w2xfa")
+"texture": ExtResource("3_r73l3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_r73l3")
+"texture": ExtResource("4_wxnko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w2xfa")
 }],
 "loop": 1,
-"name": &"talking",
+"name": &"talking_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mfyg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_icjey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dwhfs")
+}],
+"loop": 1,
+"name": &"talking_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3jopy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3cu1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qvx2b")
+}],
+"loop": 1,
+"name": &"talking_3",
 "speed": 5.0
 }]
+script = SubResource("GDScript_vpyfa")
 
 [node name="Person" type="Control" unique_id=1468336816]
 custom_minimum_size = Vector2(100, 100)
@@ -47,7 +103,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Placeholder_1" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_nkh55")
-animation = &"talking"
+[node name="Avatar" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
+sprite_frames = SubResource("SpriteFrames_5813k")
+animation = &"talking_3"
