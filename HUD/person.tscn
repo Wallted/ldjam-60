@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bwbjcj7gutp42"]
+
+[ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_idle.png" id="1_yuk71"]
+[ext_resource type="Texture2D" uid="uid://kbciljqqdhvi" path="res://img/placeholder_talking_1.png" id="2_w2xfa"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_talking_2.png" id="3_r73l3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nkh55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yuk71")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w2xfa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r73l3")
+}],
+"loop": 1,
+"name": &"talking",
+"speed": 5.0
+}]
+
+[node name="Person" type="Control" unique_id=1468336816]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w2xfa")
+
+[node name="Node2D" type="Control" parent="." unique_id=301940674]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Placeholder_1" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_nkh55")
+animation = &"talking"

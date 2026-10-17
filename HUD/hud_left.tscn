@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://dpb5tvih7c5xv"]
 
+[ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_y81a5"]
+
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 252.0
+offset_bottom = 648.0
+script = ExtResource("1_y81a5")
