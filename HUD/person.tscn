@@ -1,117 +1,11 @@
 [gd_scene format=3 uid="uid://bwbjcj7gutp42"]
 
 [ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
-[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="2_w2xfa"]
-[ext_resource type="Texture2D" uid="uid://gb72nd0ogcis" path="res://img/placeholder_2_idle.png" id="3_dwhfs"]
-[ext_resource type="Texture2D" uid="uid://kbciljqqdhvi" path="res://img/placeholder_1_talking_1.png" id="3_r73l3"]
-[ext_resource type="Texture2D" uid="uid://djt4o420wvuig" path="res://img/placeholder_3_idle.png" id="4_qvx2b"]
-[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="4_wxnko"]
-[ext_resource type="Texture2D" uid="uid://yjtwwdhgh4ca" path="res://img/placeholder_4_idle.png" id="5_83s5o"]
-[ext_resource type="Texture2D" uid="uid://d3kvq5113d84l" path="res://img/placeholder_2_talking_1.png" id="6_mfyg2"]
-[ext_resource type="Texture2D" uid="uid://c6ycp27o1x2q" path="res://img/placeholder_2_talking_2.png" id="7_icjey"]
-[ext_resource type="Texture2D" uid="uid://bthsgbfx76kst" path="res://img/placeholder_3_talking_1.png" id="9_3jopy"]
-[ext_resource type="Texture2D" uid="uid://cukcb1drnxbb5" path="res://img/placeholder_3_talking_2.png" id="10_3cu1k"]
-[ext_resource type="Texture2D" uid="uid://cf41xye4khd6x" path="res://img/placeholder_4_talking_1.png" id="12_2evq3"]
-[ext_resource type="Texture2D" uid="uid://yykd1n35yare" path="res://img/placeholder_4_talking_2.png" id="13_owash"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 shadow_color = Color(0.21176471, 0.96862745, 0.1882353, 0.26666668)
 shadow_size = 8
-
-[sub_resource type="GDScript" id="GDScript_vpyfa"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5813k"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_w2xfa")
-}],
-"loop": 1,
-"name": &"idle_1",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_dwhfs")
-}],
-"loop": 1,
-"name": &"idle_2",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_qvx2b")
-}],
-"loop": 1,
-"name": &"idle_3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_83s5o")
-}],
-"loop": 1,
-"name": &"idle_4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_r73l3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_wxnko")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_w2xfa")
-}],
-"loop": 1,
-"name": &"talking_1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_mfyg2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_icjey")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_dwhfs")
-}],
-"loop": 1,
-"name": &"talking_2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_3jopy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_3cu1k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_qvx2b")
-}],
-"loop": 1,
-"name": &"talking_3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_2evq3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_owash")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_83s5o")
-}],
-"loop": 1,
-"name": &"talking_4",
-"speed": 5.0
-}]
-script = SubResource("GDScript_vpyfa")
 
 [node name="Person" type="Control" unique_id=1468336816]
 custom_minimum_size = Vector2(100, 100)
@@ -133,6 +27,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Avatar" type="Sprite2D" parent="Node2D" unique_id=2042593102]
+scale = Vector2(0.25, 0.25)
+
 [node name="AvatarActiveBG" type="PanelContainer" parent="Node2D" unique_id=735677909]
 layout_mode = 1
 anchors_preset = 8
@@ -147,8 +44,3 @@ offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g8veb")
-
-[node name="Avatar" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_5813k")
-animation = &"talking_4"
