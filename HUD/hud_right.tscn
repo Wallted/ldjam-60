@@ -15,14 +15,32 @@ offset_bottom = 648.0
 grow_horizontal = 0
 script = ExtResource("1_t4b6d")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1046310963]
+custom_minimum_size = Vector2(250, 648)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_bottom = 648.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=353139870]
+propagate_maximum_size = true
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 60.0
+color = Color(0.7446192, 0.62969726, 0.20624554, 1)
+
 [node name="Label" type="Label" parent="." unique_id=565338275]
 layout_mode = 0
-offset_right = 252.0
+offset_right = 250.0
 offset_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme = SubResource("Theme_nkh55")
-theme_override_colors/font_color = Color(1, 0.6627451, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.7160463, 0, 0, 0.73333335)
 theme_override_font_sizes/font_size = 30
 text = "Placeholder"
@@ -36,7 +54,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -252.0
+offset_left = -250.0
 offset_top = -588.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -55,3 +73,7 @@ person_id = 2
 [node name="Person3" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 person_id = 3
+
+[node name="Person4" parent="GridContainer" unique_id=1940082769 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = 4
