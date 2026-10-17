@@ -1,10 +1,36 @@
 [gd_scene format=3 uid="uid://dpb5tvih7c5xv"]
 
-[ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_y81a5"]
+[ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_2ihca"]
+[ext_resource type="PackedScene" uid="uid://dsg5bxkh2cocg" path="res://speech_bubble/speech_bubble.tscn" id="1_y81a5"]
+[ext_resource type="Script" uid="uid://de7ujkkpaaty7" path="res://HUD/button.gd" id="2_kdo4x"]
 
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 252.0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2ihca")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1624288834]
+layout_mode = 0
+offset_right = 295.0
 offset_bottom = 648.0
-script = ExtResource("1_y81a5")
+
+[node name="ChatWindow" type="VBoxContainer" parent="ScrollContainer" unique_id=216737008]
+custom_minimum_size = Vector2(222, 339.93)
+layout_mode = 2
+
+[node name="SpeechBubble" parent="ScrollContainer/ChatWindow" unique_id=35894961 instance=ExtResource("1_y81a5")]
+custom_minimum_size = Vector2(30, 69)
+layout_mode = 2
+author = ""
+text = "text set manually in HudLeft.SpeechBubble
+and test some longer text"
+
+[node name="Button" type="Button" parent="." unique_id=1452632014]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 10.0
+offset_right = 377.0
+offset_bottom = 57.0
+script = ExtResource("2_kdo4x")
