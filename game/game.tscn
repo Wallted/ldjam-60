@@ -46,21 +46,24 @@ scale_ratio = 3
 zoom_level = 2
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
 
-[node name="FirstRoom2p5" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
+[node name="FirstRoom2p5" parent="." unique_id=325990417 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale_ratio = 2
 parent_offset = Vector2(2, 2)
 zoom_level = 1
+parent_room = NodePath("../FirstRoom3")
 
-[node name="FirstRoom2" parent="." unique_id=707941366 instance=ExtResource("3_ryrav")]
+[node name="FirstRoom2" parent="." unique_id=707941366 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
 scale_ratio = 2
 parent_offset = Vector2(-2, -2)
 zoom_level = 1
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fc0e3")])
+parent_room = NodePath("../FirstRoom3")
 
-[node name="FirstRoom1" parent="." unique_id=733392714 instance=ExtResource("3_ryrav")]
+[node name="FirstRoom1" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 position = Vector2(-1, 0)
 scale = Vector2(1, 1)
 scale_ratio = 1
 parent_offset = Vector2(-1, -1)
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
+parent_room = NodePath("../FirstRoom2p5")

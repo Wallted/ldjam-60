@@ -3,12 +3,6 @@ class_name RoomCamera
 
 var tween: Tween
 
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
-
 func zoom_room(room : GameRoom) -> Signal:
 	var room_size = room.get_size()
 	var viewport_size = get_viewport_rect().size
