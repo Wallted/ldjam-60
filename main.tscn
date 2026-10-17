@@ -9,17 +9,19 @@
 
 [node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
 
-[node name="HUD" type="Control" parent="." unique_id=1414466547]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=66122121]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1414466547]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 script = ExtResource("3_lquwl")
 
-[node name="HUDLeft" parent="HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
+[node name="HUDLeft" parent="CanvasLayer/HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
 layout_mode = 0
-offset_right = 252.0
-offset_bottom = 648.0
+offset_right = 557.0
+offset_bottom = 650.0
 
-[node name="HUDRight" parent="HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
+[node name="HUDRight" parent="CanvasLayer/HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
 layout_mode = 1
