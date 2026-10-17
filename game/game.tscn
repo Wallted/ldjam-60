@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://ufvrqekr7ija"]
+
+[ext_resource type="Script" uid="uid://cb6e7pij5avri" path="res://game/camera_2d.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://bc6tax3l3nwu8" path="res://game/game.gd" id="1_fc0e3"]
+[ext_resource type="Script" uid="uid://crrlec2d1bx6b" path="res://game/room_manager.gd" id="3_7jktm"]
+[ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game/game_room.tscn" id="3_ryrav"]
+[ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door.gd" id="4_ryrav"]
+
+[sub_resource type="Resource" id="Resource_bvpig"]
+script = ExtResource("4_ryrav")
+coord = Vector2(0, 1)
+side = Vector2(-1, 0)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_fc0e3"]
+script = ExtResource("4_ryrav")
+coord = Vector2(2, 2)
+side = Vector2(0, 1)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_fhkfd"]
+script = ExtResource("4_ryrav")
+coord = Vector2(1, 0)
+side = Vector2(0, -1)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_7jktm"]
+script = ExtResource("4_ryrav")
+coord = Vector2(0, 1)
+side = Vector2(-1, 0)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[node name="Game" type="Node2D" unique_id=1995553335]
+script = ExtResource("1_fc0e3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2096303048]
+zoom = Vector2(5, 5)
+script = ExtResource("1_e2o6t")
+
+[node name="RoomManager" type="Node2D" parent="." unique_id=65352006]
+script = ExtResource("3_7jktm")
+
+[node name="FirstRoom3" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
+position = Vector2(1000, 0)
+size = Vector2(128, 128)
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
+
+[node name="FirstRoom2" parent="." unique_id=707941366 instance=ExtResource("3_ryrav")]
+position = Vector2(200, 0)
+scale = Vector2(5, 5)
+size = Vector2(128, 128)
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fc0e3")])
+
+[node name="FirstRoom1" parent="." unique_id=733392714 instance=ExtResource("3_ryrav")]
+scale = Vector2(1, 1)
+size = Vector2(128, 128)
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
