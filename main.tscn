@@ -9,7 +9,6 @@
 [node name="Main" type="Node" unique_id=665793303]
 
 [node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=66122121]
 
