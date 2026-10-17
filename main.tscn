@@ -4,10 +4,12 @@
 [ext_resource type="Script" uid="uid://c2maoiq75ypwp" path="res://HUD/hud.gd" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://clxaq1ltk85ul" path="res://HUD/hud_right.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://cl1vkv2b6kioq" path="res://path_segments/path_segment.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node" unique_id=665793303]
 
 [node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=66122121]
 
@@ -25,3 +27,7 @@ offset_bottom = 650.0
 
 [node name="HUDRight" parent="CanvasLayer/HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
 layout_mode = 1
+
+[node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
+visible = false
+is_the_head_master_workaround_animator_singleton = true
