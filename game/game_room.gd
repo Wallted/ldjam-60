@@ -97,7 +97,6 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 			print('pressed room %s' % name)
 			request_focus.emit()
 
-
 func _on_room_area_mouse_entered() -> void:
 	sprite_2d.material.set("shader_parameter/selected",	true);
 
