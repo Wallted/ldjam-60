@@ -16,12 +16,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
+mouse_filter = 1
 script = ExtResource("3_lquwl")
 
 [node name="HUDLeft" parent="CanvasLayer/HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
 layout_mode = 0
 offset_right = 557.0
 offset_bottom = 650.0
+mouse_filter = 1
 
 [node name="HUDRight" parent="CanvasLayer/HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
 layout_mode = 1
+mouse_filter = 1

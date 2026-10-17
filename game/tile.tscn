@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dugjn7eemunam"]
+
+[ext_resource type="Texture2D" uid="uid://rcf51jdb0ww7" path="res://icon.svg" id="1_ddu76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyb1k"]
+size = Vector2(128, 128)
+
+[node name="Tile" type="Area2D" unique_id=1712489732]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=667413929]
+shape = SubResource("RectangleShape2D_jyb1k")
+
+[node name="TileSprite" type="Sprite2D" parent="." unique_id=1489123842]
+texture = ExtResource("1_ddu76")

@@ -41,17 +41,26 @@ script = ExtResource("1_e2o6t")
 script = ExtResource("3_7jktm")
 
 [node name="FirstRoom3" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
-position = Vector2(1000, 0)
-size = Vector2(128, 128)
+scale = Vector2(1, 1)
+scale_ratio = 3
+zoom_level = 2
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
 
+[node name="FirstRoom2p5" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
+scale_ratio = 2
+parent_offset = Vector2(2, 2)
+zoom_level = 1
+
 [node name="FirstRoom2" parent="." unique_id=707941366 instance=ExtResource("3_ryrav")]
-position = Vector2(200, 0)
-scale = Vector2(5, 5)
-size = Vector2(128, 128)
+scale = Vector2(1, 1)
+scale_ratio = 2
+parent_offset = Vector2(-2, -2)
+zoom_level = 1
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fc0e3")])
 
 [node name="FirstRoom1" parent="." unique_id=733392714 instance=ExtResource("3_ryrav")]
+position = Vector2(-1, 0)
 scale = Vector2(1, 1)
-size = Vector2(128, 128)
+scale_ratio = 1
+parent_offset = Vector2(-1, -1)
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
