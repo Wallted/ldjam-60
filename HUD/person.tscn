@@ -11,6 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://bthsgbfx76kst" path="res://img/placeholder_3_talking_1.png" id="9_3jopy"]
 [ext_resource type="Texture2D" uid="uid://cukcb1drnxbb5" path="res://img/placeholder_3_talking_2.png" id="10_3cu1k"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.27645758, 0.75829554, 0, 1)
+shadow_color = Color(1, 1, 1, 0.6)
+shadow_size = 5
+
 [sub_resource type="GDScript" id="GDScript_vpyfa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5813k"]
@@ -103,6 +113,21 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="AvatarActiveBG" type="PanelContainer" parent="Node2D" unique_id=735677909]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g8veb")
+
 [node name="Avatar" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
 sprite_frames = SubResource("SpriteFrames_5813k")
-animation = &"talking_3"
+animation = &"idle_1"
