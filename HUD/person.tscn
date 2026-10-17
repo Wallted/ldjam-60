@@ -30,8 +30,11 @@ animations = [{
 [node name="Person" type="Control" unique_id=1468336816]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 3
+anchors_preset = 0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_w2xfa")
 
 [node name="Node2D" type="Control" parent="." unique_id=301940674]

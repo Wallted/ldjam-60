@@ -39,6 +39,6 @@ offset_left = -252.0
 offset_top = -588.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/h_separation = 52
+theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
