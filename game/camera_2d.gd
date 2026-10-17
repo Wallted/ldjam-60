@@ -3,16 +3,7 @@ class_name RoomCamera
 
 var tween: Tween
 
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
-
-func zoom_room(room : GameRoom, instant: bool) -> void:
-	if room.position == position:
-		return
-	
+func zoom_room(room : GameRoom) -> Signal:
 	var room_size = room.get_size()
 	var viewport_size = get_viewport_rect().size
 	
@@ -21,15 +12,12 @@ func zoom_room(room : GameRoom, instant: bool) -> void:
 	
 	var zoom_factor = min(zoom_x, zoom_y)
 	var _zoom = Vector2(zoom_factor, zoom_factor)
+	
+	if tween:
+		tween.kill()
 
-	if instant:
-		position = room.position
-		zoom = _zoom
-
-	if not tween or not tween.is_running():
-		if tween:
-			tween.kill()
-		tween = get_tree().create_tween().set_parallel(true)
-		tween.tween_property(self, 'position', room.position, 0.25).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(self, 'zoom', _zoom, 0.25).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel()
+	tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(self, 'position', room.position, 0.15).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, 'zoom', _zoom, 0.15).set_trans(Tween.TRANS_CUBIC)
+	tween.parallel()
+	return tween.finished
