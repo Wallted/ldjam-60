@@ -1,7 +1,44 @@
 [gd_scene format=3 uid="uid://clxaq1ltk85ul"]
 
+[ext_resource type="Script" uid="uid://30j2hlyt3x6d" path="res://HUD/hud_right.gd" id="1_t4b6d"]
+
+[sub_resource type="Theme" id="Theme_nkh55"]
+
 [node name="HUDRight" type="Control" unique_id=1327092940]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -252.0
+offset_bottom = 648.0
+grow_horizontal = 0
+script = ExtResource("1_t4b6d")
+
+[node name="Label" type="Label" parent="." unique_id=565338275]
+layout_mode = 0
+offset_right = 252.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme = SubResource("Theme_nkh55")
+theme_override_colors/font_color = Color(1, 0.6627451, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.7160463, 0, 0, 0.73333335)
+theme_override_font_sizes/font_size = 30
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=438519031]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = -588.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/h_separation = 52
+theme_override_constants/v_separation = 0
+columns = 2
