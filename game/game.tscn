@@ -12,6 +12,11 @@ coord = Vector2(0, 1)
 side = Vector2(-1, 0)
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
+[sub_resource type="Resource" id="Resource_m75es"]
+script = ExtResource("4_ryrav")
+side = Vector2(0, -1)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
 [sub_resource type="Resource" id="Resource_fc0e3"]
 script = ExtResource("4_ryrav")
 coord = Vector2(2, 2)
@@ -50,6 +55,7 @@ doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
 scale_ratio = 2
 parent_offset = Vector2(2, 2)
 zoom_level = 1
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es")])
 parent_room = NodePath("../FirstRoom3")
 
 [node name="FirstRoom2" parent="." unique_id=707941366 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
