@@ -6,4 +6,4 @@ func _ready():
 	
 	
 func _button_pressed():
-	hud_left.send_message()
+	hud_left.send_message('Rick', 'Never gonna give you up', 3.0)

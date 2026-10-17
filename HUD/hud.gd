@@ -14,5 +14,10 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func send_message(message: String):
-	hud_left.send_message(message)
+func send_message(
+	author: String = '',
+	message: String = '',
+	duration: float = 0.0,
+	avatar: Texture2D = null,
+):
+	hud_left.send_message(author, message, duration, avatar)

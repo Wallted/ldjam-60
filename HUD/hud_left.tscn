@@ -23,15 +23,17 @@ offset_right = 250.0
 offset_bottom = 648.0
 
 [node name="ChatWindow" type="VBoxContainer" parent="ScrollContainer" unique_id=216737008]
-custom_minimum_size = Vector2(222, 339.93)
+custom_minimum_size = Vector2(295, 339.93)
 layout_mode = 2
 
 [node name="SpeechBubble" parent="ScrollContainer/ChatWindow" unique_id=35894961 instance=ExtResource("1_y81a5")]
-custom_minimum_size = Vector2(30, 69)
+custom_minimum_size = Vector2(30, 112)
 layout_mode = 2
 author = ""
-text = "text set manually in HudLeft.SpeechBubble
-and test some longer text"
+text = "text set manually in HudLeft.SpeechBubble to test wrapping
+on
+some longer text
+and longer linessssssssssssssssssssssssssssssssss"
 
 [node name="Button" type="Button" parent="." unique_id=1452632014]
 layout_mode = 0

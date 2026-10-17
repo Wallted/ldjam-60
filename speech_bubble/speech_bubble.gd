@@ -2,17 +2,28 @@
 extends Control
 class_name SpeechBubble
 
-@onready var panel_container: PanelContainer = $PanelContainer
-@onready var text_node: RichTextLabel = $PanelContainer/Text
+@onready var text_container: PanelContainer = $TextContainer
+@onready var text_node: RichTextLabel = $TextContainer/Text
+
+@onready var avatar: TextureRect = $Avatar
 
 @export var author = '<placeholder author>'
 @export_multiline var text: String = '<placeholder text>':
 	set(value):
 		text = value
-		$PanelContainer/Text.text = value
+		$TextContainer/Text.text = value
+@export var duration: float = 0.0
+
+func _process(delta: float) -> void:
+	if duration:
+		if text_node.visible_ratio <= 1.0:
+			text_node.visible_ratio += delta/duration
+	else:
+		text_node.visible_ratio = 1.0
 
 func _ready():
 	text_node.text = text
+	text_node.visible_ratio = 0.0
 
 	text_node.fit_content = true
 	text_node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -23,4 +34,7 @@ func _ready():
 	call_deferred("_update_bubble_size")
 
 func _update_bubble_size() -> void:
-	custom_minimum_size.y = panel_container.get_combined_minimum_size().y
+	custom_minimum_size.y = text_container.get_combined_minimum_size().y + avatar.size.y
+	
+func force_display():
+	text_node.visible_ratio = 1.0
