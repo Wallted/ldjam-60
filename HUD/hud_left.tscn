@@ -7,13 +7,19 @@
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 250.0
+offset_bottom = 648.0
 script = ExtResource("1_2ihca")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=576049416]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1624288834]
 layout_mode = 0
-offset_right = 295.0
+offset_right = 250.0
 offset_bottom = 648.0
 
 [node name="ChatWindow" type="VBoxContainer" parent="ScrollContainer" unique_id=216737008]
