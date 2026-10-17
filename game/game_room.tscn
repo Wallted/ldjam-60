@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h802i5fumcjv"]
 
-[ext_resource type="Script" uid="uid://d1qk77dax1anj" path="res://game_room.gd" id="1_bvpig"]
+[ext_resource type="Script" uid="uid://d1qk77dax1anj" path="res://game/game_room.gd" id="1_bvpig"]
 [ext_resource type="Texture2D" uid="uid://rcf51jdb0ww7" path="res://icon.svg" id="3_5qhiv"]
 
 [node name="GameRoom" type="Node2D" unique_id=1382508797]

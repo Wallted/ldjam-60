@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://ufvrqekr7ija"]
 
-[ext_resource type="Script" uid="uid://cb6e7pij5avri" path="res://camera_2d.gd" id="1_e2o6t"]
-[ext_resource type="Script" uid="uid://bc6tax3l3nwu8" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game_room.tscn" id="3_ryrav"]
-[ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://door.gd" id="4_ryrav"]
+[ext_resource type="Script" uid="uid://cb6e7pij5avri" path="res://game/camera_2d.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://bc6tax3l3nwu8" path="res://game/game.gd" id="1_fc0e3"]
+[ext_resource type="Script" uid="uid://crrlec2d1bx6b" path="res://game/room_manager.gd" id="3_7jktm"]
+[ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game/game_room.tscn" id="3_ryrav"]
+[ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door.gd" id="4_ryrav"]
 
 [sub_resource type="Resource" id="Resource_bvpig"]
 script = ExtResource("4_ryrav")
@@ -37,6 +38,7 @@ zoom = Vector2(5, 5)
 script = ExtResource("1_e2o6t")
 
 [node name="RoomManager" type="Node2D" parent="." unique_id=65352006]
+script = ExtResource("3_7jktm")
 
 [node name="FirstRoom3" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
 position = Vector2(1000, 0)

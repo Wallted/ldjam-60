@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var camera_2d: RoomCamera = $Camera2D
+@onready var camera_2d: RoomCamera = $"../Camera2D"
 var room_list : Array[GameRoom]
 
 var zoom_level : int = 0
