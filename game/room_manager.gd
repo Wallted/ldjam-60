@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 			change_zoom()
 
 func _ready() -> void:
-	for _child in get_children():
+	for _child in get_parent().get_children():
 		if _child is GameRoom:
 			room_list.append(_child)
 	room_list.reverse()
