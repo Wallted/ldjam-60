@@ -6,20 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://kbciljqqdhvi" path="res://img/placeholder_1_talking_1.png" id="3_r73l3"]
 [ext_resource type="Texture2D" uid="uid://djt4o420wvuig" path="res://img/placeholder_3_idle.png" id="4_qvx2b"]
 [ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="4_wxnko"]
+[ext_resource type="Texture2D" uid="uid://yjtwwdhgh4ca" path="res://img/placeholder_4_idle.png" id="5_83s5o"]
 [ext_resource type="Texture2D" uid="uid://d3kvq5113d84l" path="res://img/placeholder_2_talking_1.png" id="6_mfyg2"]
 [ext_resource type="Texture2D" uid="uid://c6ycp27o1x2q" path="res://img/placeholder_2_talking_2.png" id="7_icjey"]
 [ext_resource type="Texture2D" uid="uid://bthsgbfx76kst" path="res://img/placeholder_3_talking_1.png" id="9_3jopy"]
 [ext_resource type="Texture2D" uid="uid://cukcb1drnxbb5" path="res://img/placeholder_3_talking_2.png" id="10_3cu1k"]
+[ext_resource type="Texture2D" uid="uid://cf41xye4khd6x" path="res://img/placeholder_4_talking_1.png" id="12_2evq3"]
+[ext_resource type="Texture2D" uid="uid://yykd1n35yare" path="res://img/placeholder_4_talking_2.png" id="13_owash"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.27645758, 0.75829554, 0, 1)
-shadow_color = Color(1, 1, 1, 0.6)
-shadow_size = 5
+shadow_color = Color(0.21176471, 0.96862745, 0.1882353, 0.26666668)
+shadow_size = 8
 
 [sub_resource type="GDScript" id="GDScript_vpyfa"]
 
@@ -47,6 +45,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_83s5o")
+}],
+"loop": 1,
+"name": &"idle_4",
 "speed": 5.0
 }, {
 "frames": [{
@@ -90,6 +96,20 @@ animations = [{
 "loop": 1,
 "name": &"talking_3",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_2evq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_owash")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_83s5o")
+}],
+"loop": 1,
+"name": &"talking_4",
+"speed": 5.0
 }]
 script = SubResource("GDScript_vpyfa")
 
@@ -129,5 +149,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g8veb")
 
 [node name="Avatar" type="AnimatedSprite2D" parent="Node2D" unique_id=2085319792]
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_5813k")
-animation = &"idle_1"
+animation = &"talking_4"

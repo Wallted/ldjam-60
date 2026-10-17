@@ -73,3 +73,7 @@ person_id = 2
 [node name="Person3" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 person_id = 3
+
+[node name="Person4" parent="GridContainer" unique_id=1940082769 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = 4
