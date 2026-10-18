@@ -2,6 +2,7 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
+signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
 @export_group("Grid")
 @export
@@ -17,6 +18,7 @@ var doors: Array[Door]
 
 @export
 var parent_room: GameRoom
+
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -39,6 +41,7 @@ func _ready() -> void:
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
 
+
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:
@@ -53,6 +56,7 @@ func _setup_tiles() -> void:
 
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
+			_tile.path_hover.connect(path_hover.emit.bind(_tile))
 			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 
@@ -137,19 +141,21 @@ func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, t
 			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
-	for _t in tile_list:
-		_t.modulate = Color.WHITE 
-	if _tile:
-		for t in get_neighbour_tiles(_tile.coords):
-			t.modulate = Color.AQUA
-		_tile.modulate = Color.AQUAMARINE
+	pass
+	#for _t in tile_list:
+		#_t.modulate = Color.WHITE 
+	#if _tile:
+		#for t in get_neighbour_tiles(_tile.coords):
+			#t.modulate = Color.AQUA
+		#_tile.modulate = Color.AQUAMARINE
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
 
+
 func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			request_focus.emit()
 
 func _on_room_area_mouse_entered() -> void:
