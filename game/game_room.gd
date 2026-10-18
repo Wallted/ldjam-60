@@ -128,7 +128,7 @@ func enable_tiles() -> void:
 		var _tile : Area2D = _item
 		_tile.input_pickable = true
 
-func update_parent() -> void:
+func update_parent(_disconnect: bool = false) -> void:
 	if not parent_room:
 		return
 
@@ -136,16 +136,24 @@ func update_parent() -> void:
 		if door_tile.is_source_exit:
 			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
 			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
-			if follow_tile: 
-				follow_tile.has_energy = door_tile.has_energy
-				follow_tile.is_source_exit = true
+			if follow_tile:
+				if _disconnect:
+					follow_tile.has_energy = false
+					follow_tile.is_source_exit = false
+				else:
+					follow_tile.has_energy = door_tile.has_energy
+					follow_tile.is_source_exit = true
 
 		if door_tile.is_source_entry:
 			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
 			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
-			if follow_tile: 
-				door_tile.has_energy = follow_tile.has_energy
-				follow_tile.is_source_entry = true
+			if follow_tile:
+				if _disconnect:
+					door_tile.has_energy = false
+					follow_tile.is_source_entry = false
+				else:
+					door_tile.has_energy = follow_tile.has_energy
+					follow_tile.is_source_entry = true
 
 var tween: Tween
 var rotating = false
@@ -175,21 +183,8 @@ func rotate_room() -> void:
 		child.reparent(self)
 		child.rotate_room()
 
-	for door_tile in door_list:
-		if door_tile.is_source_exit:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
-			if follow_tile: 
-				follow_tile.has_energy = false
-				follow_tile.is_source_exit = false
+	update_parent(true)
 
-		if door_tile.is_source_entry:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
-			if follow_tile: 
-				door_tile.has_energy = false
-				follow_tile.is_source_entry = false
-	
 	for _t in tile_list:
 		_t.rotate_tile()
 	
