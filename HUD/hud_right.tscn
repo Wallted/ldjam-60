@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clxaq1ltk85ul"]
 
-[ext_resource type="Script" uid="uid://csrkrtmhvwk63" path="res://HUD/hud_right.gd" id="1_t4b6d"]
+[ext_resource type="Script" uid="uid://30j2hlyt3x6d" path="res://HUD/hud_right.gd" id="1_t4b6d"]
 [ext_resource type="PackedScene" uid="uid://bwbjcj7gutp42" path="res://HUD/person.tscn" id="2_ccku2"]
 
 [sub_resource type="Theme" id="Theme_nkh55"]

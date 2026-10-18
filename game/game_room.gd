@@ -2,7 +2,6 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
-signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
 @export_group("Grid")
@@ -28,6 +27,7 @@ var tile_list: Array[Tile]
 var door_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
+var room_area_entered: bool
 
 @onready 
 var grid: Node2D = $Grid
@@ -39,7 +39,7 @@ var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("rotate") and area_entered and not rotating:
+	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
 		tween_rotate_room()
 
 func _ready() -> void:
@@ -146,6 +146,7 @@ func update_parent() -> void:
 			if follow_tile: 
 				door_tile.has_energy = follow_tile.has_energy
 				follow_tile.is_source_entry = true
+
 var tween: Tween
 var rotating = false
 func tween_rotate_room() -> void:
@@ -205,21 +206,19 @@ func _on_tile_mouse_entered(_tile: Tile) -> void:
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
 
-
 func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			request_focus.emit()
 
-var area_entered: bool
 func _on_room_area_mouse_entered() -> void:
-	area_entered = true
+	room_area_entered = true
 	for _t in tile_list:
 		_t.modulate = Color.WHITE
 	sprite_2d.material.set("shader_parameter/selected",	true);
 
 func _on_room_area_mouse_exited() -> void:
-	area_entered = false
+	room_area_entered = false
 	sprite_2d.material.set("shader_parameter/selected",	false);
 	for _t in tile_list:
 		_t.modulate = Color.WHITE

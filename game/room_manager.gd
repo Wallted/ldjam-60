@@ -10,7 +10,6 @@ var camera_2d: RoomCamera = $"../Camera2D"
 var _path_cursor: PathSegment
 var _path_cursor_north_not_west: bool
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
@@ -28,7 +27,6 @@ func _ready() -> void:
 
 			var _room : GameRoom = _child
 			_room.request_focus.connect(_on_focus_request.bind(_room))
-			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
 
 	_snap_rooms_together()
@@ -92,9 +90,7 @@ func _on_focus_request(room: GameRoom) -> void:
 
 func _on_zoom_finished() -> void:
 	focus_available = true
-	
-func _on_rotate_request(room: GameRoom) -> void:
-	pass
+
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
