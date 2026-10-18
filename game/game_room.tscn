@@ -29,6 +29,8 @@ shape = SubResource("RectangleShape2D_hw3im")
 material = SubResource("ShaderMaterial_hw3im")
 texture = SubResource("PlaceholderTexture2D_q1pj5")
 
+[node name="Door" type="Node2D" parent="." unique_id=1761462363]
+
 [connection signal="input_event" from="RoomArea" to="." method="_on_room_area_input_event"]
 [connection signal="mouse_entered" from="RoomArea" to="." method="_on_room_area_mouse_entered"]
 [connection signal="mouse_exited" from="RoomArea" to="." method="_on_room_area_mouse_exited"]

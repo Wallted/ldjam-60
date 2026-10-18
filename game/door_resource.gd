@@ -6,4 +6,4 @@ var coord: Vector2
 @export
 var side: Enums.Direction
 @export
-var face_inside: bool
+var orientation: Enums.Direction
