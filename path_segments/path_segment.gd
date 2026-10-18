@@ -15,6 +15,8 @@ var is_hovered := false
 var is_powered := false
 var has_backward_flow := false
 
+var is_north_not_west := false
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var glow: Line2D = $Glow
 
@@ -60,7 +62,7 @@ func set_hovered(value: bool) -> void:
 
 func set_powered(value: bool) -> void:
 	update_state(is_placed, is_hovered, value)
-	
+
 
 func _on_area_2d_mouse_entered():
 	mouse_event.emit(true)
