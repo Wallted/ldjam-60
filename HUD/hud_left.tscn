@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_2ihca"]
 [ext_resource type="PackedScene" uid="uid://dsg5bxkh2cocg" path="res://speech_bubble/speech_bubble.tscn" id="1_y81a5"]
+[ext_resource type="Texture2D" uid="uid://c0wmko0smd4yg" path="res://HUD/img/elon_asleep.png" id="3_2ihca"]
 
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
@@ -18,6 +19,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1624288834]
 layout_mode = 0
+offset_top = 250.0
 offset_right = 250.0
 offset_bottom = 648.0
 
@@ -41,3 +43,10 @@ offset_left = 324.0
 offset_top = 10.0
 offset_right = 377.0
 offset_bottom = 57.0
+
+[node name="AvatarPreview" type="TextureRect" parent="." unique_id=1344432885]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 250.0
+texture = ExtResource("3_2ihca")
+expand_mode = 1

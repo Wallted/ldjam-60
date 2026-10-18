@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://ceaqardhsnspr"]
+
+[ext_resource type="Texture2D" uid="uid://c0wmko0smd4yg" path="res://HUD/img/elon_asleep.png" id="1_sosh3"]
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_vcw08"]
+[ext_resource type="Texture2D" uid="uid://b3c62dj2e7nr8" path="res://HUD/img/elon_awake.png" id="2_oomha"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_ebcpc"]
+
+[sub_resource type="Resource" id="Resource_5813k"]
+script = ExtResource("3_ebcpc")
+asleep = ExtResource("1_sosh3")
+idle = ExtResource("2_oomha")
+talking = ExtResource("2_oomha")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_vcw08")
+name = "Elon"
+entry_messages = Array[String](["Rawr! Is it over? Did we survive the apocalypse?", "Wait... Who are you? How did you get here?", "Did you touch the stone? Damn these ITsaurs! My capsule was supposed to be just for me.", "Let's see... Yup... The script hanged because someone didn't press ENTER... Amateurs...", "You seem surprised. Let me introduce myself.", "My name is Elon Muskosaurus.", "I am a \"dinosaur\" as you people called us. We hid inside these capsules to avoid extinction.", "Something about a meteor coming our way...", "So we hid inside these capsules and we were spread across the globe.", "As I said I was supposed to have a single capsule but I see that not only you got in...", "Don't worry I wasn't bored here. I've got T-Rexflix...", "And I've been doing game jams...", "Still trying to find a good idea though...", "Anyway... Thanks for getting me out.", "I'm starving and I heard that there is a new pizza place around the corner."])
+avatar = SubResource("Resource_5813k")
