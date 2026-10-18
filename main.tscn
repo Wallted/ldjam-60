@@ -36,7 +36,6 @@ script = ExtResource("3_lquwl")
 
 [node name="HUDLeft" parent="CanvasLayer/HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
 layout_mode = 0
-offset_right = 557.0
 offset_bottom = 650.0
 mouse_filter = 1
 
@@ -74,3 +73,5 @@ script = ExtResource("7_5vw27")
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=470440381]
 bus = &"SFXBus"
+
+[connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_level_changed"]

@@ -11,6 +11,6 @@ metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [resource]
 script = ExtResource("1_ftnjs")
-name = "Michelangelo"
+person_name = "Michelangelo"
 entry_messages = Array[String](["Another day... another stone.", "Do I look like a sculptor?", "Oh wait... I do...", "But this one is different...", "It's smooth and... feels like a soft one", "Wait where am I?!", "IS THAT AN UNPAINTED CEILING?!"])
 avatar = SubResource("Resource_w2xfa")

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal level_changed(person_type: Enums.PersonType)
+
 var room_list : Array[GameRoom]
 var action_available: bool = true
 var currently_focused_room: GameRoom
@@ -85,6 +87,7 @@ func focus_on_room(target_room: GameRoom, tween: bool = true):
 	else:
 		action_available = false
 		camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
+	level_changed.emit(target_room.person_name)
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)
