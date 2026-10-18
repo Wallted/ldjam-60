@@ -1,6 +1,5 @@
 extends Node
 
-
 signal message_sent(
 	author: String,
 	message: String,
@@ -15,15 +14,18 @@ func send_message(
 	duration: float = 0.0,
 	avatar: Texture2D = null,
 ):
-	var avatars = {
+	var avatars: Dictionary = {
 		"pudzian": preload("res://icon.svg"),
 		"1": preload("uid://cjilmcj7xjcec"),
 		"2": preload("uid://gb72nd0ogcis"),
 		"3": preload("uid://djt4o420wvuig"),
 		"4": preload("uid://yjtwwdhgh4ca"),
 	}
+	
 	avatar = avatars.get(author)
-
+	if avatar == null:
+		avatar = ResourceManagier.get_avatar(author).idle
+		
 	message_sent.emit(
 		author,
 		message,
@@ -48,6 +50,12 @@ func _send_test_message() -> void:
 	if Input.is_action_pressed("speak_4"):
 		author = "4"
 		message = "And desert you"
+	if Input.is_key_pressed(KEY_T):
+		author = "tourist"
+		message = "I like that boulder. That is a *nice* boulder."
+	if Input.is_key_pressed(KEY_I):
+		author = "icarus"
+		message = "Mayday, mayday!"
 	send_message(
 		author,
 		message,

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://bv4nytod4j1nt"]
+
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_22yw1"]
+[ext_resource type="Texture2D" uid="uid://dsg3xifai5267" path="res://HUD/img/sisyphus_asleep.png" id="1_w3n15"]
+[ext_resource type="Texture2D" uid="uid://de5hay1ye2bw0" path="res://HUD/img/sisyphus_awake.png" id="2_2om0t"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_rbiw4"]
+
+[sub_resource type="Resource" id="Resource_w2xfa"]
+script = ExtResource("3_rbiw4")
+asleep = ExtResource("1_w3n15")
+idle = ExtResource("2_2om0t")
+talking = ExtResource("2_2om0t")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_22yw1")
+name = "Sisyphus"
+entry_messages = Array[String](["Argh! Cursed stone!...", "I've been dealing with it for centuries!...", "But you know what?...", "I think this is the worst infrastructure I've seen in my life! Come on...", "Alright my guy... One more time up the hill and we'll go for a beer...", "Wait... I'm inside? Neat! I can work like a hamster now!"])
+avatar = SubResource("Resource_w2xfa")

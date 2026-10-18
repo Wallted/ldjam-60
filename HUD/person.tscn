@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://bwbjcj7gutp42"]
 
 [ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="2_w2xfa"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_r73l3"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="4_wxnko"]
+
+[sub_resource type="Resource" id="Resource_5813k"]
+script = ExtResource("3_r73l3")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -16,6 +23,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2xfa")
+avatar = SubResource("Resource_5813k")
 
 [node name="Node2D" type="Control" parent="." unique_id=301940674]
 layout_mode = 1
@@ -27,7 +35,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Avatar" type="Sprite2D" parent="Node2D" unique_id=2042593102]
+[node name="CurrentAvatar" type="Sprite2D" parent="Node2D" unique_id=2042593102]
 scale = Vector2(0.065, 0.065)
 
 [node name="AvatarActiveBG" type="PanelContainer" parent="Node2D" unique_id=735677909]

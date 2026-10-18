@@ -1,7 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://jduf3we633ex"]
-
-[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://HUD/res/dialog/dialog.gd" id="1_5qo7x"]
-
-[resource]
-script = ExtResource("1_5qo7x")
-entry_messages = ["Druid told me that this place will link us to cosmic beings...", "But from what he said it's just a stone circle!", "But I bet our descendants will pay for tickets to see it. Mark my words!", "AND WHY DOESN'T IT HAVE A BUILD MANUAL!", "Like... Where this stone is supposed to go?", "Ohh that's why..."]

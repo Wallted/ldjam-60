@@ -1,7 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://ceaqardhsnspr"]
-
-[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://HUD/res/dialog/dialog.gd" id="1_vcw08"]
-
-[resource]
-script = ExtResource("1_vcw08")
-entry_messages = ["Rawr! Is it over? Did we survive the apocalypse?", "Wait... Who are you? How did you get here?", "Did you touch the stone? Damn these ITsaurs! My capsule was supposed to be just for me.", "Let's see... Yup... The script hanged because someone didn't press ENTER... Amateurs...", "You seem surprised. Let me introduce myself.", "My name is Elon Muskosaurus.", "I am a \"dinosaur\" as you people called us. We hid inside these capsules to avoid extinction.", "Something about a meteor coming our way...", "So we hid inside these capsules and we were spread across the globe.", "As I said I was supposed to have a single capsule but I see that not only you got in...", "Don't worry I wasn't bored here. I've got T-Rexflix...", "And I've been doing game jams...", "Still trying to find a good idea though...", "Anyway... Thanks for getting me out.", "I'm starving and I heard that there is a new pizza place around the corner."]

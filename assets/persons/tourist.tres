@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://dt7h14mpkykbb"]
+
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_6u80u"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_otyd1"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_r1ake"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_kdf30"]
+
+[sub_resource type="Resource" id="Resource_r73l3"]
+script = ExtResource("2_r1ake")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_6u80u")
+name = "Tourist"
+entry_messages = Array[String](["Look at this one honey! It'll look great as your profile picture...", "No you don't look fat in it...", "Yea let's do some for me...", "What if I posed like this?...", "Or maybe like that?", "Oh! I've got it! I'll take this stone and pose like I'm building this place. Ha-ha-ha. Could you imagine? Me building Stonehenge?", "H-honey?... Wha-what happened?... Where am I?..."])
+avatar = SubResource("Resource_r73l3")
