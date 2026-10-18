@@ -113,6 +113,12 @@ func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> vo
 func _try_place_path_segment() -> void:
 	if _path_cursor != null and _path_cursor.is_hovered:
 		_path_cursor.set_placed(true)
+		#var front_endpoint := _get_segment_endpoint(_path_cursor.get_parent().local_coords, _path_cursor_north_not_west, currently_focused_room, false)
+		#var back_endpoint := _get_segment_endpoint(_path_cursor.get_parent().local_coords, _path_cursor_north_not_west, currently_focused_room, true)
+		#if front_endpoint != null:
+			#front_endpoint.set_powered(true)
+		#if back_endpoint != null:
+			#back_endpoint.set_powered(false)
 
 
 func _try_unplace_path_segment() -> void:
@@ -152,3 +158,38 @@ func _tile_placed_paths_count(tile_local_coords: Vector2, room: GameRoom) -> int
 	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_placed:
 		result += 1
 	return result
+
+
+func _get_segment_endpoint(tile_local_coords: Vector2, north_not_west: bool, room: GameRoom, backside: bool) -> PathSegment:
+	var main_path: PathSegment
+	var tile := room.get_tile(tile_local_coords, true)
+	if tile != null:
+		if north_not_west:
+			main_path = tile.north_path
+			if main_path.has_backward_flow == backside: # the endpoint outside the tile
+				return _get_the_other_segment_in_a_tile(main_path, tile_local_coords + Vector2.UP, room)
+			else: # the endpoint inside the tile
+				return _get_the_other_segment_in_a_tile(main_path, tile_local_coords, room)
+		else:
+			main_path = tile.west_path
+			if main_path.has_backward_flow == backside: # the endpoint outside the tile
+				return _get_the_other_segment_in_a_tile(main_path, tile_local_coords + Vector2.LEFT, room)
+			else: # the endpoint inside the tile
+				return _get_the_other_segment_in_a_tile(main_path, tile_local_coords, room)
+	return null
+
+
+func _get_the_other_segment_in_a_tile(wrong_path: PathSegment, tile_local_coords: Vector2, room: GameRoom) -> PathSegment:
+	var tile := room.get_tile(tile_local_coords, true)
+	if tile != null:
+		if tile.north_path != null and tile.north_path != wrong_path and tile.north_path.is_placed:
+			return tile.north_path
+		if tile.west_path != null and tile.west_path != wrong_path and tile.west_path.is_placed:
+			return tile.west_path
+	var south_tile := room.get_tile(tile_local_coords + Vector2.DOWN, true)
+	if south_tile != null and south_tile.north_path != null and south_tile.north_path != wrong_path and south_tile.north_path.is_placed:
+		return south_tile.north_path
+	var east_tile := room.get_tile(tile_local_coords + Vector2.RIGHT, true)
+	if east_tile != null and east_tile.west_path != null and east_tile.west_path != wrong_path and east_tile.west_path.is_placed:
+		return east_tile.west_path
+	return null
