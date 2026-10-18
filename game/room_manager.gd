@@ -1,7 +1,7 @@
 extends Node2D
 
 var room_list : Array[GameRoom]
-var focus_available: bool = true
+var action_available: bool = true
 var currently_focused_room: GameRoom
 
 @onready
@@ -70,10 +70,10 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 		prev_position = r_l[0].position
 
 func focus_on_room(target_room: GameRoom):
-	if not focus_available or not target_room:
+	if not action_available or not target_room:
 		return
 
-	focus_available = false
+	action_available = false
 	currently_focused_room = target_room
 
 	for room in room_list:
@@ -89,11 +89,14 @@ func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)
 
 func _on_rotate_request(room: GameRoom) -> void:
-	focus_available = false
-	room.tween_rotate_room().connect(func (): focus_available = true)
+	if not action_available:
+		return
+
+	action_available = false
+	room.tween_rotate_room().connect(func (): action_available = true)
 
 func _on_zoom_finished(target_room: GameRoom) -> void:
-	focus_available = true
+	action_available = true
 	for room in room_list:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()
