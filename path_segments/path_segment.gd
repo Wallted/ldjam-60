@@ -41,7 +41,7 @@ func update_state(placed: bool, hovered: bool, powered: bool) -> void:
 			glow.self_modulate = Color("ff0000ff")
 	else:
 		self_modulate = Color("ffffff00")
-		glow.self_modulate = Color("21150bff") if is_hovered else Color("ffffff00")
+		glow.self_modulate = Color("11eef9ff") if is_hovered else Color("ffffff00")
 
 
 func set_placed(value: bool) -> void:
