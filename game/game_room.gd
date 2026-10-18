@@ -22,6 +22,7 @@ var _path_cursor: PathSegment
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
+var door_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 
 @onready 
@@ -62,6 +63,7 @@ func _setup_tiles() -> void:
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
 			_tile.path_hovered_on.connect(_on_path_mouse_entered.bind(_tile))
+			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 
 			tile_list.append(_tile)
@@ -71,16 +73,13 @@ func _setup_tiles() -> void:
 		i+=1
 
 func _setup_doors() -> void:
-	var step = 3.0 # todo: magic number
-	for door in doors:
-		var _door_txt = Sprite2D.new()
-		_door_txt.modulate *= 10.0 # todo: remove
-		_door_txt.texture = load('res://icon.svg') # todo: remove
-		_door_txt.position -= room_size / 2.0
-		_door_txt.position += room_size / step * door.coord + room_size / (step * 2.0)
-		_door_txt.scale /= grid_size * 2.0
-		_door_txt.position += room_size / (step * 2.0) * Enums.get_direction(door.side)
-		add_child(_door_txt)
+	for _door in doors:
+		var _tile = get_tile(_door.coord)
+		_tile.enable_door(
+			Enums.get_direction(_door.side), 
+			Enums.get_direction(_door.orientation),
+		)
+		door_list.append(_tile)
 
 func get_size() -> Vector2:
 	return room_size * scale
@@ -117,13 +116,42 @@ func translate_to_parent_tile(_tile: Tile) -> Vector2:
 	var parent_base = Vector2(3, 3) + parent_offset
 	var res_coord = floor(_tile.coords / 3.0) + parent_base
 	return res_coord
-
-func set_as_focused(enabled: bool, area_enabled: bool) -> void:
-	room_area.input_pickable = area_enabled
+	
+func disable_room() -> void:
+	room_area.input_pickable = false
 	for _item in tile_list:
 		var _tile : Area2D = _item
-		_tile.input_pickable = enabled
+		_tile.input_pickable = false
 
+func set_as_pickable() -> void:
+	room_area.input_pickable = true
+
+func enable_tiles() -> void:
+	for _item in tile_list:
+		var _tile : Area2D = _item
+		_tile.input_pickable = true
+
+func update_parent() -> void:
+	if not parent_room:
+		return
+
+	for door_tile in door_list:
+		if door_tile.is_source_exit:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
+			if follow_tile: 
+				follow_tile.has_energy = door_tile.has_energy
+
+		if door_tile.is_source_entry:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
+			if follow_tile: 
+				door_tile.has_energy = follow_tile.has_energy
+
+func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
+			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
