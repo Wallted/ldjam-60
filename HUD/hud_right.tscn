@@ -62,18 +62,42 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="Person" parent="GridContainer" unique_id=1468336816 instance=ExtResource("2_ccku2")]
+[node name="Tourist" parent="GridContainer" unique_id=1468336816 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-person_id = 1
+person_id = "tourist"
 
-[node name="Person2" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
+[node name="Archaeologist" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-person_id = 2
+person_id = "archaeologist"
 
-[node name="Person3" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
+[node name="Michelangelo" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-person_id = 3
+person_id = "michelangelo"
 
-[node name="Person4" parent="GridContainer" unique_id=1940082769 instance=ExtResource("2_ccku2")]
+[node name="Celt" parent="GridContainer" unique_id=1940082769 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-person_id = 4
+person_id = "celt"
+
+[node name="Goliath" parent="GridContainer" unique_id=469114919 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "goliath"
+
+[node name="Icarus" parent="GridContainer" unique_id=451458892 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "icarus"
+
+[node name="Sisyphus" parent="GridContainer" unique_id=1644210309 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "sisyphus"
+
+[node name="Neanderthal" parent="GridContainer" unique_id=1643710493 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "neanderthal"
+
+[node name="Monkey" parent="GridContainer" unique_id=1025184399 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "monkey"
+
+[node name="Elon" parent="GridContainer" unique_id=995309169 instance=ExtResource("2_ccku2")]
+layout_mode = 2
+person_id = "elon"
