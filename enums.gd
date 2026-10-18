@@ -18,3 +18,17 @@ static func get_direction(_dir: Direction) -> Vector2:
 		Direction.LEFT:
 			return Vector2.LEFT
 	return Vector2.ZERO
+
+
+enum PersonType {
+	ARCHAEOLOGIST,
+	CELT,
+	ELON,
+	GOLIATH,
+	ICARUS,
+	MICHELANGELO,
+	MONKEY,
+	NEANDERTHAL,
+	SISYPHUS,
+	TOURIST,
+}

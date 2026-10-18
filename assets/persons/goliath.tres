@@ -11,6 +11,6 @@ metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [resource]
 script = ExtResource("1_kjs0d")
-name = "Goliath"
+person_name = "Goliath"
 entry_messages = Array[String](["Ha-ha-ha! Are you kidding me? This widdle guy? What's you name boy?", "David huh? Like the King. Well you sure are brave.", "Ohhh that's cute... Hey guys! He's got a little slingshot there.", "Wait this is going to be fun.", "Ok I'll give you one... maybe two... ok I'll let you have 5 shots at me...", "And after that I promise to kill you quickly.", "Hah! That tickled my forehead! Wait where am I?"])
 avatar = SubResource("Resource_c5fji")

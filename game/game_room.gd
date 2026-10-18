@@ -5,6 +5,9 @@ signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
+@export
+var person_name: Enums.PersonType
+
 @export_group("Grid")
 @export
 var grid_size : int = 9

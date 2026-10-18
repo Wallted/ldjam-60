@@ -1,5 +1,7 @@
 extends Node2D
 
+signal level_changed(person_type: Enums.PersonType)
+
 var room_list : Array[GameRoom]
 var action_available: bool = true
 var currently_focused_room: GameRoom
@@ -102,6 +104,7 @@ func _on_zoom_finished(target_room: GameRoom) -> void:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()
 	target_room.enable_tiles()
+	level_changed.emit(target_room.person_name)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
