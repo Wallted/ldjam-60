@@ -2,7 +2,9 @@ extends Camera2D
 class_name RoomCamera
 
 var tween: Tween
-@onready var action_progress: ActionProgress = $"../../CanvasLayer/HUD/ActionProgress"
+
+@onready 
+var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
 
 func _calculate_zoom(room: GameRoom) -> Vector2:
 	var room_size = room.get_size()

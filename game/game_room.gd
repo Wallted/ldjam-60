@@ -38,6 +38,9 @@ var room_area: Area2D = $RoomArea
 var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 @onready
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
+@onready
+var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
+
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
@@ -172,7 +175,6 @@ func update_parent(_disconnect: bool = false) -> void:
 				else:
 					door_tile.has_energy = follow_tile.has_energy
 					follow_tile.is_source_entry = true
-@onready var action_progress: ActionProgress = $"../../CanvasLayer/HUD/ActionProgress"
 
 var tween: Tween
 var rotating = false
