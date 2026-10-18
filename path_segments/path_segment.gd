@@ -2,6 +2,8 @@ class_name PathSegment
 extends Line2D
 
 
+signal mouse_event(entered: bool)
+
 const POWERED_WIDTH_CURVE = preload("uid://po2k2jpyeddn")
 const OFFLINE_WIDTH_CURVE = preload("uid://1fpi08ycayod")
 
@@ -39,7 +41,7 @@ func update_state(placed: bool, hovered: bool, powered: bool) -> void:
 			glow.self_modulate = Color("ff0000ff")
 	else:
 		self_modulate = Color("ffffff00")
-		glow.self_modulate = Color("21150bff") if is_hovered else Color("ffffff00")
+		glow.self_modulate = Color("11eef9ff") if is_hovered else Color("ffffff00")
 
 
 func set_placed(value: bool) -> void:
@@ -52,3 +54,11 @@ func set_hovered(value: bool) -> void:
 
 func set_powered(value: bool) -> void:
 	update_state(is_placed, is_hovered, value)
+	
+
+func _on_area_2d_mouse_entered():
+	mouse_event.emit(true)
+
+
+func _on_area_2d_mouse_exited():
+	mouse_event.emit(false)
