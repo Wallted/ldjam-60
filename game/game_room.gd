@@ -131,7 +131,7 @@ func update_parent() -> void:
 
 func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
