@@ -10,7 +10,6 @@ var camera_2d: RoomCamera = $"../Camera2D"
 var _path_cursor: PathSegment
 var _path_cursor_north_not_west: bool
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:

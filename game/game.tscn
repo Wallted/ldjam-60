@@ -45,13 +45,22 @@ zoom = Vector2(5, 5)
 script = ExtResource("1_e2o6t")
 
 [node name="RoomManager" type="Node2D" parent="." unique_id=65352006]
+unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="FirstRoom3" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
+[node name="FullRoom" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
+scale_ratio = 5
+parent_offset = Vector2(1, 1)
+parent_base = Vector2(0, 0)
+zoom_level = 3
+
+[node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
 scale_ratio = 3
+parent_base = Vector2(4, 4)
 zoom_level = 2
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
+parent_room = NodePath("../FullRoom")
 
 [node name="FirstRoom2p5" parent="." unique_id=325990417 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale_ratio = 2
