@@ -38,6 +38,9 @@ var room_area: Area2D = $RoomArea
 var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 @onready
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
+@onready
+var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
+
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
@@ -180,8 +183,9 @@ func tween_rotate_room() -> Signal:
 	if tween:
 		tween.kill()
 
-	tween = get_tree().create_tween()
+	tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, 'rotation', rotation + PI / 2.0, 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(action_progress, 'progress', 1.0, 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.finished.connect(
 		func ():
 			rotating = false
