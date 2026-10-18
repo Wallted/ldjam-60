@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://bfv5g5akf1qre"]
+
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="1_0llkg"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_t0kak"]
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="2_hw8fs"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_hjdi6"]
+
+[sub_resource type="Resource" id="Resource_c5fji"]
+script = ExtResource("1_0llkg")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("2_hw8fs")
+name = "Archaeologist"
+entry_messages = Array[String](["God damn it! I've been looking for an exciting expedition from a university for 3 months!...", "And what do they give me?...", "How many archaeologists does it take to find everything in the Pyramids?", "Feel like they use it to get rid of ambitious people.", "Wait a second? What's that glow?...", "What an interesting stone...", "I'm going to be famous after all...", "What? Of course it's some sort of an artifact!!!", "That's it! I'm going to Human Resources!", "After I get out of here..."])
+avatar = SubResource("Resource_c5fji")

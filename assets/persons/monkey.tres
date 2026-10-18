@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://caj77fkltgd7f"]
+
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_2go3i"]
+[ext_resource type="Texture2D" uid="uid://c5mcjoixjurmd" path="res://HUD/img/monkey_asleep.png" id="1_mmkyr"]
+[ext_resource type="Texture2D" uid="uid://cm0872hn5ms84" path="res://HUD/img/monkey_awake.png" id="2_80os1"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_6purh"]
+
+[sub_resource type="Resource" id="Resource_c5fji"]
+script = ExtResource("3_6purh")
+asleep = ExtResource("1_mmkyr")
+idle = ExtResource("2_80os1")
+talking = ExtResource("2_80os1")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_2go3i")
+name = "Monkey"
+entry_messages = Array[String](["Monkey Brothers! We will have an 8 hour work day...", "You will be able to have private property!", "and BANANA TAXES!!!", "Our group will be rich!", "Well not richer than me of course.", "And what will we do with communists?", "That's right! We will take a stone...", "Wait... Did the stone just nationalize me?"])
+avatar = SubResource("Resource_c5fji")

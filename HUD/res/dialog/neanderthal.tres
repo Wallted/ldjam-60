@@ -1,7 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://br7655kp8sprx"]
-
-[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://HUD/res/dialog/dialog.gd" id="1_3jrlc"]
-
-[resource]
-script = ExtResource("1_3jrlc")
-entry_messages = ["Who touch my meat!", "You! You friend?... You no run! You fight me! Me strongest...", "Me take rock! Rock smash paper!", "Why sky bright!?"]
