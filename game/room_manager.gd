@@ -26,6 +26,10 @@ func _ready() -> void:
 	room_list.reverse()
 	focus_on_room(room_list[0])
 
+func _process(_delta: float) -> void:
+	for room in room_list:
+		room.update_parent()
+
 func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var dict : Dictionary[int, Array]
 	for room in room_list:
@@ -64,9 +68,11 @@ func focus_on_room(target_room: GameRoom):
 
 	currently_focused_room = target_room
 	for room in room_list:
-		var _is_room_focusable : bool = room.zoom_level == target_room.zoom_level - 1
-		room.set_as_focused(false, _is_room_focusable)
-	target_room.set_as_focused(true, false)
+		room.disable_room()
+		if room.zoom_level == target_room.zoom_level - 1:
+			room.set_as_pickable()
+
+	target_room.enable_tiles()
 	camera_2d.zoom_room(target_room).connect(_on_zoom_finished)
 	focus_available = false
 

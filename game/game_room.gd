@@ -20,6 +20,7 @@ var parent_room: GameRoom
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
+var door_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 
 @onready 
@@ -67,6 +68,7 @@ func _setup_doors() -> void:
 			Enums.get_direction(_door.side), 
 			Enums.get_direction(_door.orientation),
 		)
+		door_list.append(_tile)
 
 func get_size() -> Vector2:
 	return room_size * scale
@@ -94,13 +96,37 @@ func translate_to_parent_tile(_tile: Tile) -> Vector2:
 	var parent_base = Vector2(3, 3) + parent_offset
 	var res_coord = floor(_tile.coords / 3.0) + parent_base
 	return res_coord
-
-func set_as_focused(enabled: bool, area_enabled: bool) -> void:
-	room_area.input_pickable = area_enabled
+	
+func disable_room() -> void:
+	room_area.input_pickable = false
 	for _item in tile_list:
 		var _tile : Area2D = _item
-		_tile.input_pickable = enabled
+		_tile.input_pickable = false
 
+func set_as_pickable() -> void:
+	room_area.input_pickable = true
+	
+func enable_tiles() -> void:
+	for _item in tile_list:
+		var _tile : Area2D = _item
+		_tile.input_pickable = true
+
+func update_parent() -> void:
+	if not parent_room:
+		return
+
+	for door_tile in door_list:
+		if door_tile.is_source_exit:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
+			if follow_tile: 
+				follow_tile.has_energy = door_tile.has_energy
+
+		if door_tile.is_source_entry:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
+			if follow_tile: 
+				door_tile.has_energy = follow_tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	for _t in tile_list:
