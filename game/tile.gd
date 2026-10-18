@@ -6,14 +6,19 @@ signal path_hover(entered: bool, north_not_west: bool)
 
 const PATH_SEGMENT = preload("uid://cl1vkv2b6kioq")
 
-var coords: Vector2
-var door_orientation: Vector2
-
 @export
 var has_energy: bool
 
+var coords: Vector2
+var local_coords: Vector2
+var door_orientation: Vector2
+
 var is_source_exit: bool
 var is_source_entry: bool
+
+var north_path: PathSegment
+var west_path: PathSegment
+
 
 @onready
 var door: Sprite2D = $Door
@@ -21,6 +26,11 @@ var door: Sprite2D = $Door
 var tile_sprite: Sprite2D = $TileSprite
 @onready 
 var label: Label = $Label
+
+func _ready() -> void:
+	label.text = "(%s,%s)" % [coords.x, coords.y]
+	local_coords = coords
+	_init_path_segments()
 
 func _process(_delta: float) -> void:
 	if has_energy:
@@ -30,22 +40,12 @@ func _process(_delta: float) -> void:
 		door.modulate = Color.WHITE
 		modulate = Color.WHITE
 
-var north_path: PathSegment
-var west_path: PathSegment
-
-
-func _ready() -> void:
-	label.text = "(%s,%s)" % [coords.x, coords.y]
-	_init_path_segments()
-
-
 func remove_path(north_not_west: bool):
 	if north_not_west:
 		if north_path != null:
 			north_path.queue_free()
 	elif west_path != null:
 		west_path.queue_free()
-
 
 func _init_path_segments() -> void:
 	if coords.x > 0:
