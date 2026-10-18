@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://duawx1lpcrybo" path="res://speech_bubble/speech_bubble.gd" id="1_ti646"]
 
+[sub_resource type="Gradient" id="Gradient_triwo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_triwo"]
+gradient = SubResource("Gradient_triwo")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a23f0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 2
@@ -11,7 +16,7 @@ border_width_bottom = 2
 border_color = Color(0.84281015, 0, 0.0017037323, 1)
 
 [node name="SpeechBubble" type="Control" unique_id=197747971]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(30, 62)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,19 +25,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ti646")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1933849306]
+[node name="Avatar" type="TextureRect" parent="." unique_id=702780052]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("GradientTexture2D_triwo")
+expand_mode = 1
+
+[node name="AuthorContainer" type="PanelContainer" parent="." unique_id=272844574]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 1152.0
+offset_bottom = 30.0
+
+[node name="Author" type="RichTextLabel" parent="AuthorContainer" unique_id=2143256184]
+custom_minimum_size = Vector2(32, 32)
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+text = "<placeholder author text>"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="TextContainer" type="PanelContainer" parent="." unique_id=1933849306]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Text" type="RichTextLabel" parent="PanelContainer" unique_id=2053433856]
+[node name="Text" type="RichTextLabel" parent="TextContainer" unique_id=2053433856]
 custom_minimum_size = Vector2(30, 30)
 clip_contents = false
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 11
 text = "<placeholder text>"
 fit_content = true
 scroll_active = false

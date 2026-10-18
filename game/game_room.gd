@@ -61,16 +61,12 @@ func _setup_tiles() -> void:
 		i+=1
 
 func _setup_doors() -> void:
-	var step = 3.0 # todo: magic number
-	for door in doors:
-		var _door_txt = Sprite2D.new()
-		_door_txt.modulate *= 10.0 # todo: remove
-		_door_txt.texture = load('res://icon.svg') # todo: remove
-		_door_txt.position -= room_size / 2.0
-		_door_txt.position += room_size / step * door.coord + room_size / (step * 2.0)
-		_door_txt.scale /= grid_size * 2.0
-		_door_txt.position += room_size / (step * 2.0) * Enums.get_direction(door.side)
-		add_child(_door_txt)
+	for _door in doors:
+		var _tile = get_tile(_door.coord)
+		_tile.enable_door(
+			Enums.get_direction(_door.side), 
+			Enums.get_direction(_door.orientation),
+		)
 
 func get_size() -> Vector2:
 	return room_size * scale
