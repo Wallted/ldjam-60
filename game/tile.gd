@@ -19,7 +19,6 @@ var is_source_entry: bool
 var north_path: PathSegment
 var west_path: PathSegment
 
-
 @onready
 var door: Sprite2D = $Door
 @onready
