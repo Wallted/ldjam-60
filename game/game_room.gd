@@ -2,6 +2,7 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
+signal path_hovered_on(north_not_west: bool, tile: Tile)
 
 @export_group("Grid")
 @export
@@ -18,7 +19,6 @@ var doors: Array[Door]
 @export
 var parent_room: GameRoom
 
-var _path_cursor: PathSegment
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -42,12 +42,6 @@ func _ready() -> void:
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			_try_place_path_segment()
-
-
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:
@@ -62,7 +56,7 @@ func _setup_tiles() -> void:
 
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
-			_tile.path_hovered_on.connect(_on_path_mouse_entered.bind(_tile))
+			_tile.path_hovered_on.connect(path_hovered_on.emit.bind(_tile))
 			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 
@@ -101,15 +95,6 @@ func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
 	for _tile in tile_list:
 		if _tile.coords in neigbour_coords:
 			neighbours.append(_tile)
-			# mock:
-			#if _tile.north_path == null:
-				#_tile.add_path_segment(true)
-			#else:
-				#_tile.remove_path_segment(true)
-			#if _tile.west_path == null:
-				#_tile.add_path_segment(false)
-			#else:
-				#_tile.remove_path_segment(false)
 	return neighbours
 
 func translate_to_parent_tile(_tile: Tile) -> Vector2:
@@ -164,19 +149,6 @@ func _on_tile_mouse_entered(_tile: Tile) -> void:
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
-
-
-func _on_path_mouse_entered(north_not_west: bool, tile: Tile) -> void:
-	if tile.input_pickable:
-		if _path_cursor != null:
-			_path_cursor.set_hovered(false)
-		_path_cursor = tile.north_path if north_not_west else tile.west_path
-		_path_cursor.set_hovered(true)
-
-
-func _try_place_path_segment() -> void:
-	if _path_cursor != null:
-		_path_cursor.set_placed(true)
 
 
 func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
