@@ -53,6 +53,7 @@ func _setup_tiles() -> void:
 
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
+			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 
 			tile_list.append(_tile)
@@ -105,7 +106,7 @@ func disable_room() -> void:
 
 func set_as_pickable() -> void:
 	room_area.input_pickable = true
-	
+
 func enable_tiles() -> void:
 	for _item in tile_list:
 		var _tile : Area2D = _item
@@ -127,6 +128,11 @@ func update_parent() -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
 			if follow_tile: 
 				door_tile.has_energy = follow_tile.has_energy
+
+func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	for _t in tile_list:

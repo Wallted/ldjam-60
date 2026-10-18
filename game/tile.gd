@@ -7,18 +7,15 @@ var door_orientation: Vector2
 @export
 var has_energy: bool
 
+var is_source_exit: bool
+var is_source_entry: bool
+
 @onready
 var door: Sprite2D = $Door
 @onready
 var tile_sprite: Sprite2D = $TileSprite
 @onready 
 var label: Label = $Label
-
-var is_source_exit: bool
-var is_source_entry: bool
-
-var is_s_entry: Vector2
-var is_s_exit: Vector2
 
 func _process(_delta: float) -> void:
 	if has_energy:
@@ -41,9 +38,7 @@ func enable_door(_side: Vector2, _orientation: Vector2) -> void:
 	door.position = _side * tile_sprite.texture.get_size() / 2.5
 
 	var _follow_tile = coords + door_orientation
-	is_s_entry = _follow_tile
-	is_source_exit = _follow_tile.x < 0 or _follow_tile.y < 0
+	is_source_exit = _follow_tile != _follow_tile.clamp(Vector2.ZERO, Vector2(8.0, 8.0))
 
 	_follow_tile = coords - door_orientation
-	is_s_exit = _follow_tile
-	is_source_entry = _follow_tile.x < 0 or _follow_tile.y < 0
+	is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
