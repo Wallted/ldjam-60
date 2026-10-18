@@ -2,10 +2,11 @@ extends Control
 
 @export var is_awake: bool
 @export var resource: PersonResource
-@export var person_name: String
-@export var avatar: Avatar
 @onready var current_avatar: Sprite2D = $Node2D/CurrentAvatar
 @onready var avatar_active_bg: PanelContainer = $Node2D/AvatarActiveBG
+
+var person_name: String
+var avatar: Avatar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
