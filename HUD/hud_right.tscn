@@ -15,6 +15,12 @@
 [ext_resource type="Resource" uid="uid://caj77fkltgd7f" path="res://assets/persons/monkey.tres" id="11_wsabk"]
 [ext_resource type="Resource" uid="uid://ceaqardhsnspr" path="res://assets/persons/elon.tres" id="12_cfq5b"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcacg"]
+bg_color = Color(1, 1, 1, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7hbg"]
+bg_color = Color(1, 1, 1, 0.19607843)
+
 [node name="HUDRight" type="Control" unique_id=1327092940]
 layout_mode = 3
 anchors_preset = 1
@@ -48,6 +54,7 @@ grow_horizontal = 0
 [node name="Help" type="Button" parent="HBoxContainer" unique_id=1892685807]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcacg")
 icon = ExtResource("2_t8lao")
 icon_alignment = 1
 expand_icon = true
@@ -56,6 +63,7 @@ expand_icon = true
 propagate_maximum_size = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_r7hbg")
 icon = ExtResource("3_r5wc1")
 icon_alignment = 1
 expand_icon = true
