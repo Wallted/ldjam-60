@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bwbjcj7gutp42"]
+
+[ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+shadow_color = Color(0.21176471, 0.96862745, 0.1882353, 0.26666668)
+shadow_size = 8
+
+[node name="Person" type="Control" unique_id=1468336816]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_w2xfa")
+
+[node name="Node2D" type="Control" parent="." unique_id=301940674]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Avatar" type="Sprite2D" parent="Node2D" unique_id=2042593102]
+scale = Vector2(0.25, 0.25)
+
+[node name="AvatarActiveBG" type="PanelContainer" parent="Node2D" unique_id=735677909]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g8veb")

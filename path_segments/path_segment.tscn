@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://cl1vkv2b6kioq"]
+
+[ext_resource type="Curve" uid="uid://po2k2jpyeddn" path="res://path_segments/powered_width_curve.tres" id="1_ek3cv"]
+[ext_resource type="Texture2D" uid="uid://biriqu2hj8yeq" path="res://img/Bysk_mini.png" id="2_al322"]
+[ext_resource type="Script" uid="uid://dvpm8wivm2uil" path="res://path_segments/path_segment.gd" id="3_y8scm"]
+[ext_resource type="Texture2D" uid="uid://crtxls6ys4322" path="res://img/bysk_glow.png" id="4_444o0"]
+
+[sub_resource type="Animation" id="Animation_y3abr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:width_curve:point_0/position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:width_curve:point_1/position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:width_curve:point_2/position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_7ibsq"]
+resource_name = "powered"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:width_curve:point_0/position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.4), Vector2(0, 0.7), Vector2(0, 0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:width_curve:point_1/position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.4), Vector2(0.5, 0.7), Vector2(0.5, 0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:width_curve:point_2/position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.4), Vector2(1, 0.7), Vector2(1, 0.4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3abr"]
+_data = {
+&"RESET": SubResource("Animation_y3abr"),
+&"powered": SubResource("Animation_7ibsq")
+}
+
+[node name="PathSegment" type="Line2D" unique_id=1309965418]
+points = PackedVector2Array(-2.4, 0, 24.8, 0, 52, 0)
+width = 30.0
+width_curve = ExtResource("1_ek3cv")
+texture = ExtResource("2_al322")
+texture_mode = 2
+round_precision = 4
+script = ExtResource("3_y8scm")
+
+[node name="Glow" type="Line2D" parent="." unique_id=461911961]
+z_index = -1
+points = PackedVector2Array(-7.4, 0, 56, 0)
+width = 13.0
+texture = ExtResource("4_444o0")
+texture_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981627908]
+libraries/ = SubResource("AnimationLibrary_y3abr")

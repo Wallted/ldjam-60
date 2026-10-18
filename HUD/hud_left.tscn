@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dpb5tvih7c5xv"]
+
+[ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_2ihca"]
+[ext_resource type="PackedScene" uid="uid://dsg5bxkh2cocg" path="res://speech_bubble/speech_bubble.tscn" id="1_y81a5"]
+
+[node name="HUDLeft" type="Control" unique_id=488148864]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 648.0
+script = ExtResource("1_2ihca")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=576049416]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1624288834]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 648.0
+
+[node name="ChatWindow" type="VBoxContainer" parent="ScrollContainer" unique_id=216737008]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpeechBubble" parent="ScrollContainer/ChatWindow" unique_id=35894961 instance=ExtResource("1_y81a5")]
+custom_minimum_size = Vector2(30, 128)
+layout_mode = 2
+author = ""
+text = "text set manually in HudLeft.SpeechBubble to test wrapping
+on sadfsdfsdfsdfsdfs
+some longer text
+and longer linessssssssssssssssssssssssssssssssss"
+
+[node name="Button" type="Button" parent="." unique_id=1452632014]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 10.0
+offset_right = 377.0
+offset_bottom = 57.0

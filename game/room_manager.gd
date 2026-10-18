@@ -1,0 +1,83 @@
+extends Node2D
+
+var room_list : Array[GameRoom]
+var focus_available: bool = true
+var currently_focused_room: GameRoom
+
+@onready 
+var camera_2d: RoomCamera = $"../Camera2D"
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
+			focus_on_room(currently_focused_room.parent_room)
+
+func _ready() -> void:
+	for _child in get_parent().get_children():
+		if _child is GameRoom:
+			await _child.ready
+			room_list.append(_child)
+
+			var _room : GameRoom = _child
+			_room.request_focus.connect(_on_focus_request.bind(_room))
+
+	_snap_rooms_together()
+
+	room_list.reverse()
+	focus_on_room(room_list[0])
+
+func _process(_delta: float) -> void:
+	for room in room_list:
+		room.update_parent()
+
+func _snap_rooms_together() -> void: # todo: horrendous, fix it
+	var dict : Dictionary[int, Array]
+	for room in room_list:
+		if room.zoom_level not in dict.keys():
+			dict.set(room.zoom_level, [])
+		dict[room.zoom_level].append(room)
+
+		var _tiles_to_remove: Array[Vector2] = []
+		for _t in room.tile_list:
+			var local_coord = room.translate_to_parent_tile(_t)
+			if local_coord:
+				_tiles_to_remove.append(local_coord)
+				
+		for _t in _tiles_to_remove:
+			if room.parent_room:
+				var _t_to_r = room.parent_room.get_tile(_t)
+				if _t_to_r:
+					room.parent_room.tile_list.erase(_t_to_r)
+					_t_to_r.queue_free()
+
+	var prev_tile_size: Vector2 = Vector2.ZERO
+	var prev_position: Vector2 = Vector2.ZERO
+	for key in dict.keys():
+		var r_l = dict[key]
+
+		for room in r_l:
+			room.position = prev_position
+			room.position += room.parent_offset * prev_tile_size
+
+		prev_tile_size = r_l[0].room_size / r_l[0].grid_size * r_l[0].scale
+		prev_position = r_l[0].position
+
+func focus_on_room(target_room: GameRoom):
+	if not focus_available or not target_room:
+		return
+
+	currently_focused_room = target_room
+	for room in room_list:
+		room.disable_room()
+		if room.zoom_level == target_room.zoom_level - 1:
+			room.set_as_pickable()
+
+	target_room.enable_tiles()
+	camera_2d.zoom_room(target_room).connect(_on_zoom_finished)
+	focus_available = false
+
+func _on_focus_request(room: GameRoom) -> void:
+	focus_on_room(room)
+
+func _on_zoom_finished() -> void:
+	focus_available = true

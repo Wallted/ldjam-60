@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://h802i5fumcjv"]
+
+[ext_resource type="Script" uid="uid://d1qk77dax1anj" path="res://game/game_room.gd" id="1_bvpig"]
+[ext_resource type="Shader" uid="uid://b3bdu0s8km4xv" path="res://game/select.gdshader" id="2_jyb1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hw3im"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hw3im"]
+resource_local_to_scene = true
+shader = ExtResource("2_jyb1k")
+shader_parameter/selected = false
+shader_parameter/rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q1pj5"]
+
+[node name="GameRoom" type="Node2D" unique_id=1382508797]
+scale = Vector2(60, 60)
+script = ExtResource("1_bvpig")
+
+[node name="Grid" type="Node2D" parent="." unique_id=1894364825]
+
+[node name="RoomArea" type="Area2D" parent="." unique_id=1990814139]
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea" unique_id=150228654]
+shape = SubResource("RectangleShape2D_hw3im")
+
+[node name="SelectedShader" type="Sprite2D" parent="RoomArea" unique_id=216332683]
+material = SubResource("ShaderMaterial_hw3im")
+texture = SubResource("PlaceholderTexture2D_q1pj5")
+
+[node name="Door" type="Node2D" parent="." unique_id=1761462363]
+
+[connection signal="input_event" from="RoomArea" to="." method="_on_room_area_input_event"]
+[connection signal="mouse_entered" from="RoomArea" to="." method="_on_room_area_mouse_entered"]
+[connection signal="mouse_exited" from="RoomArea" to="." method="_on_room_area_mouse_exited"]
