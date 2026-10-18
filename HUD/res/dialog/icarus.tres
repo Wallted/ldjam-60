@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource("1_f7y07")
+entry_messages = ["\"You shouldn't forget about your limitations...\"", "I guess my father was right...", "But he didn't mention anything about stones! Ha-ha! That'll show him...", "Well, well, well! This one looks kind of like a sun...", "Huh... Falling upwards? That's surely new...", "Oh I messed up again, didn't I?"]

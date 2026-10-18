@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource("1_dwun8")
+entry_messages = ["Another day... another stone.", "Do I look like a sculptor?", "Oh wait... I do...", "But this one is different...", "It's smooth and... feels like a soft one", "Wait where am I?!", "IS THAT AN UNPAINTED CEILING?!"]
