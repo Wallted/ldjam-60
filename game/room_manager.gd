@@ -4,7 +4,7 @@ var room_list : Array[GameRoom]
 var focus_available: bool = true
 var currently_focused_room: GameRoom
 
-@onready 
+@onready
 var camera_2d: RoomCamera = $"../Camera2D"
 
 var _path_cursor: PathSegment
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 	_snap_rooms_together()
 	room_list.reverse()
-	
+
 	camera_2d.zoom_room(room_list[0])
 	focus_on_room(room_list[0])
 
@@ -52,7 +52,7 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 			var local_coord = room.translate_to_parent_tile(_t)
 			if local_coord:
 				_tiles_to_remove.append(local_coord)
-				
+
 		for _t in _tiles_to_remove:
 			if room.parent_room:
 				_remove_tile(_t, room.parent_room)
@@ -78,11 +78,11 @@ func focus_on_room(target_room: GameRoom):
 
 	for room in room_list:
 		room.disable_room()
-	
+
 	if _path_cursor != null:
 		_path_cursor.set_hovered(false)
 	_path_cursor = null
-	
+
 	camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
 
 func _on_focus_request(room: GameRoom) -> void:
