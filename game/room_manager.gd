@@ -26,13 +26,17 @@ func _ready() -> void:
 	room_list.reverse()
 	focus_on_room(room_list[0])
 
+func _process(_delta: float) -> void:
+	for room in room_list:
+		room.update_parent()
+
 func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var dict : Dictionary[int, Array]
 	for room in room_list:
 		if room.zoom_level not in dict.keys():
 			dict.set(room.zoom_level, [])
 		dict[room.zoom_level].append(room)
-		
+
 		var _tiles_to_remove: Array[Vector2] = []
 		for _t in room.tile_list:
 			var local_coord = room.translate_to_parent_tile(_t)
@@ -50,7 +54,7 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var prev_position: Vector2 = Vector2.ZERO
 	for key in dict.keys():
 		var r_l = dict[key]
-		
+
 		for room in r_l:
 			room.position = prev_position
 			room.position += room.parent_offset * prev_tile_size
@@ -64,9 +68,11 @@ func focus_on_room(target_room: GameRoom):
 
 	currently_focused_room = target_room
 	for room in room_list:
-		var _is_room_focusable : bool = room.zoom_level == target_room.zoom_level - 1
-		room.set_as_focused(false, _is_room_focusable)
-	target_room.set_as_focused(true, false)
+		room.disable_room()
+		if room.zoom_level == target_room.zoom_level - 1:
+			room.set_as_pickable()
+
+	target_room.enable_tiles()
 	camera_2d.zoom_room(target_room).connect(_on_zoom_finished)
 	focus_available = false
 
