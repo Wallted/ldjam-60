@@ -2,7 +2,7 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
-signal path_hovered_on(north_not_west: bool, tile: Tile)
+signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
 @export_group("Grid")
 @export
@@ -56,7 +56,7 @@ func _setup_tiles() -> void:
 
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
-			_tile.path_hovered_on.connect(path_hovered_on.emit.bind(_tile))
+			_tile.path_hover.connect(path_hover.emit.bind(_tile))
 			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 

@@ -2,7 +2,7 @@ class_name PathSegment
 extends Line2D
 
 
-signal mouse_entered
+signal mouse_event(entered: bool)
 
 const POWERED_WIDTH_CURVE = preload("uid://po2k2jpyeddn")
 const OFFLINE_WIDTH_CURVE = preload("uid://1fpi08ycayod")
@@ -57,4 +57,8 @@ func set_powered(value: bool) -> void:
 	
 
 func _on_area_2d_mouse_entered():
-	mouse_entered.emit()
+	mouse_event.emit(true)
+
+
+func _on_area_2d_mouse_exited():
+	mouse_event.emit(false)

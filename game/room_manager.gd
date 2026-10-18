@@ -8,6 +8,8 @@ var currently_focused_room: GameRoom
 var camera_2d: RoomCamera = $"../Camera2D"
 
 var _path_cursor: PathSegment
+var _path_cursor_north_not_west: bool
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -26,7 +28,7 @@ func _ready() -> void:
 
 			var _room : GameRoom = _child
 			_room.request_focus.connect(_on_focus_request.bind(_room))
-			_room.path_hovered_on.connect(_on_path_mouse_entered)
+			_room.path_hover.connect(_on_path_mouse_event)
 
 	_snap_rooms_together()
 
@@ -91,16 +93,26 @@ func _on_zoom_finished() -> void:
 	focus_available = true
 
 
-func _on_path_mouse_entered(north_not_west: bool, tile: Tile) -> void:
+func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
+		if entered == false: # no lepiej tak działa lol
+			return
 		if _path_cursor != null:
 			_path_cursor.set_hovered(false)
-		_path_cursor = tile.north_path if north_not_west else tile.west_path
-		_path_cursor.set_hovered(true)
+		if entered:
+			_path_cursor = tile.north_path if north_not_west else tile.west_path
+			_path_cursor_north_not_west = north_not_west
+			var is_eligible_to_hover := true
+			if not _path_cursor.is_placed:
+				var target_tile_coords: Vector2 = _path_cursor.get_parent().coords + (Vector2.UP if _path_cursor_north_not_west else Vector2.LEFT)
+				is_eligible_to_hover = _tile_placed_paths_count(_path_cursor.get_parent().coords, currently_focused_room) < 2
+				is_eligible_to_hover = is_eligible_to_hover and _tile_placed_paths_count(target_tile_coords, currently_focused_room) < 2
+			if is_eligible_to_hover:
+				_path_cursor.set_hovered(true)
 
 
 func _try_place_path_segment() -> void:
-	if _path_cursor != null:
+	if _path_cursor != null and _path_cursor.is_hovered:
 		_path_cursor.set_placed(true)
 
 
@@ -118,9 +130,26 @@ func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
 
 
 func _trim_paths_of_neighbors(unavailable_tile_coords: Vector2, room: GameRoom) -> void:
-	var south_tile = room.get_tile(unavailable_tile_coords + Vector2.DOWN)
-	var east_tile = room.get_tile(unavailable_tile_coords + Vector2.RIGHT)
+	var south_tile := room.get_tile(unavailable_tile_coords + Vector2.DOWN)
+	var east_tile := room.get_tile(unavailable_tile_coords + Vector2.RIGHT)
 	if south_tile != null:
 		south_tile.remove_path(true)
 	if east_tile != null:
 		east_tile.remove_path(false)
+
+
+func _tile_placed_paths_count(tile_coords: Vector2, room: GameRoom) -> int:
+	var result := 0
+	var tile := room.get_tile(tile_coords)
+	if tile != null:
+		if tile.north_path != null and tile.north_path.is_placed:
+			result += 1
+		if tile.west_path != null and tile.west_path.is_placed:
+			result += 1
+	var south_tile := room.get_tile(tile_coords + Vector2.DOWN)
+	var east_tile := room.get_tile(tile_coords + Vector2.RIGHT)
+	if south_tile != null and south_tile.north_path != null and south_tile.north_path.is_placed:
+		result += 1
+	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_placed:
+		result += 1
+	return result
