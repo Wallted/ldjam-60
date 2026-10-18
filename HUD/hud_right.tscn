@@ -64,6 +64,7 @@ columns = 2
 
 [node name="Tourist" parent="GridContainer" unique_id=1468336816 instance=ExtResource("2_ccku2")]
 layout_mode = 2
+person_id = "tourist"
 
 [node name="Archaeologist" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
 layout_mode = 2

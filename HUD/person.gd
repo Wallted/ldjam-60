@@ -5,8 +5,6 @@ extends Control
 @onready var avatar: Sprite2D = $Node2D/Avatar
 @onready var avatar_active_bg: PanelContainer = $Node2D/AvatarActiveBG
 var avatar_instance = Avatars.new()
-#@onready var avatars_res: GDScript = load("res://HUD/res/avatars.gd")
-#var avatar_instance: Avatars = avatars_res.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
