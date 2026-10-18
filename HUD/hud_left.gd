@@ -3,13 +3,14 @@ class_name HUDLeft
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
+@onready var test_button: Button = $Button
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 
-signal test_button_pressed(author: String, message: String)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	test_button.pressed.connect(DialogManagier._send_test_message)
+	DialogManagier.message_sent.connect(send_message)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,22 +41,3 @@ func send_message(
 				scroll_container.get_v_scroll_bar().max_value + 200,
 			)
 	)
-
-
-func _on_button_pressed() -> void:
-	var author = "pudzian"
-	var message = "polska gurooooom"
-	
-	if Input.is_action_pressed("speak_1"):
-		author = "1"
-		message = "Never gonna give you up"
-	if Input.is_action_pressed("speak_2"):
-		author = "2"
-		message = "Never gonna let you down"
-	if Input.is_action_pressed("speak_3"):
-		author = "3"
-		message = "Never gonna run around"
-	if Input.is_action_pressed("speak_4"):
-		author = "4"
-		message = "And desert you"
-	test_button_pressed.emit(author, message)

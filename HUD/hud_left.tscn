@@ -41,5 +41,3 @@ offset_left = 324.0
 offset_top = 10.0
 offset_right = 377.0
 offset_bottom = 57.0
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
