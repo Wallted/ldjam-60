@@ -3,6 +3,9 @@ class_name RoomCamera
 
 var tween: Tween
 
+@onready 
+var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
+
 func _calculate_zoom(room: GameRoom) -> Vector2:
 	var room_size = room.get_size()
 	var viewport_size = get_viewport_rect().size
@@ -26,5 +29,6 @@ func tween_zoom_room(room : GameRoom) -> Signal:
 	tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, 'position', room.position, 0.5).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, 'zoom', _calculate_zoom(room), 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(action_progress, 'progress', 1.0, 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.parallel()
 	return tween.finished
