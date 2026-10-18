@@ -19,7 +19,7 @@ var doors: Array[Door]
 var parent_room: GameRoom
 
 var _tile_scene = preload("res://game/tile.tscn")
-var tile_list: Array[Area2D]
+var tile_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 
 @onready 
@@ -41,8 +41,9 @@ func _ready() -> void:
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:
-			var _tile = _tile_scene.instantiate() as Area2D
+			var _tile = _tile_scene.instantiate() as Tile
 			
+			_tile.coords = Vector2(i, j)
 			var tile_size = room_size / grid_size
 			var _x = (i * tile_size.x) - room_size.x / 2.0
 			var _y = (j * tile_size.y) - room_size.y / 2.0
@@ -68,32 +69,65 @@ func _setup_doors() -> void:
 		_door_txt.position -= room_size / 2.0
 		_door_txt.position += room_size / step * door.coord + room_size / (step * 2.0)
 		_door_txt.scale /= grid_size * 2.0
-		_door_txt.position += room_size / (step * 2.0) * door.side
+		_door_txt.position += room_size / (step * 2.0) * Enums.get_direction(door.side)
 		add_child(_door_txt)
 
 func get_size() -> Vector2:
 	return room_size * scale
 	
+func get_tile(coord: Vector2) -> Tile:
+	for _t in tile_list:
+		if _t.coords == coord:
+			return _t
+	return null
+
+func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
+	var neighbours : Array[Tile] = []
+	var neigbour_coords = [
+		coord + Vector2.UP,
+		coord + Vector2.DOWN,
+		coord + Vector2.RIGHT,
+		coord + Vector2.LEFT,
+	]
+	for _tile in tile_list:
+		if _tile.coords in neigbour_coords:
+			neighbours.append(_tile)
+	return neighbours
+
+func translate_to_parent_tile(_tile: Tile) -> Vector2:
+	var parent_base = Vector2(3, 3) + parent_offset
+	var res_coord = floor(_tile.coords / 3.0) + parent_base
+	return res_coord
+
 func set_as_focused(enabled: bool, area_enabled: bool) -> void:
 	room_area.input_pickable = area_enabled
 	for _item in tile_list:
 		var _tile : Area2D = _item
 		_tile.input_pickable = enabled
 
-func _on_tile_mouse_entered(_tile: Area2D) -> void:
-	_tile.modulate *= 10.0 # todo: remove
+
+func _on_tile_mouse_entered(_tile: Tile) -> void:
+	for _t in tile_list:
+		_t.modulate = Color.WHITE 
+	if _tile:
+		for t in get_neighbour_tiles(_tile.coords):
+			t.modulate = Color.AQUA
+		_tile.modulate = Color.AQUAMARINE
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
-	_tile.modulate /= 10.0 # todo: remove
+	pass
 
 func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			# print('pressed room %s' % name)
 			request_focus.emit()
 
 func _on_room_area_mouse_entered() -> void:
+	for _t in tile_list:
+		_t.modulate = Color.WHITE
 	sprite_2d.material.set("shader_parameter/selected",	true);
 
 func _on_room_area_mouse_exited() -> void:
 	sprite_2d.material.set("shader_parameter/selected",	false);
+	for _t in tile_list:
+		_t.modulate = Color.WHITE

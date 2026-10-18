@@ -32,12 +32,25 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 		if room.zoom_level not in dict.keys():
 			dict.set(room.zoom_level, [])
 		dict[room.zoom_level].append(room)
+		
+		var _tiles_to_remove: Array[Vector2] = []
+		for _t in room.tile_list:
+			var local_coord = room.translate_to_parent_tile(_t)
+			if local_coord:
+				_tiles_to_remove.append(local_coord)
+				
+		for _t in _tiles_to_remove:
+			if room.parent_room:
+				var _t_to_r = room.parent_room.get_tile(_t)
+				if _t_to_r:
+					room.parent_room.tile_list.erase(_t_to_r)
+					_t_to_r.queue_free()
 
 	var prev_tile_size: Vector2 = Vector2.ZERO
 	var prev_position: Vector2 = Vector2.ZERO
 	for key in dict.keys():
-		print(key)
 		var r_l = dict[key]
+		
 		for room in r_l:
 			room.position = prev_position
 			room.position += room.parent_offset * prev_tile_size
