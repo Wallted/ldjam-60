@@ -73,7 +73,6 @@ func _setup_tiles() -> void:
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
 			_tile.path_hover.connect(path_hover.emit.bind(_tile))
-			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
 			_tile.input_pickable = false
 
 			tile_list.append(_tile)
@@ -213,11 +212,6 @@ func rotate_room() -> void:
 
 	for _t in tile_list:
 		_t.rotate_tile()
-
-func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
