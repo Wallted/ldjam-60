@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://nh0rhmc40k6e"
+path="res://.godot/imported/turists memory dialog.ogg-be156551ecad3e538ee93a4821d5850f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/turists memory dialog.ogg"
+dest_files=["res://.godot/imported/turists memory dialog.ogg-be156551ecad3e538ee93a4821d5850f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
