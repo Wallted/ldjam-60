@@ -88,10 +88,15 @@ func _setup_doors() -> void:
 func get_size() -> Vector2:
 	return room_size * scale
 	
-func get_tile(coord: Vector2) -> Tile:
-	for _t in tile_list:
-		if _t.coords == coord:
-			return _t
+func get_tile(coord: Vector2, in_local_coords := false) -> Tile:
+	if in_local_coords:
+		for _t in tile_list:
+			if _t.local_coords == coord:
+				return _t
+	else:
+		for _t in tile_list:
+			if _t.coords == coord:
+				return _t
 	return null
 
 func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:

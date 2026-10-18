@@ -103,8 +103,8 @@ func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> vo
 			_path_cursor_north_not_west = north_not_west
 			var is_eligible_to_hover := true
 			if not _path_cursor.is_placed:
-				var target_tile_coords: Vector2 = _path_cursor.get_parent().coords + (Vector2.UP if _path_cursor_north_not_west else Vector2.LEFT)
-				is_eligible_to_hover = _tile_placed_paths_count(_path_cursor.get_parent().coords, currently_focused_room) < 2
+				var target_tile_coords: Vector2 = _path_cursor.get_parent().local_coords + (Vector2.UP if _path_cursor_north_not_west else Vector2.LEFT)
+				is_eligible_to_hover = _tile_placed_paths_count(_path_cursor.get_parent().local_coords, currently_focused_room) < 2
 				is_eligible_to_hover = is_eligible_to_hover and _tile_placed_paths_count(target_tile_coords, currently_focused_room) < 2
 			if is_eligible_to_hover:
 				_path_cursor.set_hovered(true)
@@ -125,28 +125,28 @@ func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
 	if tile != null:
 		room.tile_list.erase(tile)
 		tile.queue_free()
-		_trim_paths_of_neighbors(tile_coords, room)
+		_trim_paths_of_neighbors(tile.local_coords, room)
 
 
-func _trim_paths_of_neighbors(unavailable_tile_coords: Vector2, room: GameRoom) -> void:
-	var south_tile := room.get_tile(unavailable_tile_coords + Vector2.DOWN)
-	var east_tile := room.get_tile(unavailable_tile_coords + Vector2.RIGHT)
+func _trim_paths_of_neighbors(unavailable_tile_local_coords: Vector2, room: GameRoom) -> void:
+	var south_tile := room.get_tile(unavailable_tile_local_coords + Vector2.DOWN, true)
+	var east_tile := room.get_tile(unavailable_tile_local_coords + Vector2.RIGHT, true)
 	if south_tile != null:
 		south_tile.remove_path(true)
 	if east_tile != null:
 		east_tile.remove_path(false)
 
 
-func _tile_placed_paths_count(tile_coords: Vector2, room: GameRoom) -> int:
+func _tile_placed_paths_count(tile_local_coords: Vector2, room: GameRoom) -> int:
 	var result := 0
-	var tile := room.get_tile(tile_coords)
+	var tile := room.get_tile(tile_local_coords, true)
 	if tile != null:
 		if tile.north_path != null and tile.north_path.is_placed:
 			result += 1
 		if tile.west_path != null and tile.west_path.is_placed:
 			result += 1
-	var south_tile := room.get_tile(tile_coords + Vector2.DOWN)
-	var east_tile := room.get_tile(tile_coords + Vector2.RIGHT)
+	var south_tile := room.get_tile(tile_local_coords + Vector2.DOWN, true)
+	var east_tile := room.get_tile(tile_local_coords + Vector2.RIGHT, true)
 	if south_tile != null and south_tile.north_path != null and south_tile.north_path.is_placed:
 		result += 1
 	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_placed:
