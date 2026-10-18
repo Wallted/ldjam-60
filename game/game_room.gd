@@ -126,12 +126,14 @@ func update_parent() -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
 			if follow_tile: 
 				follow_tile.has_energy = door_tile.has_energy
+				follow_tile.is_source_exit = true
 
 		if door_tile.is_source_entry:
 			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
 			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
 			if follow_tile: 
 				door_tile.has_energy = follow_tile.has_energy
+				follow_tile.is_source_entry = true
 
 func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
 	if event is InputEventMouseButton:
