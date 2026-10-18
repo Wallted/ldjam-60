@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://clxaq1ltk85ul" path="res://HUD/hud_right.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://cl1vkv2b6kioq" path="res://path_segments/path_segment.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
+[ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
 
 [node name="Main" type="Node" unique_id=665793303]
 
@@ -33,3 +35,14 @@ mouse_filter = 1
 [node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
 visible = false
 is_the_head_master_workaround_animator_singleton = true
+
+[node name="MainAudioStream" type="AudioStreamPlayer" parent="." unique_id=1927473233]
+bus = &"MusicBus"
+script = ExtResource("6_272bh")
+
+[node name="DialogStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=825157408]
+bus = &"DialogBus"
+script = ExtResource("7_5vw27")
+
+[node name="SFXStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=470440381]
+bus = &"SFXBus"
