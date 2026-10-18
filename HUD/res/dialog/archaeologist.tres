@@ -1,0 +1,6 @@
+[gd_resource type="Resource" format=3 uid="uid://bfv5g5akf1qre"]
+
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://HUD/res/dialog/dialog.gd" id="1_3y5mf"]
+
+[resource]
+script = ExtResource("1_3y5mf")
