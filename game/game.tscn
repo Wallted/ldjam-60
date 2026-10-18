@@ -4,33 +4,37 @@
 [ext_resource type="Script" uid="uid://bc6tax3l3nwu8" path="res://game/game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://crrlec2d1bx6b" path="res://game/room_manager.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game/game_room.tscn" id="3_ryrav"]
-[ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door.gd" id="4_ryrav"]
+[ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door_resource.gd" id="4_ryrav"]
 
 [sub_resource type="Resource" id="Resource_bvpig"]
 script = ExtResource("4_ryrav")
-coord = Vector2(0, 1)
+coord = Vector2(0, 4)
 side = 3
+orientation = 2
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_m75es"]
 script = ExtResource("4_ryrav")
+coord = Vector2(1, 0)
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_fc0e3"]
 script = ExtResource("4_ryrav")
-coord = Vector2(2, 2)
+coord = Vector2(7, 8)
 side = 1
+orientation = 1
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_fhkfd"]
 script = ExtResource("4_ryrav")
-coord = Vector2(1, 0)
+coord = Vector2(4, 0)
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_7jktm"]
 script = ExtResource("4_ryrav")
-coord = Vector2(0, 1)
+coord = Vector2(0, 4)
 side = 3
+orientation = 2
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [node name="Game" type="Node2D" unique_id=1995553335]
