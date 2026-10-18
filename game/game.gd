@@ -31,7 +31,7 @@ func send_message(
 	
 
 func _on_message_sent(author: String, message: String) -> void:
-	send_message(author, message, 3.0)
+	send_message(author, message, 2.0)
 	
 func _on_hud_left_test_button_pressed(author: String, message: String) -> void:
-	send_message(author, message, 3.0)
+	send_message(author, message, 2.0)

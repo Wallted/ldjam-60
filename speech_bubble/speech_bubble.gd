@@ -4,15 +4,20 @@ class_name SpeechBubble
 
 @onready var text_container: PanelContainer = $TextContainer
 @onready var text_node: RichTextLabel = $TextContainer/Text
+@onready var author_node: RichTextLabel = $AuthorContainer/Author
 
 @onready var avatar: TextureRect = $Avatar
+@export var duration: float = 0.0
 
-@export var author = '<placeholder author>'
+@export_multiline var author: String = '<placeholder author>':
+	set(value):
+		author = value
+		$AuthorContainer/Author.text = value
+
 @export_multiline var text: String = '<placeholder text>':
 	set(value):
 		text = value
 		$TextContainer/Text.text = value
-@export var duration: float = 0.0
 
 func _process(delta: float) -> void:
 	if duration:
