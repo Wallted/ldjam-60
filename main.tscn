@@ -33,3 +33,5 @@ mouse_filter = 1
 [node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
 visible = false
 is_the_head_master_workaround_animator_singleton = true
+
+[connection signal="test_button_pressed" from="CanvasLayer/HUD/HUDLeft" to="Game" method="_on_hud_left_test_button_pressed"]

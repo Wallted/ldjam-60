@@ -16,7 +16,7 @@ border_width_bottom = 2
 border_color = Color(0.84281015, 0, 0.0017037323, 1)
 
 [node name="SpeechBubble" type="Control" unique_id=197747971]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(30, 62)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,7 +64,7 @@ custom_minimum_size = Vector2(30, 30)
 clip_contents = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 11
-text = "<placeholder message text>"
+text = "<placeholder text>"
 fit_content = true
 scroll_active = false
 
