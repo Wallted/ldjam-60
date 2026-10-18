@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcl5jk8an51n8"
-path="res://.godot/imported/neaderthal_awake.png-6c5968f323b6b338eddace67749c01d5.ctex"
+path="res://.godot/imported/neanderthal_awake.png-5eb0a6999626f7bc15ec65302e37f2fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/img/neaderthal_awake.png"
-dest_files=["res://.godot/imported/neaderthal_awake.png-6c5968f323b6b338eddace67749c01d5.ctex"]
+source_file="res://HUD/img/neanderthal_awake.png"
+dest_files=["res://.godot/imported/neanderthal_awake.png-5eb0a6999626f7bc15ec65302e37f2fe.ctex"]
 
 [params]
 

@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	# Testing placeholder
 	if Input.is_action_pressed("speak_1"):
 		avatar_active_bg.show()
-		avatar.texture = avatar_instance.avatars.get(person_id).get("sleeping")
+		avatar.texture = avatar_instance.avatars.get(person_id).get("awake")
 	else:
 		avatar_active_bg.hide()
 		avatar.texture = avatar_instance.avatars.get(person_id).get("sleeping")
