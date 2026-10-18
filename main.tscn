@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://c2maoiq75ypwp" path="res://HUD/hud.gd" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://clxaq1ltk85ul" path="res://HUD/hud_right.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://bc43y4cvy2853" path="res://settings.tscn" id="5_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cl1vkv2b6kioq" path="res://path_segments/path_segment.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://bkkrnwmeyogai" path="res://help.tscn" id="6_dg77c"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://nh0rhmc40k6e" path="res://assets/audio/turists memory dialog.ogg" id="7_kek77"]
 [ext_resource type="AudioStream" uid="uid://bh3yy3hbm1um" path="res://assets/audio/mumblephone.wav" id="8_4c57u"]
@@ -42,6 +44,12 @@ mouse_filter = 1
 [node name="HUDRight" parent="CanvasLayer/HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
 layout_mode = 1
 mouse_filter = 1
+
+[node name="Settings" parent="CanvasLayer/HUD" unique_id=272828926 instance=ExtResource("5_efxa6")]
+layout_mode = 0
+
+[node name="Help" parent="CanvasLayer/HUD" unique_id=2005726561 instance=ExtResource("6_dg77c")]
+layout_mode = 0
 
 [node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
 visible = false
