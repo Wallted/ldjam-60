@@ -45,6 +45,7 @@ zoom = Vector2(5, 5)
 script = ExtResource("1_e2o6t")
 
 [node name="RoomManager" type="Node2D" parent="." unique_id=65352006]
+unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
 [node name="FullRoom" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]

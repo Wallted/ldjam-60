@@ -159,11 +159,15 @@ func tween_rotate_room() -> void:
 	tween.finished.connect(
 		func ():
 			rotating = false
-			for child in child_room_list:
-				child.reparent(get_parent())
+			reset_parent()
 	)
 
 	rotate_room()
+
+func reset_parent():
+	for child in child_room_list:
+		child.reset_parent()
+	reparent(%RoomManager.get_parent())
 
 func rotate_room() -> void:
 	for child in child_room_list:
