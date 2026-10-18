@@ -8,30 +8,14 @@
 size = Vector2(128, 128)
 
 [node name="Tile" type="Area2D" unique_id=1712489732]
+monitoring = false
+monitorable = false
 script = ExtResource("1_7cios")
+door_texture = ExtResource("3_ifppd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=667413929]
 shape = SubResource("RectangleShape2D_jyb1k")
+disabled = true
 
 [node name="TileSprite" type="Sprite2D" parent="." unique_id=1489123842]
 texture = ExtResource("2_ifppd")
-
-[node name="Label" type="Label" parent="." unique_id=85902873]
-self_modulate = Color(0, 0, 0, 1)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="Door" type="Sprite2D" parent="." unique_id=79730810]
-visible = false
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_ifppd")
