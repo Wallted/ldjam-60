@@ -33,8 +33,7 @@ func _ready() -> void:
 	_snap_rooms_together()
 	room_list.reverse()
 
-	camera_2d.zoom_room(room_list[0])
-	focus_on_room(room_list[0])
+	focus_on_room(room_list[0], false)
 
 func _process(_delta: float) -> void:
 	for room in room_list:
@@ -69,11 +68,10 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 		prev_tile_size = r_l[0].room_size / r_l[0].grid_size * r_l[0].scale
 		prev_position = r_l[0].position
 
-func focus_on_room(target_room: GameRoom):
+func focus_on_room(target_room: GameRoom, tween: bool = true):
 	if not action_available or not target_room:
 		return
 
-	action_available = false
 	currently_focused_room = target_room
 
 	for room in room_list:
@@ -82,8 +80,11 @@ func focus_on_room(target_room: GameRoom):
 	if _path_cursor != null:
 		_path_cursor.set_hovered(false)
 	_path_cursor = null
-
-	camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
+	if not tween:
+		camera_2d.zoom_room(room_list[0])
+	else:
+		action_available = false
+		camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)

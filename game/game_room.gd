@@ -172,6 +172,7 @@ func update_parent(_disconnect: bool = false) -> void:
 				else:
 					door_tile.has_energy = follow_tile.has_energy
 					follow_tile.is_source_entry = true
+@onready var action_progress: ActionProgress = $"../../CanvasLayer/HUD/ActionProgress"
 
 var tween: Tween
 var rotating = false
@@ -180,8 +181,9 @@ func tween_rotate_room() -> Signal:
 	if tween:
 		tween.kill()
 
-	tween = get_tree().create_tween()
+	tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(self, 'rotation', rotation + PI / 2.0, 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(action_progress, 'progress', 1.0, 0.5).set_trans(Tween.TRANS_LINEAR)
 	tween.finished.connect(
 		func ():
 			rotating = false
