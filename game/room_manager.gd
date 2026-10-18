@@ -84,6 +84,7 @@ func focus_on_room(target_room: GameRoom, tween: bool = true):
 	_path_cursor = null
 	if not tween:
 		camera_2d.zoom_room(room_list[0])
+		target_room.enable_tiles()
 	else:
 		action_available = false
 		camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
@@ -107,7 +108,7 @@ func _on_zoom_finished(target_room: GameRoom) -> void:
 	level_changed.emit(target_room.person_name)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
-	if tile.input_pickable:
+	if tile.enabled:
 		if entered == false: # no lepiej tak działa lol
 			return
 		if _path_cursor != null:
