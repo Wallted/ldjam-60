@@ -15,9 +15,9 @@ static var RESOURCES: Dictionary[String, PersonResource] = {
 }
 
 
-static func get_resource(name: String) -> PersonResource:
-	return RESOURCES[name]
+static func get_resource(_name: String) -> PersonResource:
+	return RESOURCES[_name]
 
 
-static func get_avatar(name: String) -> Avatar:
-	return RESOURCES[name].avatar
+static func get_avatar(_name: String) -> Avatar:
+	return RESOURCES[_name].avatar
