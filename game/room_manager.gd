@@ -9,7 +9,7 @@ var camera_2d: RoomCamera = $"../Camera2D"
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
 			focus_on_room(currently_focused_room.parent_room)
 
 func _ready() -> void:

@@ -91,6 +91,9 @@ _data = {
 &"powered": SubResource("Animation_7ibsq")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idcf6"]
+size = Vector2(32, 32)
+
 [node name="PathSegment" type="Line2D" unique_id=1309965418]
 z_index = 1
 scale = Vector2(2.56, 2.56)
@@ -111,3 +114,13 @@ texture_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981627908]
 libraries/ = SubResource("AnimationLibrary_y3abr")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1577706439]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1147634145]
+position = Vector2(25, 0)
+rotation = 0.7853982
+shape = SubResource("RectangleShape2D_idcf6")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

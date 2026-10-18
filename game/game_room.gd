@@ -18,6 +18,8 @@ var doors: Array[Door]
 @export
 var parent_room: GameRoom
 
+var _path_cursor: PathSegment
+
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
@@ -38,6 +40,13 @@ func _ready() -> void:
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
 
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
+			_try_place_path_segment()
+
+
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:
@@ -52,6 +61,7 @@ func _setup_tiles() -> void:
 
 			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
 			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
+			_tile.path_hovered_on.connect(_on_path_mouse_entered.bind(_tile))
 			_tile.input_pickable = false
 
 			tile_list.append(_tile)
@@ -116,19 +126,34 @@ func set_as_focused(enabled: bool, area_enabled: bool) -> void:
 
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
-	for _t in tile_list:
-		_t.modulate = Color.WHITE 
-	if _tile:
-		for t in get_neighbour_tiles(_tile.coords):
-			t.modulate = Color.AQUA
-		_tile.modulate = Color.AQUAMARINE
+	pass
+	#for _t in tile_list:
+		#_t.modulate = Color.WHITE 
+	#if _tile:
+		#for t in get_neighbour_tiles(_tile.coords):
+			#t.modulate = Color.AQUA
+		#_tile.modulate = Color.AQUAMARINE
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
 
+
+func _on_path_mouse_entered(north_not_west: bool, tile: Tile) -> void:
+	if tile.input_pickable:
+		if _path_cursor != null:
+			_path_cursor.set_hovered(false)
+		_path_cursor = tile.north_path if north_not_west else tile.west_path
+		_path_cursor.set_hovered(true)
+
+
+func _try_place_path_segment() -> void:
+	if _path_cursor != null:
+		_path_cursor.set_placed(true)
+
+
 func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			request_focus.emit()
 
 func _on_room_area_mouse_entered() -> void:
