@@ -92,6 +92,15 @@ func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
 	for _tile in tile_list:
 		if _tile.coords in neigbour_coords:
 			neighbours.append(_tile)
+			# mock:
+			#if _tile.north_path == null:
+				#_tile.add_path_segment(true)
+			#else:
+				#_tile.remove_path_segment(true)
+			#if _tile.west_path == null:
+				#_tile.add_path_segment(false)
+			#else:
+				#_tile.remove_path_segment(false)
 	return neighbours
 
 func translate_to_parent_tile(_tile: Tile) -> Vector2:

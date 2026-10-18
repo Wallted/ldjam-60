@@ -92,6 +92,8 @@ _data = {
 }
 
 [node name="PathSegment" type="Line2D" unique_id=1309965418]
+z_index = 1
+scale = Vector2(2.56, 2.56)
 points = PackedVector2Array(-2.4, 0, 24.8, 0, 52, 0)
 width = 30.0
 width_curve = ExtResource("1_ek3cv")
