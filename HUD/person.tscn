@@ -16,6 +16,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2xfa")
+person_id = "tourist"
 
 [node name="Node2D" type="Control" parent="." unique_id=301940674]
 layout_mode = 1
@@ -28,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Avatar" type="Sprite2D" parent="Node2D" unique_id=2042593102]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.07, 0.07)
 
 [node name="AvatarActiveBG" type="PanelContainer" parent="Node2D" unique_id=735677909]
 layout_mode = 1
