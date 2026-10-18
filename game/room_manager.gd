@@ -31,8 +31,9 @@ func _ready() -> void:
 			_room.path_hover.connect(_on_path_mouse_event)
 
 	_snap_rooms_together()
-
 	room_list.reverse()
+	
+	camera_2d.zoom_room(room_list[0])
 	focus_on_room(room_list[0])
 
 func _process(_delta: float) -> void:
@@ -82,7 +83,7 @@ func focus_on_room(target_room: GameRoom):
 		_path_cursor.set_hovered(false)
 	_path_cursor = null
 	
-	camera_2d.zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
+	camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)

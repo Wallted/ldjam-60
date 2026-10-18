@@ -121,6 +121,7 @@ func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	
 func disable_room() -> void:
 	sprite_2d.material.set("shader_parameter/selected",	false);
+	room_area_entered = false
 	room_area.input_pickable = false
 	for _item in tile_list:
 		var _tile : Area2D = _item
@@ -138,6 +139,7 @@ func set_as_pickable() -> void:
 		var room : GameRoom = resp['collider'].get_parent() as GameRoom
 		if room and room.zoom_level == zoom_level :
 			room.sprite_2d.material.set("shader_parameter/selected", true);
+			room.room_area_entered = true
 
 func enable_tiles() -> void:
 	for _item in tile_list:
