@@ -19,6 +19,8 @@ var is_source_entry: bool
 var north_path: PathSegment
 var west_path: PathSegment
 
+var parent_room: GameRoom
+
 @onready
 var door: Sprite2D = $Door
 @onready
@@ -29,6 +31,7 @@ var label: Label = $Label
 func _ready() -> void:
 	label.text = "(%s,%s)" % [coords.x, coords.y]
 	local_coords = coords
+	parent_room = get_parent().get_parent()
 	_init_path_segments()
 
 func _process(_delta: float) -> void:
@@ -52,12 +55,14 @@ func _init_path_segments() -> void:
 		west_path.position = Vector2.ZERO
 		west_path.rotation = -0.5*TAU
 		west_path.mouse_event.connect(path_hover.emit.bind(false))
+		west_path.is_north_not_west = false
 		add_child(west_path)
 	if coords.y > 0:
 		north_path = PATH_SEGMENT.instantiate()
 		north_path.position = Vector2.ZERO
 		north_path.rotation = -0.25*TAU
 		north_path.mouse_event.connect(path_hover.emit.bind(true))
+		north_path.is_north_not_west = true
 		add_child(north_path)
 
 func is_door() -> bool:

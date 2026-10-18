@@ -122,12 +122,27 @@ func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> vo
 
 
 func _try_place_path_segment() -> void:
-	if _path_cursor != null and _path_cursor.is_hovered:
+	if _path_cursor != null and _path_cursor.is_hovered and not _path_cursor.is_placed:
 		_path_cursor.set_placed(true)
+		# <tmp>
+		var parent_tile: Tile = _path_cursor.get_parent()
+		if parent_tile.has_energy:
+			_power_a_segment(_path_cursor, parent_tile.local_coords)
+		# </tmp>
+		var front_endpoint := _get_segment_endpoint(_path_cursor, false)
+		var back_endpoint := _get_segment_endpoint(_path_cursor, true)
+		# there is max one powered endpoint
+		assert(front_endpoint == null or not front_endpoint.is_powered or back_endpoint == null or not back_endpoint.is_powered)
+		if front_endpoint != null and front_endpoint.is_powered:
+			_power_a_segment(_path_cursor, _path_segment_tip_local_coords(_path_cursor))
+		elif back_endpoint != null and back_endpoint.is_powered:
+			_power_a_segment(_path_cursor, parent_tile.local_coords)
 
 
 func _try_unplace_path_segment() -> void:
 	if _path_cursor != null:
+		_unpower_a_segment(_path_cursor)
+		_path_cursor.has_backward_flow = false
 		_path_cursor.set_placed(false)
 
 
@@ -162,4 +177,60 @@ func _tile_placed_paths_count(tile_local_coords: Vector2, room: GameRoom) -> int
 		result += 1
 	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_placed:
 		result += 1
+	return result
+
+
+func _get_segment_endpoint(segment: PathSegment, backside: bool) -> PathSegment:
+	var tile := segment.get_parent()
+	if tile != null:
+		if segment.is_north_not_west:
+			if segment.has_backward_flow == backside: # the endpoint outside the tile
+				return _get_the_other_segment_in_a_tile(segment, tile.local_coords + Vector2.UP)
+			else: # the endpoint inside the tile
+				return _get_the_other_segment_in_a_tile(segment, tile.local_coords)
+		else:
+			segment = tile.west_path
+			if segment.has_backward_flow == backside: # the endpoint outside the tile
+				return _get_the_other_segment_in_a_tile(segment, tile.local_coords + Vector2.LEFT,)
+			else: # the endpoint inside the tile
+				return _get_the_other_segment_in_a_tile(segment, tile.local_coords)
+	return null
+
+
+func _get_the_other_segment_in_a_tile(wrong_path: PathSegment, tile_local_coords: Vector2) -> PathSegment:
+	var room: GameRoom = wrong_path.get_parent().parent_room
+	var tile := room.get_tile(tile_local_coords, true)
+	if tile != null:
+		if tile.north_path != null and tile.north_path != wrong_path and tile.north_path.is_placed:
+			return tile.north_path
+		if tile.west_path != null and tile.west_path != wrong_path and tile.west_path.is_placed:
+			return tile.west_path
+	var south_tile := room.get_tile(tile_local_coords + Vector2.DOWN, true)
+	if south_tile != null and south_tile.north_path != null and south_tile.north_path != wrong_path and south_tile.north_path.is_placed:
+		return south_tile.north_path
+	var east_tile := room.get_tile(tile_local_coords + Vector2.RIGHT, true)
+	if east_tile != null and east_tile.west_path != null and east_tile.west_path != wrong_path and east_tile.west_path.is_placed:
+		return east_tile.west_path
+	return null
+
+
+func _power_a_segment(target: PathSegment, source_tile_local_coords: Vector2) -> void:
+	while target != null:
+		var local_coords = target.get_parent().local_coords
+		target.has_backward_flow = local_coords != source_tile_local_coords
+		target.set_powered(true)
+		source_tile_local_coords = _path_segment_tip_local_coords(target)
+		target = _get_segment_endpoint(target, false)
+
+
+func _unpower_a_segment(target: PathSegment) -> void:
+	while target != null and target.is_powered:
+		target.set_powered(false)
+		target = _get_segment_endpoint(target, false)
+
+
+func _path_segment_tip_local_coords(segment: PathSegment) -> Vector2:
+	var result: Vector2 = segment.get_parent().local_coords
+	if not segment.has_backward_flow:
+		result += Vector2.UP if segment.is_north_not_west else Vector2.LEFT
 	return result
