@@ -2,6 +2,7 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
+signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
 @export_group("Grid")
@@ -40,7 +41,7 @@ var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
-		tween_rotate_room()
+		request_rotate.emit()
 
 func _ready() -> void:
 	_setup_tiles()
@@ -50,7 +51,6 @@ func _ready() -> void:
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
 	if parent_room:
 		parent_room.child_room_list.append(self)
-
 
 func _setup_tiles() -> void:
 	for i in grid_size:
@@ -120,6 +120,7 @@ func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	return res_coord
 	
 func disable_room() -> void:
+	sprite_2d.material.set("shader_parameter/selected",	false);
 	room_area.input_pickable = false
 	for _item in tile_list:
 		var _tile : Area2D = _item
@@ -127,6 +128,16 @@ func disable_room() -> void:
 
 func set_as_pickable() -> void:
 	room_area.input_pickable = true
+
+	var space_state = get_world_2d().direct_space_state
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = get_global_mouse_position()
+	params.collide_with_areas = true
+	var out = space_state.intersect_point(params)
+	for resp in out:
+		var room : GameRoom = resp['collider'].get_parent() as GameRoom
+		if room and room.zoom_level == zoom_level :
+			room.sprite_2d.material.set("shader_parameter/selected", true);
 
 func enable_tiles() -> void:
 	for _item in tile_list:
@@ -162,13 +173,13 @@ func update_parent(_disconnect: bool = false) -> void:
 
 var tween: Tween
 var rotating = false
-func tween_rotate_room() -> void:
+func tween_rotate_room() -> Signal:
 	rotating = true
 	if tween:
 		tween.kill()
 
 	tween = get_tree().create_tween()
-	tween.tween_property(self, 'rotation', rotation + PI / 2.0, 0.15).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, 'rotation', rotation + PI / 2.0, 0.5).set_trans(Tween.TRANS_CUBIC)
 	tween.finished.connect(
 		func ():
 			rotating = false
@@ -176,6 +187,7 @@ func tween_rotate_room() -> void:
 	)
 
 	rotate_room()
+	return tween.finished
 
 func reset_parent():
 	for child in child_room_list:

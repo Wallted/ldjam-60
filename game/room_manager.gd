@@ -27,6 +27,7 @@ func _ready() -> void:
 
 			var _room : GameRoom = _child
 			_room.request_focus.connect(_on_focus_request.bind(_room))
+			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
 
 	_snap_rooms_together()
@@ -74,23 +75,27 @@ func focus_on_room(target_room: GameRoom):
 	currently_focused_room = target_room
 	for room in room_list:
 		room.disable_room()
-		if room.zoom_level == target_room.zoom_level - 1:
-			room.set_as_pickable()
 	
 	if _path_cursor != null:
 		_path_cursor.set_hovered(false)
 	_path_cursor = null
 	
 	target_room.enable_tiles()
-	camera_2d.zoom_room(target_room).connect(_on_zoom_finished)
+	camera_2d.zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
 	focus_available = false
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)
 
-func _on_zoom_finished() -> void:
+func _on_zoom_finished(target_room: GameRoom) -> void:
 	focus_available = true
+	for room in room_list:
+		if room.zoom_level == target_room.zoom_level - 1:
+			room.set_as_pickable()
 
+func _on_rotate_request(room: GameRoom) -> void:
+	focus_available = false
+	room.tween_rotate_room().connect(func (): focus_available = true)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
