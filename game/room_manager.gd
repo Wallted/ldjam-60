@@ -20,6 +20,7 @@ func _ready() -> void:
 
 			var _room : GameRoom = _child
 			_room.request_focus.connect(_on_focus_request.bind(_room))
+			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 
 	_snap_rooms_together()
 
@@ -81,3 +82,6 @@ func _on_focus_request(room: GameRoom) -> void:
 
 func _on_zoom_finished() -> void:
 	focus_available = true
+	
+func _on_rotate_request(room: GameRoom) -> void:
+	pass

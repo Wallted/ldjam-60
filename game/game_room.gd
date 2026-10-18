@@ -2,6 +2,7 @@ extends Node2D
 class_name GameRoom
 
 signal request_focus
+signal request_rotate
 
 @export_group("Grid")
 @export
@@ -10,6 +11,8 @@ var grid_size : int = 9
 var scale_ratio: int
 @export
 var parent_offset: Vector2
+@export
+var parent_base: Vector2 = Vector2(3, 3)
 @export
 var zoom_level: int
 @export
@@ -22,6 +25,7 @@ var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
 var door_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
+var child_room_list : Array[GameRoom]
 
 @onready 
 var grid: Node2D = $Grid
@@ -32,12 +36,18 @@ var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 @onready
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("rotate") and area_entered and not rotating:
+		tween_rotate_room()
+
 func _ready() -> void:
 	_setup_tiles()
 	_setup_doors()
 	(collision_shape_2d.shape as RectangleShape2D).size = room_size
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
+	if parent_room:
+		parent_room.child_room_list.append(self)
 
 func _setup_tiles() -> void:
 	for i in grid_size:
@@ -93,9 +103,11 @@ func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
 			neighbours.append(_tile)
 	return neighbours
 
-func translate_to_parent_tile(_tile: Tile) -> Vector2:
-	var parent_base = Vector2(3, 3) + parent_offset
-	var res_coord = floor(_tile.coords / 3.0) + parent_base
+func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
+	if not parent_room:
+		return Vector2.ZERO
+	var _parent_base = parent_base + parent_offset
+	var res_coord = floor(_tile.coords / pow(3.0, parent_room.scale_ratio - scale_ratio)) + _parent_base
 	return res_coord
 	
 func disable_room() -> void:
@@ -130,7 +142,48 @@ func update_parent() -> void:
 			if follow_tile: 
 				door_tile.has_energy = follow_tile.has_energy
 				follow_tile.is_source_entry = true
+var tween: Tween
+var rotating = false
+func tween_rotate_room() -> void:
+	rotating = true
+	if tween:
+		tween.kill()
 
+	tween = get_tree().create_tween()
+	tween.tween_property(self, 'rotation', rotation + PI / 2.0, 0.15).set_trans(Tween.TRANS_CUBIC)
+	tween.finished.connect(
+		func ():
+			rotating = false
+			for child in child_room_list:
+				child.reparent(get_parent())
+	)
+
+	rotate_room()
+
+func rotate_room() -> void:
+	for child in child_room_list:
+		child.parent_offset = Vector2(-child.parent_offset.y, child.parent_offset.x)
+		child.reparent(self)
+		child.rotate_room()
+
+	for door_tile in door_list:
+		if door_tile.is_source_exit:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
+			if follow_tile: 
+				follow_tile.has_energy = false
+				follow_tile.is_source_exit = false
+
+		if door_tile.is_source_entry:
+			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
+			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
+			if follow_tile: 
+				door_tile.has_energy = false
+				follow_tile.is_source_entry = false
+	
+	for _t in tile_list:
+		_t.rotate_tile()
+	
 func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
@@ -152,12 +205,15 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			request_focus.emit()
 
+var area_entered: bool
 func _on_room_area_mouse_entered() -> void:
+	area_entered = true
 	for _t in tile_list:
 		_t.modulate = Color.WHITE
 	sprite_2d.material.set("shader_parameter/selected",	true);
 
 func _on_room_area_mouse_exited() -> void:
+	area_entered = false
 	sprite_2d.material.set("shader_parameter/selected",	false);
 	for _t in tile_list:
 		_t.modulate = Color.WHITE

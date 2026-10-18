@@ -42,3 +42,10 @@ func enable_door(_side: Vector2, _orientation: Vector2) -> void:
 
 	_follow_tile = coords - door_orientation
 	is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
+
+func rotate_tile() -> void:
+	var offset = Vector2(4.0, 4.0)
+	var temp_coord = coords - offset
+	var rotated_coord = Vector2(-temp_coord.y, temp_coord.x)
+	coords = rotated_coord + offset
+	door_orientation = Vector2(-door_orientation.y, door_orientation.x)
