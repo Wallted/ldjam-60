@@ -87,7 +87,6 @@ func focus_on_room(target_room: GameRoom, tween: bool = true):
 	else:
 		action_available = false
 		camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
-	level_changed.emit(target_room.person_name)
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)
@@ -105,6 +104,7 @@ func _on_zoom_finished(target_room: GameRoom) -> void:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()
 	target_room.enable_tiles()
+	level_changed.emit(target_room.person_name)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
