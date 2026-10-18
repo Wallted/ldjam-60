@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://jduf3we633ex"]
+
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_5qo7x"]
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_ssvx5"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_kkk1n"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_r57vc"]
+
+[sub_resource type="Resource" id="Resource_5813k"]
+script = ExtResource("2_kkk1n")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_5qo7x")
+name = "Celt"
+entry_messages = Array[String](["Druid told me that this place will link us to cosmic beings...", "But from what he said it's just a stone circle!", "But I bet our descendants will pay for tickets to see it. Mark my words!", "AND WHY DOESN'T IT HAVE A BUILD MANUAL!", "Like... Where this stone is supposed to go?", "Ohh that's why..."])
+avatar = SubResource("Resource_5813k")

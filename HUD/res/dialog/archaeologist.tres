@@ -1,7 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://bfv5g5akf1qre"]
-
-[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://HUD/res/dialog/dialog.gd" id="1_3y5mf"]
-
-[resource]
-script = ExtResource("1_3y5mf")
-entry_messages = Array[String](["God damn it! I've been looking for an exciting expedition from a university for 3 months!...", "And what do they give me?...", "How many archaeologists does it take to find everything in the Pyramids?", "Feel like they use it to get rid of ambitious people.", "Wait a second? What's that glow?...", "What an interesting stone...", "I'm going to be famous after all...", "What? Of course it's some sort of an artifact!!!", "That's it! I'm going to Human Resources!", "After I get out of here..."])

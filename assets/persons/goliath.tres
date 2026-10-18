@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://e0rywutbukxu"]
+
+[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_bwhvt"]
+[ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_kjs0d"]
+[ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_b1cj3"]
+[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_q4fnq"]
+
+[sub_resource type="Resource" id="Resource_c5fji"]
+script = ExtResource("2_b1cj3")
+metadata/_custom_type_script = "uid://b2hdefaktpid6"
+
+[resource]
+script = ExtResource("1_kjs0d")
+name = "Goliath"
+entry_messages = Array[String](["Ha-ha-ha! Are you kidding me? This widdle guy? What's you name boy?", "David huh? Like the King. Well you sure are brave.", "Ohhh that's cute... Hey guys! He's got a little slingshot there.", "Wait this is going to be fun.", "Ok I'll give you one... maybe two... ok I'll let you have 5 shots at me...", "And after that I promise to kill you quickly.", "Hah! That tickled my forehead! Wait where am I?"])
+avatar = SubResource("Resource_c5fji")

@@ -4,6 +4,7 @@ class_name HUDLeft
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
 @onready var test_button: Button = $Button
+@onready var avatar_preview: TextureRect = $AvatarPreview
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 
 
@@ -34,6 +35,7 @@ func send_message(
 	chat_window.add_child(speech_bubble)
 	if avatar != null:
 		speech_bubble.avatar.texture = avatar
+		avatar_preview.texture = avatar
 	get_tree().create_timer(.01).timeout.connect(
 		func () -> void:
 			scroll_container.set_deferred(
