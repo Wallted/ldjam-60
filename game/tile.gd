@@ -39,6 +39,14 @@ func _ready() -> void:
 	_init_path_segments()
 
 
+func remove_path(north_not_west: bool):
+	if north_not_west:
+		if north_path != null:
+			north_path.queue_free()
+	elif west_path != null:
+		west_path.queue_free()
+
+
 func _init_path_segments() -> void:
 	if coords.x > 0:
 		west_path = PATH_SEGMENT.instantiate()
@@ -52,7 +60,7 @@ func _init_path_segments() -> void:
 		north_path.rotation = -0.25*TAU
 		north_path.mouse_entered.connect(path_hovered_on.emit.bind(true))
 		add_child(north_path)
-	
+
 func is_door() -> bool:
 	return door_orientation != Vector2.ZERO
 

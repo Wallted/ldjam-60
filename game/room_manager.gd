@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			_try_place_path_segment()
 		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
-			_try_remove_path_segment()
+			_try_unplace_path_segment()
 
 func _ready() -> void:
 	for _child in get_parent().get_children():
@@ -52,10 +52,7 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 				
 		for _t in _tiles_to_remove:
 			if room.parent_room:
-				var _t_to_r = room.parent_room.get_tile(_t)
-				if _t_to_r:
-					room.parent_room.tile_list.erase(_t_to_r)
-					_t_to_r.queue_free()
+				_remove_tile(_t, room.parent_room)
 
 	var prev_tile_size: Vector2 = Vector2.ZERO
 	var prev_position: Vector2 = Vector2.ZERO
@@ -107,6 +104,23 @@ func _try_place_path_segment() -> void:
 		_path_cursor.set_placed(true)
 
 
-func _try_remove_path_segment() -> void:
+func _try_unplace_path_segment() -> void:
 	if _path_cursor != null:
 		_path_cursor.set_placed(false)
+
+
+func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
+	var tile := room.get_tile(tile_coords)
+	if tile != null:
+		room.tile_list.erase(tile)
+		tile.queue_free()
+		_trim_paths_of_neighbors(tile_coords, room)
+
+
+func _trim_paths_of_neighbors(unavailable_tile_coords: Vector2, room: GameRoom) -> void:
+	var south_tile = room.get_tile(unavailable_tile_coords + Vector2.DOWN)
+	var east_tile = room.get_tile(unavailable_tile_coords + Vector2.RIGHT)
+	if south_tile != null:
+		south_tile.remove_path(true)
+	if east_tile != null:
+		east_tile.remove_path(false)
