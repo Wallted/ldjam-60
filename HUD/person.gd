@@ -12,7 +12,7 @@ func _ready() -> void:
 	avatar.texture = avatar_instance.avatars.get(person_id).get("sleeping")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Testing placeholder
 	if Input.is_action_pressed("speak_1"):
 		avatar_active_bg.show()
