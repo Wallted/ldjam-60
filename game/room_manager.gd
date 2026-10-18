@@ -1,10 +1,10 @@
 extends Node2D
 
 var room_list : Array[GameRoom]
-var focus_available: bool = true
+var action_available: bool = true
 var currently_focused_room: GameRoom
 
-@onready 
+@onready
 var camera_2d: RoomCamera = $"../Camera2D"
 
 var _path_cursor: PathSegment
@@ -27,11 +27,13 @@ func _ready() -> void:
 
 			var _room : GameRoom = _child
 			_room.request_focus.connect(_on_focus_request.bind(_room))
+			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
 
 	_snap_rooms_together()
-
 	room_list.reverse()
+
+	camera_2d.zoom_room(room_list[0])
 	focus_on_room(room_list[0])
 
 func _process(_delta: float) -> void:
@@ -50,7 +52,7 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 			var local_coord = room.translate_to_parent_tile(_t)
 			if local_coord:
 				_tiles_to_remove.append(local_coord)
-				
+
 		for _t in _tiles_to_remove:
 			if room.parent_room:
 				_remove_tile(_t, room.parent_room)
@@ -68,29 +70,37 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 		prev_position = r_l[0].position
 
 func focus_on_room(target_room: GameRoom):
-	if not focus_available or not target_room:
+	if not action_available or not target_room:
 		return
 
+	action_available = false
 	currently_focused_room = target_room
+
 	for room in room_list:
 		room.disable_room()
-		if room.zoom_level == target_room.zoom_level - 1:
-			room.set_as_pickable()
-	
+
 	if _path_cursor != null:
 		_path_cursor.set_hovered(false)
 	_path_cursor = null
-	
-	target_room.enable_tiles()
-	camera_2d.zoom_room(target_room).connect(_on_zoom_finished)
-	focus_available = false
+
+	camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
 
 func _on_focus_request(room: GameRoom) -> void:
 	focus_on_room(room)
 
-func _on_zoom_finished() -> void:
-	focus_available = true
+func _on_rotate_request(room: GameRoom) -> void:
+	if not action_available:
+		return
 
+	action_available = false
+	room.tween_rotate_room().connect(func (): action_available = true)
+
+func _on_zoom_finished(target_room: GameRoom) -> void:
+	action_available = true
+	for room in room_list:
+		if room.zoom_level == target_room.zoom_level - 1:
+			room.set_as_pickable()
+	target_room.enable_tiles()
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.input_pickable:
