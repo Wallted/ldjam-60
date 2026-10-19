@@ -54,4 +54,3 @@ person_type = 4
 entry_messages = Array[ExtResource("4_6tgb8")]([SubResource("Resource_6tgb8"), SubResource("Resource_cfaak"), SubResource("Resource_7vqlv"), SubResource("Resource_pl6e5"), SubResource("Resource_ttjuj"), SubResource("Resource_xevba")])
 avatar = SubResource("Resource_yuk71")
 entry_message_audio = ExtResource("4_cfaak")
-is_discovered = true
