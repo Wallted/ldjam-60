@@ -1,5 +1,5 @@
 extends AudioStreamPlayer
-@export var magicPathAudio :AudioStream = preload("uid://b1knn6fd0h6ne")
+@export var magicPathAudio :AudioStream = preload("uid://dp5evh62rbgmb")
 @export var insideAudio :AudioStream = preload("uid://buf2gdc58ngyv")
 @export var outsideAudio :AudioStream = preload("uid://d0s8sgddpjdn3")
 @export var pathAudio :AudioStream = preload("uid://dno1xq4wh8pum")
