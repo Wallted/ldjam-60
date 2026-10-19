@@ -1,15 +1,18 @@
 extends Node2D
 
 signal level_changed(person_type: Enums.PersonType)
+@onready var room_manager: Node2D = %RoomManager
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
+func _on_room_finished() -> void:
+	GameState.set_state(GameState.State.CUTSCENE)
+	# do sth
+	GameState.set_status(GameState.State.ACTION_FREE)
 
 func _on_room_manager_level_changed(person_type: Enums.PersonType) -> void:
 	level_changed.emit(person_type)
+
+func _on_hud_game_mouse_entered() -> void:
+	pass
+
+func _on_hud_game_mouse_exited() -> void:
+	room_manager.hide_cursor()

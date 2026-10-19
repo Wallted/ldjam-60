@@ -47,7 +47,7 @@ var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
 @onready var multi_mesh_instance_2d: MultiMeshInstance2D = $MultiMeshInstance2D
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
+	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating and GameState.state == GameState.State.ACTION_FREE:
 		request_rotate.emit()
 
 func _ready() -> void:
