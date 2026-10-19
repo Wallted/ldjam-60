@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game/game_room.tscn" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door_resource.gd" id="4_ryrav"]
 
+[sub_resource type="Resource" id="Resource_7cios"]
+script = ExtResource("4_ryrav")
+coord = Vector2(0, 4)
+side = 3
+orientation = 2
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
 [sub_resource type="Resource" id="Resource_bvpig"]
 script = ExtResource("4_ryrav")
 coord = Vector2(0, 4)
@@ -54,6 +61,7 @@ scale_ratio = 5
 parent_offset = Vector2(1, 1)
 parent_base = Vector2(0, 0)
 zoom_level = 3
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_7cios")])
 
 [node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)

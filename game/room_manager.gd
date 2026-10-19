@@ -130,7 +130,7 @@ func _try_place_path_segment() -> void:
 		_path_cursor.set_placed(true)
 		# <tmp>
 		var parent_tile: Tile = _path_cursor.get_parent()
-		if parent_tile.has_energy:
+		if parent_tile.is_flow_tip:
 			_power_a_segment(_path_cursor, parent_tile.local_coords)
 		# </tmp>
 		var front_endpoint := _get_segment_endpoint(_path_cursor, false)

@@ -14,8 +14,14 @@ var coords: Vector2
 var local_coords: Vector2
 var door_orientation: Vector2
 
-var is_source_exit: bool
-var is_source_entry: bool
+#var is_source_exit: bool
+#var is_source_entry: bool
+
+var linked_door_tiles: Dictionary[Tile, Object] # ignore the values, just use keys
+var is_inside_door := false
+var is_outside_door := false
+var is_flow_base := false
+var is_flow_tip := false
 
 var north_path: PathSegment
 var west_path: PathSegment
@@ -27,6 +33,7 @@ func _ready() -> void:
 	local_coords = coords
 	parent_room = get_parent().get_parent()
 	_init_path_segments()
+
 
 func remove_path(north_not_west: bool):
 	if north_not_west:
@@ -51,22 +58,23 @@ func _init_path_segments() -> void:
 		north_path.is_north_not_west = true
 		add_child(north_path)
 
-func is_door() -> bool:
-	return door_orientation != Vector2.ZERO
+#func is_door() -> bool:
+	#return door_orientation != Vector2.ZERO
 
-func enable_door(_side: Vector2, _orientation: Vector2) -> void:
+func enable_door(_side: Vector2) -> void:
+	is_inside_door = true
 	var door = Sprite2D.new()
 	door.scale *= 0.5
 	door.texture = door_texture
-	door_orientation = _orientation
-	door.rotate(PI/2.0 + _orientation.angle())
+	door_orientation = -_side
+	door.rotate(PI/2.0 + door_orientation.angle())
 	door.position = _side * Vector2(128, 128) / 2.5
 	add_child(door)
-	var _follow_tile = coords + door_orientation
-	is_source_exit = _follow_tile != _follow_tile.clamp(Vector2.ZERO, Vector2(8.0, 8.0))
-
-	_follow_tile = coords - door_orientation
-	is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
+	#var _follow_tile = coords + door_orientation
+	#is_source_exit = _follow_tile != _follow_tile.clamp(Vector2.ZERO, Vector2(8.0, 8.0))
+#
+	#_follow_tile = coords - door_orientation
+	#is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
 
 func rotate_tile() -> void:
 	var offset = Vector2(4.0, 4.0)

@@ -29,6 +29,7 @@ var parent_room: GameRoom
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
 var door_list: Array[Tile]
+var outside_doors: Dictionary[Tile, Object] # ignore the values, just use keys
 var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
 var room_area_entered: bool
@@ -88,8 +89,10 @@ func _setup_doors() -> void:
 		var _tile = get_tile(_door.coord)
 		_tile.enable_door(
 			Enums.get_direction(_door.side),
-			Enums.get_direction(_door.orientation),
 		)
+		# top level door has energy from nowhere
+		if parent_room == null:
+			_tile.is_flow_tip = true
 		door_list.append(_tile)
 
 func get_size() -> Vector2:
@@ -106,18 +109,18 @@ func get_tile(coord: Vector2, in_local_coords := false) -> Tile:
 				return _t
 	return null
 
-func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
-	var neighbours : Array[Tile] = []
-	var neigbour_coords = [
-		coord + Vector2.UP,
-		coord + Vector2.DOWN,
-		coord + Vector2.RIGHT,
-		coord + Vector2.LEFT,
-	]
-	for _tile in tile_list:
-		if _tile.coords in neigbour_coords:
-			neighbours.append(_tile)
-	return neighbours
+#func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
+	#var neighbours : Array[Tile] = []
+	#var neigbour_coords = [
+		#coord + Vector2.UP,
+		#coord + Vector2.DOWN,
+		#coord + Vector2.RIGHT,
+		#coord + Vector2.LEFT,
+	#]
+	#for _tile in tile_list:
+		#if _tile.coords in neigbour_coords:
+			#neighbours.append(_tile)
+	#return neighbours
 
 func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	if not parent_room:
@@ -158,27 +161,23 @@ func update_parent(_disconnect: bool = false) -> void:
 		return
 
 	for door_tile in door_list:
-		if door_tile.is_source_exit:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
-			if follow_tile:
-				if _disconnect:
-					follow_tile.has_energy = false
-					follow_tile.is_source_exit = false
-				else:
-					follow_tile.has_energy = door_tile.has_energy
-					follow_tile.is_source_exit = true
-
-		if door_tile.is_source_entry:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
-			if follow_tile:
-				if _disconnect:
-					door_tile.has_energy = false
-					follow_tile.is_source_entry = false
-				else:
-					door_tile.has_energy = follow_tile.has_energy
-					follow_tile.is_source_entry = true
+		var follow_tile := _fetch_outside_door_tile(door_tile)
+		if follow_tile:
+			if _disconnect:
+				door_tile.linked_door_tiles.erase(follow_tile)
+				follow_tile.linked_door_tiles.erase(door_tile)
+				if follow_tile.linked_door_tiles.is_empty():
+					parent_room.outside_doors.erase(follow_tile)
+					follow_tile.is_outside_door = false
+				#door_tile.has_energy = false
+				#follow_tile.is_source_entry = false
+			else:
+				door_tile.linked_door_tiles.get_or_add(follow_tile)
+				follow_tile.linked_door_tiles.get_or_add(door_tile)
+				parent_room.outside_doors.get_or_add(follow_tile)
+				follow_tile.is_outside_door = true
+				#door_tile.has_energy = follow_tile.has_energy
+				#follow_tile.is_source_entry = true
 
 var tween: Tween
 var rotating = false
@@ -214,6 +213,14 @@ func rotate_room() -> void:
 
 	for _t in tile_list:
 		_t.rotate_tile()
+
+
+func _fetch_outside_door_tile(inside_door_tile: Tile) -> Tile:
+	if parent_room == null:
+		return null
+	var parent_tile_coords: Vector2 = translate_to_parent_tile(inside_door_tile)
+	return parent_room.get_tile(parent_tile_coords - inside_door_tile.door_orientation)
+
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
