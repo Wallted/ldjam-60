@@ -60,7 +60,7 @@ func _ready() -> void:
 		room.update_parent()
 	
 	assert(currently_focused_room != null)
-	level_changed.emit.call_deferred(currently_focused_room.person_name)
+	level_changed.emit.call_deferred(currently_focused_room.person_name, false)
 
 
 func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
