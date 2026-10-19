@@ -25,6 +25,8 @@ var room_unlocked: bool :
 			return
 		if parent_room.room_unlocked:
 			return
+		if not room_powered:
+			return
 		if value and not room_unlocked:
 			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
