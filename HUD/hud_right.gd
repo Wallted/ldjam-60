@@ -4,6 +4,8 @@ class_name HUDRight
 
 signal settings_requested
 signal help_requested
+@onready var sfx_stream: AudioStreamPlayer = $"../../../MainAudioStream/SFXStream"
+const ODDYMIACZ = preload("uid://dmyc208cgyl31")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,4 +48,7 @@ func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	for person in grid_container.get_children():
 		person = person as Person
 		if person.type == person_type:
+			if not person.is_discovered:
+				sfx_stream.stream = ODDYMIACZ
+				sfx_stream.play()
 			person.is_discovered = true

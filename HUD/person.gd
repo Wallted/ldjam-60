@@ -1,6 +1,8 @@
-@tool
+#@tool
 extends Control
 class_name Person
+
+@onready var dust_texture: TextureRect = $MarginContainer/UndiscoveredIndicator/DustTexture
 
 @export var resource: PersonResource:
 	set(value):
@@ -16,6 +18,9 @@ class_name Person
 		resource.is_discovered = value
 		is_discovered = value
 		if is_discovered and undiscovered_indicator != null:
+			var tween = get_tree().create_tween()
+			var fadeout_time = 3.0
+			await tween.tween_property(dust_texture, "modulate:a", 0.0, fadeout_time).finished
 			undiscovered_indicator.hide()
 @export var status: PersonStatus = PersonStatus.ASLEEP:
 	set(value):
