@@ -1,9 +1,9 @@
 extends Node2D
 
 signal level_changed(person_type: Enums.PersonType)
+signal room_finished(room: GameRoom)
 
 var room_list : Array[GameRoom]
-var action_available: bool = true
 var currently_focused_room: GameRoom
 
 @onready
@@ -13,9 +13,9 @@ var _path_cursor: PathSegment
 var _path_cursor_north_not_west: bool
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and GameState.state == GameState.State.ACTION_FREE:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
-			focus_on_room(currently_focused_room.parent_room)
+			focus_on_room_action(currently_focused_room.parent_room)
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			_try_place_path_segment()
 		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
@@ -34,14 +34,14 @@ func _ready() -> void:
 
 	_snap_rooms_together()
 	room_list.reverse()
+	
+	GameState.set_state(GameState.State.ACTION_FREE)
 
-	focus_on_room(room_list[0], false)
+	focus_on_room_action(room_list[0], false)
+
+func _process(_delta: float) -> void:
 	for room in room_list:
-		room.update_parent()
-
-#func _process(_delta: float) -> void:
-	#for room in room_list:
-		#room.update_parent()
+		room.check_is_room_finished(room_finished)
 
 func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var dict : Dictionary[int, Array]
@@ -72,8 +72,21 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 		prev_tile_size = r_l[0].room_size / r_l[0].grid_size * r_l[0].scale
 		prev_position = r_l[0].position
 
-func focus_on_room(target_room: GameRoom, tween: bool = true):
-	if not action_available or not target_room:
+func finish_room() -> void:
+	room_finished.emit(currently_focused_room)
+
+func rotate_room_action(room) -> void:
+	if not GameState.is_state(GameState.State.ACTION_FREE):
+		return
+
+	GameState.set_state(GameState.State.ACTION_PENDING)
+	room.tween_rotate_room().connect(func (): GameState.set_state(GameState.State.ACTION_FREE))
+
+func focus_on_room_action(target_room: GameRoom, tween: bool = true):
+	if not GameState.is_state(GameState.State.ACTION_FREE):
+		return
+
+	if not target_room:
 		return
 
 	currently_focused_room = target_room
@@ -81,28 +94,28 @@ func focus_on_room(target_room: GameRoom, tween: bool = true):
 	for room in room_list:
 		room.disable_room()
 
-	if _path_cursor != null:
-		_path_cursor.set_hovered(false)
-	_path_cursor = null
+	hide_cursor()
+	
 	if not tween:
 		camera_2d.zoom_room(room_list[0])
 		target_room.enable_tiles()
 	else:
-		action_available = false
 		camera_2d.tween_zoom_room(target_room).connect(_on_zoom_finished.bind(target_room))
+		GameState.set_state(GameState.State.ACTION_PENDING)
+
+func hide_cursor() -> void:
+	if _path_cursor != null:
+		_path_cursor.set_hovered(false)
+	_path_cursor = null
 
 func _on_focus_request(room: GameRoom) -> void:
-	focus_on_room(room)
+	focus_on_room_action(room)
 
 func _on_rotate_request(room: GameRoom) -> void:
-	if not action_available:
-		return
-
-	action_available = false
-	room.tween_rotate_room().connect(func (): action_available = true)
+	rotate_room_action(room)
 
 func _on_zoom_finished(target_room: GameRoom) -> void:
-	action_available = true
+	GameState.set_state(GameState.State.ACTION_FREE)
 	for room in room_list:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()

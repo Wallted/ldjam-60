@@ -20,19 +20,26 @@ var parent_base: Vector2 = Vector2(3, 3)
 @export
 var zoom_level: int
 @export
-var doors: Array[Door]
-
-@export
 var parent_room: GameRoom
 
+@export_group("Elements")
+@export
+var doors: Array[Door]
+@export
+var gateways: Array[Gateway]
+
+var room_finished: bool
+var room_powered: bool
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
-var door_list: Array[Tile]
-var outside_doors: Dictionary[Tile, Object] # ignore the values, just use keys
 var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
 var room_area_entered: bool
+
+var outside_doors: Dictionary[Tile, Object] # ignore the values, just use keys
+var door_list: Array[Tile]
+var gateway_list: Array[Tile]
 
 @onready
 var grid: Node2D = $Grid
@@ -54,6 +61,7 @@ func _input(_event: InputEvent) -> void:
 func _ready() -> void:
 	_setup_tiles()
 	_setup_doors()
+	_setup_gateways()
 	(collision_shape_2d.shape as RectangleShape2D).size = room_size
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
@@ -62,6 +70,7 @@ func _ready() -> void:
 	for i in tile_list.size():
 		var _tile: Node2D = tile_list[i]
 		multi_mesh_instance_2d.multimesh.set_instance_transform_2d(i, _tile.transform)
+	z_index = 100 - zoom_level * 10
 
 func _setup_tiles() -> void:
 	for i in grid_size:
@@ -94,6 +103,24 @@ func _setup_doors() -> void:
 		if parent_room == null:
 			_tile.is_flow_tip = true
 		door_list.append(_tile)
+
+func _setup_gateways() -> void:
+	for _gateway in gateways:
+		var _tile = get_tile(_gateway.coord)
+		_tile.enable_gateway(_gateway)
+		gateway_list.append(_tile)
+
+func check_is_room_finished(signal_finished: Signal) -> bool:
+	if gateway_list.size() > 0:
+		room_powered = true
+		for _gateway in gateway_list:
+			room_powered = room_powered and _gateway.is_tile_powered()
+
+		if not room_finished and room_powered:
+			signal_finished.emit(self)
+			room_finished = true
+
+	return room_powered
 
 func get_size() -> Vector2:
 	return room_size * scale
@@ -130,7 +157,7 @@ func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	return res_coord
 
 func disable_room() -> void:
-	sprite_2d.material.set("shader_parameter/selected",	false);
+	update_hover_shader(false)
 	room_area_entered = false
 	room_area.input_pickable = false
 	for _item in tile_list:
@@ -148,7 +175,7 @@ func set_as_pickable() -> void:
 	for resp in out:
 		var room : GameRoom = resp['collider'].get_parent() as GameRoom
 		if room and room.zoom_level == zoom_level :
-			room.sprite_2d.material.set("shader_parameter/selected", true);
+			room.update_hover_shader(true)
 			room.room_area_entered = true
 
 func enable_tiles() -> void:
@@ -213,6 +240,12 @@ func rotate_room() -> void:
 
 	for _t in tile_list:
 		_t.rotate_tile()
+ 
+func update_hover_shader(selected: bool) -> void:
+	sprite_2d.material.set("shader_parameter/selected", selected)
+	for _child in child_room_list:
+		var _room : GameRoom = _child
+		_room.update_hover_shader(selected)
 
 
 func _fetch_outside_door_tile(inside_door_tile: Tile) -> Tile:
@@ -224,12 +257,6 @@ func _fetch_outside_door_tile(inside_door_tile: Tile) -> Tile:
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
-	#for _t in tile_list:
-		#_t.modulate = Color.WHITE
-	#if _tile:
-		#for t in get_neighbour_tiles(_tile.coords):
-			#t.modulate = Color.AQUA
-		#_tile.modulate = Color.AQUAMARINE
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
@@ -241,12 +268,8 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 
 func _on_room_area_mouse_entered() -> void:
 	room_area_entered = true
-	for _t in tile_list:
-		_t.modulate = Color.WHITE
-	sprite_2d.material.set("shader_parameter/selected",	true);
+	update_hover_shader(true)
 
 func _on_room_area_mouse_exited() -> void:
 	room_area_entered = false
-	sprite_2d.material.set("shader_parameter/selected",	false);
-	for _t in tile_list:
-		_t.modulate = Color.WHITE
+	update_hover_shader(false)

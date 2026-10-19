@@ -76,5 +76,6 @@ message = "I'm starving and I heard that there is a new pizza place around the c
 [resource]
 script = ExtResource("1_vcw08")
 person_name = "Elon"
+person_type = 2
 entry_messages = Array[ExtResource("4_oomha")]([SubResource("Resource_oomha"), SubResource("Resource_ebcpc"), SubResource("Resource_c48y2"), SubResource("Resource_b3thd"), SubResource("Resource_c36kc"), SubResource("Resource_tlejx"), SubResource("Resource_4kh4v"), SubResource("Resource_mpe5l"), SubResource("Resource_51ylk"), SubResource("Resource_la2sk"), SubResource("Resource_dj2pu"), SubResource("Resource_f6st8"), SubResource("Resource_b7qhn"), SubResource("Resource_2ly26"), SubResource("Resource_7sufe")])
 avatar = SubResource("Resource_5813k")

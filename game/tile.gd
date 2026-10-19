@@ -76,9 +76,27 @@ func enable_door(_side: Vector2) -> void:
 	#_follow_tile = coords - door_orientation
 	#is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
 
+func enable_gateway(_gateway: Gateway) -> void:
+	var gateway = Sprite2D.new()
+	gateway.scale *= 0.25
+	gateway.texture = _gateway.texture
+	add_child(gateway)
+
 func rotate_tile() -> void:
 	var offset = Vector2(4.0, 4.0)
 	var temp_coord = coords - offset
 	var rotated_coord = Vector2(-temp_coord.y, temp_coord.x)
 	coords = rotated_coord + offset
 	door_orientation = Vector2(-door_orientation.y, door_orientation.x)
+
+func is_tile_powered() -> bool:
+	if (north_path != null and north_path.is_powered) or (west_path != null and west_path.is_powered):
+		return true
+	var south_tile := parent_room.get_tile(local_coords + Vector2.DOWN, true)
+	if south_tile != null and south_tile.north_path != null and south_tile.north_path.is_powered:
+		return true
+	var east_tile := parent_room.get_tile(local_coords + Vector2.RIGHT, true)
+	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_powered:
+		return true
+
+	return false

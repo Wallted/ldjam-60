@@ -5,20 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://dacarvlnprxkh" path="res://action_progress.gd" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://clxaq1ltk85ul" path="res://HUD/hud_right.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://bc43y4cvy2853" path="res://settings.tscn" id="5_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cl1vkv2b6kioq" path="res://path_segments/path_segment.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://bkkrnwmeyogai" path="res://help.tscn" id="6_dg77c"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
-[ext_resource type="AudioStream" uid="uid://nh0rhmc40k6e" path="res://assets/audio/turists memory dialog.ogg" id="7_kek77"]
-[ext_resource type="AudioStream" uid="uid://bh3yy3hbm1um" path="res://assets/audio/mumblephone.wav" id="8_4c57u"]
-
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_pjyu3"]
-clip_count = 2
-clip_0/name = &"Turists Memory Dialog"
-clip_0/stream = ExtResource("7_kek77")
-clip_0/auto_advance = 0
-clip_1/name = &"Mumblephone"
-clip_1/stream = ExtResource("8_4c57u")
-clip_1/auto_advance = 0
 
 [node name="Main" type="Node" unique_id=665793303]
 
@@ -34,6 +25,24 @@ offset_bottom = 648.0
 mouse_filter = 1
 script = ExtResource("3_lquwl")
 
+[node name="HUDGame" type="Control" parent="CanvasLayer/HUD" unique_id=1377671542]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(16.305, 16.305)
+offset_transform_visual_only = false
+mouse_filter = 1
+
 [node name="HUDLeft" parent="CanvasLayer/HUD" unique_id=488148864 instance=ExtResource("4_7mycd")]
 layout_mode = 0
 offset_bottom = 650.0
@@ -42,6 +51,28 @@ mouse_filter = 1
 [node name="HUDRight" parent="CanvasLayer/HUD" unique_id=1327092940 instance=ExtResource("5_272bh")]
 layout_mode = 1
 mouse_filter = 1
+
+[node name="Settings" parent="CanvasLayer/HUD" unique_id=272828926 instance=ExtResource("5_efxa6")]
+top_level = true
+layout_mode = 0
+
+[node name="Help" parent="CanvasLayer/HUD" unique_id=2005726561 instance=ExtResource("6_dg77c")]
+top_level = true
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD" unique_id=1901270043]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="ActionProgress" type="Control" parent="CanvasLayer" unique_id=1872492922]
 layout_mode = 3
@@ -67,12 +98,12 @@ bus = &"MusicBus"
 script = ExtResource("6_272bh")
 
 [node name="DialogStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=825157408]
-stream = SubResource("AudioStreamInteractive_pjyu3")
 bus = &"DialogBus"
-playback_type = 2
+playback_type = 1
 script = ExtResource("7_5vw27")
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=470440381]
 bus = &"SFXBus"
 
-[connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_level_changed"]
+[connection signal="mouse_entered" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_exited"]

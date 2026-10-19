@@ -32,5 +32,6 @@ message = "Why sky bright!?"
 [resource]
 script = ExtResource("1_3jrlc")
 person_name = "Neanderthal"
+person_type = 7
 entry_messages = Array[ExtResource("4_oxe5u")]([SubResource("Resource_oxe5u"), SubResource("Resource_5mtkb"), SubResource("Resource_iknqq"), SubResource("Resource_bvxdk")])
 avatar = SubResource("Resource_yuk71")

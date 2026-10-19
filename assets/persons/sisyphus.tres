@@ -40,5 +40,6 @@ message = "Wait... I'm inside? Neat! I can work like a hamster now!\""
 [resource]
 script = ExtResource("1_22yw1")
 person_name = "Sisyphus"
+person_type = 8
 entry_messages = Array[ExtResource("4_2om0t")]([SubResource("Resource_2om0t"), SubResource("Resource_rbiw4"), SubResource("Resource_rhshc"), SubResource("Resource_r5d7j"), SubResource("Resource_266j5"), SubResource("Resource_70ayv")])
 avatar = SubResource("Resource_w2xfa")

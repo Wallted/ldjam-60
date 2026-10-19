@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bkkrnwmeyogai"]
+
+[ext_resource type="Script" uid="uid://dw3o44unjrup4" path="res://help.gd" id="1_e3oed"]
+
+[node name="Help" type="Control" unique_id=2005726561]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_e3oed")
+
+[node name="HelpBackground" type="ColorRect" parent="." unique_id=1368744737]
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.6666667)
+
+[node name="HelpText" type="Label" parent="." unique_id=1743152793]
+layout_mode = 1
+offset_right = 900.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 57
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
