@@ -10,6 +10,15 @@ signal message_sent(
 signal monologue_started(person_type: Enums.PersonType)
 signal monologue_ended()
 
+func start_monologue(person_type: Enums.PersonType) -> void:
+	var resource = ResourceManagier.get_resource(person_type) as PersonResource
+	if not resource.entry_message_audio:
+		resource.entry_message_audio_played = true
+		return
+	if resource.entry_message_audio_played:
+		return
+	monologue_started.emit(person_type)
+
 func send_message(
 	author: Enums.PersonType,
 	message: String = '',
