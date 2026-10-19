@@ -65,8 +65,10 @@ func set_powered(value: bool) -> void:
 
 
 func _on_area_2d_mouse_entered():
-	mouse_event.emit(true)
+	if GameState.is_state(GameState.State.ACTION_FREE):
+		mouse_event.emit(true)
 
 
 func _on_area_2d_mouse_exited():
-	mouse_event.emit(false)
+	if GameState.is_state(GameState.State.ACTION_FREE):
+		mouse_event.emit(false)
