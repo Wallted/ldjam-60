@@ -1,9 +1,10 @@
 extends Node2D
 
 signal level_changed(person_type: Enums.PersonType)
+
 @onready var room_manager: Node2D = %RoomManager
 
-func _on_room_finished() -> void:
+func _on_room_manager_room_finished(_room: GameRoom) -> void:
 	GameState.set_state(GameState.State.CUTSCENE)
 	# do sth
 	GameState.set_status(GameState.State.ACTION_FREE)

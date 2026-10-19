@@ -1,6 +1,7 @@
 extends Node2D
 
 signal level_changed(person_type: Enums.PersonType)
+signal room_finished(room: GameRoom)
 
 var room_list : Array[GameRoom]
 var currently_focused_room: GameRoom
@@ -70,6 +71,9 @@ func _snap_rooms_together() -> void: # todo: horrendous, fix it
 
 		prev_tile_size = r_l[0].room_size / r_l[0].grid_size * r_l[0].scale
 		prev_position = r_l[0].position
+
+func finish_room() -> void:
+	room_finished.emit(currently_focused_room)
 
 func rotate_room_action(room) -> void:
 	if not GameState.is_state(GameState.State.ACTION_FREE):

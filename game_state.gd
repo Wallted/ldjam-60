@@ -9,6 +9,7 @@ enum State {
 
 var state: State 
 var prev_state: State
+var prev_mouse_mode: Input.MouseMode
 
 var action_progress: ActionProgress
 var label: Label
@@ -26,10 +27,14 @@ func pause_game():
 	prev_state = state
 	state = State.PAUSED
 
+	prev_mouse_mode = Input.mouse_mode
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func unpause_game():
 	get_tree().paused = true
 	action_progress.visible = true
 	state = prev_state
+	Input.mouse_mode = prev_mouse_mode
 
 func set_state(new_state: State) -> void:
 	state = new_state
