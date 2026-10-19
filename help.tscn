@@ -41,4 +41,4 @@ theme_override_font_sizes/normal_font_size = 32
 text = "- LMB - place wire
 - RMB - remove wire
 - R - rotate room
-- Mouse Scroll - zoom rooms"
+- Mouse Scroll - zoom if available"
