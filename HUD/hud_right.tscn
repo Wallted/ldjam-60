@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://30j2hlyt3x6d" path="res://HUD/hud_right.gd" id="1_t4b6d"]
 [ext_resource type="PackedScene" uid="uid://bwbjcj7gutp42" path="res://HUD/person.tscn" id="2_ccku2"]
+[ext_resource type="Texture2D" uid="uid://ch4n2hi5tp31n" path="res://img/help_icon.png" id="2_t8lao"]
 [ext_resource type="Resource" uid="uid://dt7h14mpkykbb" path="res://assets/persons/tourist.tres" id="3_3swto"]
+[ext_resource type="Texture2D" uid="uid://b0e3tlanop5iw" path="res://img/settings_icon.png" id="3_r5wc1"]
 [ext_resource type="Resource" uid="uid://bfv5g5akf1qre" path="res://assets/persons/archaeologist.tres" id="4_gm5x8"]
 [ext_resource type="Resource" uid="uid://87f0xxfa8wx5" path="res://assets/persons/michelangelo.tres" id="5_t8lao"]
 [ext_resource type="Resource" uid="uid://jduf3we633ex" path="res://assets/persons/celt.tres" id="6_r5wc1"]
@@ -12,14 +14,18 @@
 [ext_resource type="Resource" uid="uid://caj77fkltgd7f" path="res://assets/persons/monkey.tres" id="11_wsabk"]
 [ext_resource type="Resource" uid="uid://ceaqardhsnspr" path="res://assets/persons/elon.tres" id="12_cfq5b"]
 
-[sub_resource type="Theme" id="Theme_nkh55"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcacg"]
+bg_color = Color(1, 1, 1, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7hbg"]
+bg_color = Color(1, 1, 1, 0.19607843)
 
 [node name="HUDRight" type="Control" unique_id=1327092940]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -252.0
+offset_left = -250.0
 offset_bottom = 648.0
 grow_horizontal = 0
 script = ExtResource("1_t4b6d")
@@ -35,26 +41,33 @@ offset_bottom = 648.0
 grow_horizontal = 0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=353139870]
-propagate_maximum_size = true
-layout_mode = 0
-offset_right = 250.0
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1021309600]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
 offset_bottom = 60.0
-color = Color(0.7446192, 0.62969726, 0.20624554, 1)
+grow_horizontal = 0
 
-[node name="Label" type="Label" parent="." unique_id=565338275]
-layout_mode = 0
-offset_right = 250.0
-offset_bottom = 60.0
+[node name="Help" type="Button" parent="HBoxContainer" unique_id=1892685807]
+process_mode = 3
+layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 2
-theme = SubResource("Theme_nkh55")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.7160463, 0, 0, 0.73333335)
-theme_override_font_sizes/font_size = 30
-text = "Placeholder"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcacg")
+icon = ExtResource("2_t8lao")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Settings" type="Button" parent="HBoxContainer" unique_id=885201556]
+process_mode = 3
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_r7hbg")
+icon = ExtResource("3_r5wc1")
+icon_alignment = 1
+expand_icon = true
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=438519031]
 layout_mode = 1
@@ -109,3 +122,6 @@ resource = ExtResource("11_wsabk")
 [node name="Elon" parent="GridContainer" unique_id=995309169 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("12_cfq5b")
+
+[connection signal="pressed" from="HBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]

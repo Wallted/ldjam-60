@@ -22,6 +22,8 @@ func _ready() -> void:
 	label = main.get_node("CanvasLayer/HUD/Label")
 
 func pause_game():
+	if state == GameState.State.PAUSED:
+		return
 	get_tree().paused = true
 	action_progress.visible = false
 	prev_state = state
@@ -31,7 +33,9 @@ func pause_game():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func unpause_game():
-	get_tree().paused = true
+	if state != GameState.State.PAUSED:
+		return
+	get_tree().paused = false
 	action_progress.visible = true
 	state = prev_state
 	Input.mouse_mode = prev_mouse_mode
