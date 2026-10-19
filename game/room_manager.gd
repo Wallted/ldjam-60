@@ -82,7 +82,13 @@ func rotate_room_action(room) -> void:
 		return
 
 	GameState.set_state(GameState.State.ACTION_PENDING)
-	room.tween_rotate_room().connect(func (): GameState.set_state(GameState.State.ACTION_FREE))
+	room.tween_rotate_room().connect(_finish_rotation_updates.bind(room))
+
+
+func _finish_rotation_updates(room: GameRoom) -> void:
+	GameState.set_state(GameState.State.ACTION_FREE)
+	room.update_parent()
+
 
 func focus_on_room_action(target_room: GameRoom, tween: bool = true):
 	if not GameState.is_state(GameState.State.ACTION_FREE):
@@ -146,7 +152,7 @@ func _try_place_path_segment() -> void:
 	if _path_cursor != null and _path_cursor.is_hovered and not _path_cursor.is_placed:
 		_path_cursor.set_placed(true)
 		var parent_tile: Tile = _path_cursor.get_parent()
-		var neighbor_tile := parent_tile.parent_room.get_tile(parent_tile.local_coords + (Vector2.UP if _path_cursor.is_north_not_west else Vector2.LEFT))
+		var neighbor_tile := parent_tile.parent_room.get_tile(parent_tile.local_coords + (Vector2.UP if _path_cursor.is_north_not_west else Vector2.LEFT), true)
 		var front_endpoint := _get_segment_endpoint(_path_cursor, false)
 		var back_endpoint := _get_segment_endpoint(_path_cursor, true)
 		assert(neighbor_tile != null)
