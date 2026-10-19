@@ -14,3 +14,4 @@ class_name PersonResource
 @export var entry_message_audio: AudioStream
 @export var entry_message_audio_played: bool = false
 @export var is_solved: bool = false
+@export var is_discovered: bool = false
