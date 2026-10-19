@@ -25,7 +25,7 @@ script = ExtResource("1_x2hje")
 
 [node name="SettingsBackground" type="ColorRect" parent="." unique_id=482692681]
 layout_mode = 0
-offset_right = 900.0
+offset_right = 902.0
 offset_bottom = 648.0
 color = Color(0, 0, 0, 0.6666667)
 
