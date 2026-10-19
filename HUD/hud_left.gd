@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_W):
 		if not _test_button_pressed:
 			$"../../EndScreen".show()
+			$"../../EndScreen".fade_in()
 		_test_button_pressed = true
 	else:
 		_test_button_pressed = false

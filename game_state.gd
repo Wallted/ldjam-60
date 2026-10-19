@@ -67,6 +67,7 @@ func enable_cutscene():
 func show_credits():
 	state = GameState.State.CUTSCENE
 	%EndScreen.show()
+	%EndScreen.fade_in()
 	
 func disable_cutscene():
 	state = GameState.State.ACTION_FREE

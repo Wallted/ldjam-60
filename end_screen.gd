@@ -1,7 +1,7 @@
 extends Control
 
 
-func _ready() -> void:
+func fade_in() -> void:
 	var tween = get_tree().create_tween()
 	var fadeout_time = 3.0
 	self.modulate.a = 0.0
