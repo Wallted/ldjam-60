@@ -31,6 +31,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpeechBubble" parent="ScrollContainer/ChatWindow" unique_id=35894961 instance=ExtResource("1_y81a5")]
+visible = false
 custom_minimum_size = Vector2(30, 128)
 layout_mode = 2
 author = ""

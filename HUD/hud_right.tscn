@@ -111,7 +111,7 @@ type = 3
 
 [node name="Icarus" parent="GridContainer" unique_id=451458892 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-is_discovered = true
+is_discovered = false
 
 [node name="Sisyphus" parent="GridContainer" unique_id=1644210309 instance=ExtResource("2_ccku2")]
 layout_mode = 2
