@@ -115,7 +115,7 @@ func _finish_rotation_updates(room: GameRoom) -> void:
 
 
 func focus_on_room_action(target_room: GameRoom, tween: bool = true):
-	if currently_focused_room != null:
+	if currently_focused_room != null and target_room != null:
 		if target_room.zoom_level > currently_focused_room.zoom_level:
 			zoom_out_room.emit()
 		else:
