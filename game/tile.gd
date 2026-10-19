@@ -1,6 +1,5 @@
-extends Area2D
+extends Node2D
 class_name Tile
-
 
 signal path_hover(entered: bool, north_not_west: bool)
 
@@ -22,9 +21,7 @@ var north_path: PathSegment
 var west_path: PathSegment
 
 var parent_room: GameRoom
-
-@onready
-var tile_sprite: Sprite2D = $TileSprite
+var enabled: bool
 
 func _ready() -> void:
 	local_coords = coords
@@ -63,7 +60,7 @@ func enable_door(_side: Vector2, _orientation: Vector2) -> void:
 	door.texture = door_texture
 	door_orientation = _orientation
 	door.rotate(PI/2.0 + _orientation.angle())
-	door.position = _side * tile_sprite.texture.get_size() / 2.5
+	door.position = _side * Vector2(128, 128) / 2.5
 	add_child(door)
 	var _follow_tile = coords + door_orientation
 	is_source_exit = _follow_tile != _follow_tile.clamp(Vector2.ZERO, Vector2(8.0, 8.0))
