@@ -68,16 +68,10 @@ func _ready() -> void:
 	self.status = status  # refresh status when it's available
 	if preview_only or is_discovered:
 		undiscovered_indicator.hide()
-	
-
-
-func set_asleep() -> void:
-	status = PersonStatus.ASLEEP
-	talking_indicator.hide()
-
 
 func set_idle() -> void:
 	status = PersonStatus.IDLE
+	print('idle')
 	talking_indicator.hide()
 
 
