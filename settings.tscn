@@ -40,6 +40,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sliders" type="VBoxContainer" parent="." unique_id=1727258286]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -59,6 +60,9 @@ vertical_alignment = 2
 [node name="MusicVolumeSlider" type="HSlider" parent="Sliders" unique_id=1630918261]
 layout_mode = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.75, 0.75)
+offset_transform_visual_only = false
 theme_override_icons/grabber = ExtResource("2_3ykye")
 theme_override_icons/grabber_highlight = ExtResource("3_gc0em")
 theme_override_styles/slider = SubResource("StyleBoxLine_3ykye")
@@ -77,6 +81,9 @@ vertical_alignment = 2
 [node name="SFXVolumeSlider" type="HSlider" parent="Sliders" unique_id=2076676162]
 layout_mode = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.75, 0.75)
+offset_transform_visual_only = false
 theme_override_icons/grabber = ExtResource("2_3ykye")
 theme_override_icons/grabber_highlight = ExtResource("3_gc0em")
 theme_override_styles/slider = SubResource("StyleBoxLine_3ykye")
