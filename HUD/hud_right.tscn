@@ -51,6 +51,7 @@ offset_bottom = 60.0
 grow_horizontal = 0
 
 [node name="Help" type="Button" parent="HBoxContainer" unique_id=1892685807]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/hover = SubResource("StyleBoxFlat_rcacg")
@@ -59,6 +60,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Settings" type="Button" parent="HBoxContainer" unique_id=885201556]
+process_mode = 3
 propagate_maximum_size = true
 layout_mode = 2
 size_flags_horizontal = 3

@@ -21,8 +21,16 @@ func _on_settings_pressed() -> void:
 	if help_menu.visible:
 		help_menu.visible = false
 	settings_menu.visible = not settings_menu.visible
+	switch_pause(settings_menu.visible)
 
 func _on_help_pressed() -> void:
 	if settings_menu.visible:
 		settings_menu.visible = false
 	help_menu.visible = not help_menu.visible
+	switch_pause(help_menu.visible)
+
+func switch_pause(need_pause: bool) -> void:
+	if need_pause:
+		GameState.pause_game()
+	else:
+		GameState.unpause_game()
