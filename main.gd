@@ -7,6 +7,7 @@ extends Node
 
 func _ready() -> void:
 	GameState.pause_game()
+	$MainAudioStream.play()
 
 func _on_title_button_pressed() -> void:
 	var tween = get_tree().create_tween()
