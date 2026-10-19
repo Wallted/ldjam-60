@@ -41,5 +41,6 @@ message = "Hah! That tickled my forehead! Wait where am I?"
 [resource]
 script = ExtResource("1_kjs0d")
 person_name = "Goliath"
+person_type = 3
 entry_messages = Array[ExtResource("4_b1cj3")]([SubResource("Resource_b1cj3"), SubResource("Resource_q4fnq"), SubResource("Resource_aanv1"), SubResource("Resource_1uwfe"), SubResource("Resource_de0nt"), SubResource("Resource_a0c8x"), SubResource("Resource_66v02")])
 avatar = SubResource("Resource_c5fji")

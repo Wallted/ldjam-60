@@ -87,6 +87,7 @@ columns = 2
 [node name="Tourist" parent="GridContainer" unique_id=1468336816 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("3_3swto")
+type = 9
 
 [node name="Archaeologist" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
 layout_mode = 2
@@ -95,33 +96,41 @@ resource = ExtResource("4_gm5x8")
 [node name="Michelangelo" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("5_t8lao")
+type = 5
 
 [node name="Celt" parent="GridContainer" unique_id=1940082769 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("6_r5wc1")
+type = 1
 
 [node name="Goliath" parent="GridContainer" unique_id=469114919 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("7_4xmd3")
+type = 3
 
 [node name="Icarus" parent="GridContainer" unique_id=451458892 instance=ExtResource("2_ccku2")]
 layout_mode = 2
+type = 4
 
 [node name="Sisyphus" parent="GridContainer" unique_id=1644210309 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("9_xgxnq")
+type = 8
 
 [node name="Neanderthal" parent="GridContainer" unique_id=1643710493 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("10_nub0u")
+type = 7
 
 [node name="Monkey" parent="GridContainer" unique_id=1025184399 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("11_wsabk")
+type = 6
 
 [node name="Elon" parent="GridContainer" unique_id=995309169 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("12_cfq5b")
+type = 2
 
 [connection signal="pressed" from="HBoxContainer/Help" to="." method="_on_help_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]

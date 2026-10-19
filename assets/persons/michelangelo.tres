@@ -41,5 +41,6 @@ message = "IS THAT AN UNPAINTED CEILING?!"
 [resource]
 script = ExtResource("1_ftnjs")
 person_name = "Michelangelo"
+person_type = 5
 entry_messages = Array[ExtResource("4_sbco0")]([SubResource("Resource_sbco0"), SubResource("Resource_dojhd"), SubResource("Resource_dnmr7"), SubResource("Resource_3c4kq"), SubResource("Resource_mqm2s"), SubResource("Resource_h4tyl"), SubResource("Resource_o5umx")])
 avatar = SubResource("Resource_w2xfa")

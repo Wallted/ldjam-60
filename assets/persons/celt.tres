@@ -37,5 +37,6 @@ message = "Ohh that's why..."
 [resource]
 script = ExtResource("1_5qo7x")
 person_name = "Celt"
+person_type = 1
 entry_messages = Array[ExtResource("4_kkk1n")]([SubResource("Resource_kkk1n"), SubResource("Resource_r57vc"), SubResource("Resource_rbwjm"), SubResource("Resource_q30jn"), SubResource("Resource_x510s"), SubResource("Resource_uftbc")])
 avatar = SubResource("Resource_5813k")

@@ -48,5 +48,6 @@ message = "Wait... Did the stone just nationalize me?"
 [resource]
 script = ExtResource("1_2go3i")
 person_name = "Monkey"
+person_type = 6
 entry_messages = Array[ExtResource("4_80os1")]([SubResource("Resource_80os1"), SubResource("Resource_6purh"), SubResource("Resource_8obsq"), SubResource("Resource_g76bt"), SubResource("Resource_hx8e2"), SubResource("Resource_uc1cp"), SubResource("Resource_ucfgp"), SubResource("Resource_4wkts")])
 avatar = SubResource("Resource_c5fji")

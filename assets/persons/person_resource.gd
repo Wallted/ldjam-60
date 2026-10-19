@@ -3,6 +3,7 @@ extends Resource
 class_name PersonResource
 
 @export var person_name: String
+@export var person_type: Enums.PersonType
 @export var entry_messages: Array[DialogueLine]:
 	set(value):
 		entry_messages = value

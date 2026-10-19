@@ -1,11 +1,14 @@
 extends Control
 class_name HUDRight
+@onready var grid_container: GridContainer = $GridContainer
 
 signal settings_requested
 signal help_requested
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	DialogManagier.monologue_started.connect(_on_monologue_start)
+	DialogManagier.monologue_ended.connect(_on_monologue_end)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,3 +20,17 @@ func _on_settings_pressed() -> void:
 
 func _on_help_pressed() -> void:
 	help_requested.emit()
+	
+	
+func _on_monologue_start(person_type: Enums.PersonType) -> void:
+	for person in grid_container.get_children():
+		person = person as Person
+		if person.type == person_type:
+			person.set_talking()
+
+func _on_monologue_end() -> void:
+	for person in grid_container.get_children():
+		person = person as Person
+		if person.is_talking():
+			print('> ', person)
+			person.set_idle()
