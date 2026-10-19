@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d14nlk8v350dr"
-path="res://.godot/imported/celt_awake.png-14ec5d0bd077b60379298326e13341bb.ctex"
+uid="uid://dhhmh73cw5tf5"
+path="res://.godot/imported/michel_awake.png-c59314a37768a6388276d0cae7c22f60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HUD/img/celt_awake.png"
-dest_files=["res://.godot/imported/celt_awake.png-14ec5d0bd077b60379298326e13341bb.ctex"]
+source_file="res://HUD/img/michel_awake.png"
+dest_files=["res://.godot/imported/michel_awake.png-c59314a37768a6388276d0cae7c22f60.ctex"]
 
 [params]
 

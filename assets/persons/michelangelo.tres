@@ -1,13 +1,16 @@
 [gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://87f0xxfa8wx5"]
 
 [ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_ftnjs"]
-[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_npy83"]
+[ext_resource type="Texture2D" uid="uid://cvjxt4ih6mm5g" path="res://HUD/img/michel_asleep.png" id="1_sbco0"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_sbco0"]
-[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_dojhd"]
+[ext_resource type="Texture2D" uid="uid://dhhmh73cw5tf5" path="res://HUD/img/michel_awake.png" id="3_dojhd"]
 [ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_sbco0"]
 
 [sub_resource type="Resource" id="Resource_w2xfa"]
 script = ExtResource("2_sbco0")
+asleep = ExtResource("1_sbco0")
+idle = ExtResource("1_sbco0")
+talking = ExtResource("3_dojhd")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [sub_resource type="Resource" id="Resource_sbco0"]
