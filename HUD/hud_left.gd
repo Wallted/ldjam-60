@@ -24,6 +24,15 @@ func _process(_delta: float) -> void:
 		_test_button_pressed = false
 
 
+func _scroll_to_bottom(delay: float = 0.0) -> void:
+	get_tree().create_timer(delay + .01).timeout.connect(
+		func () -> void:
+			scroll_container.set_deferred(
+				"scroll_vertical",
+				scroll_container.get_v_scroll_bar().max_value + 200,
+			)
+	)
+
 func send_message(
 	author: Enums.PersonType,
 	message: String = '',
@@ -40,13 +49,19 @@ func send_message(
 	speech_bubble.duration = duration
 	chat_window.add_child(speech_bubble)
 	speech_bubble.avatar.texture = resource.avatar.idle
-	get_tree().create_timer(.01).timeout.connect(
+	_scroll_to_bottom()
+
+func queue_message(
+	person_type: Enums.PersonType,
+	message: String,
+	duration: float,
+	delay: float,
+) -> void:
+	get_tree().create_timer(delay).timeout.connect(
 		func () -> void:
-			scroll_container.set_deferred(
-				"scroll_vertical",
-				scroll_container.get_v_scroll_bar().max_value + 200,
-			)
+			send_message(person_type, message, duration)
 	)
+	_scroll_to_bottom(delay)
 
 
 func _on_game_level_changed(person_type: Enums.PersonType) -> void:
@@ -64,5 +79,10 @@ func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	for dialogue_line in resource.entry_messages:
 		if dialogue_line.is_spoken:
 			continue
-		send_message(person_type, dialogue_line.message)
+		queue_message(
+			person_type,
+			dialogue_line.message,
+			dialogue_line.duration,
+			dialogue_line.timestamp
+		)
 		dialogue_line.is_spoken = true

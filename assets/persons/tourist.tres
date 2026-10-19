@@ -13,31 +13,45 @@ metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [sub_resource type="Resource" id="Resource_r1ake"]
 script = ExtResource("4_r1ake")
-message = "Look at this one honey! It'll look great as your profile picture..."
+message = "Look at this one, honey! It'll look great as your profile picture..."
+timestamp = 1.5
+duration = 3.5
 
 [sub_resource type="Resource" id="Resource_kdf30"]
 script = ExtResource("4_r1ake")
-message = "No you don't look fat in it..."
+message = "No, you don't look fat in it..."
+timestamp = 6.0
+duration = 2.0
 
 [sub_resource type="Resource" id="Resource_gycxn"]
 script = ExtResource("4_r1ake")
-message = "Yea let's do some for me..."
+message = "Yeah, let's do some for me..."
+timestamp = 10.0
+duration = 1.0
 
 [sub_resource type="Resource" id="Resource_pqpcu"]
 script = ExtResource("4_r1ake")
-message = "What if I posed like this?..."
+message = "What if I posed like this...?"
+timestamp = 13.0
+duration = 1.0
 
 [sub_resource type="Resource" id="Resource_auswx"]
 script = ExtResource("4_r1ake")
 message = "Or maybe like that?"
+timestamp = 15.0
+duration = 1.0
 
 [sub_resource type="Resource" id="Resource_vlhpy"]
 script = ExtResource("4_r1ake")
-message = "Oh! I've got it! I'll take this stone and pose like I'm building this place. Ha-ha-ha. Could you imagine? Me building Stonehenge?"
+message = "Oh, I've got it! I'll take this stone and pose like I'm building this place. Ha-ha-ha. Could you imagine? Me, building Stonehenge?"
+timestamp = 17.0
+duration = 8.0
 
 [sub_resource type="Resource" id="Resource_lf4gj"]
 script = ExtResource("4_r1ake")
-message = "H-honey?... Wha-what happened?... Where am I?..."
+message = "H-honey...? Wha-what happened...? Where am I...?"
+timestamp = 28.0
+duration = 5.0
 
 [resource]
 script = ExtResource("1_6u80u")
