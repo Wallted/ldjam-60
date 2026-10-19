@@ -103,7 +103,13 @@ func _on_monologue_end() -> void:
 		child.emit_signal("timeout")
 
 
-func _on_game_level_changed(person_type: Enums.PersonType) -> void:
+func _on_game_level_changed(person_type: Enums.PersonType, powered: bool) -> void:
 	var resource = ResourceManagier.get_resource(person_type)
 	current_level_person.resource = resource
 	current_level_person.resource.is_discovered = true
+	current_level_person.is_solved = powered
+
+
+func _on_game_room_powered_changed(person_type: Enums.PersonType, powered: bool) -> void:
+	if current_level_person.resource.person_type == person_type:
+		current_level_person.is_solved = powered

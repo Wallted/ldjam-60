@@ -1,6 +1,6 @@
 extends Node2D
 
-signal level_changed(person_type: Enums.PersonType)
+signal level_changed(person_type: Enums.PersonType, powered: bool)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
 @onready var room_manager: Node2D = %RoomManager
@@ -28,8 +28,8 @@ func _on_room_manager_room_finished(_room: GameRoom) -> void:
 	DialogManagier.monologue_ended.emit()
 	DialogManagier.start_monologue(_room.person_name)
 
-func _on_room_manager_level_changed(person_type: Enums.PersonType) -> void:
-	level_changed.emit(person_type)
+func _on_room_manager_level_changed(person_type: Enums.PersonType, powered: bool) -> void:
+	level_changed.emit(person_type, powered)
 	DialogManagier.monologue_ended.emit()
 	#DialogManagier.start_monologue(person_type)
 

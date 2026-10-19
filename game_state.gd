@@ -63,7 +63,7 @@ func enable_cutscene():
 	skip_button.visible = true
 	if not skip_button.is_connected('pressed', disable_cutscene):
 		skip_button.pressed.connect(disable_cutscene)
-	
+
 func disable_cutscene():
 	state = GameState.State.ACTION_FREE
 	DialogManagier.monologue_ended.emit()

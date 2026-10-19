@@ -1,7 +1,7 @@
 extends Node2D
 class_name RoomManager
 
-signal level_changed(person_type: Enums.PersonType)
+signal level_changed(person_type: Enums.PersonType, powered: bool)
 signal room_finished(room: GameRoom)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
@@ -60,7 +60,7 @@ func _ready() -> void:
 		room.update_parent()
 	
 	assert(currently_focused_room != null)
-	level_changed.emit.call_deferred(currently_focused_room.person_name)
+	level_changed.emit.call_deferred(currently_focused_room.person_name, false)
 
 
 func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
@@ -162,7 +162,7 @@ func _on_zoom_finished(target_room: GameRoom) -> void:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()
 	target_room.enable_tiles()
-	level_changed.emit(target_room.person_name)
+	level_changed.emit(target_room.person_name, target_room.room_powered)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.enabled:
