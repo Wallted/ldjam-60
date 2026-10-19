@@ -56,6 +56,7 @@ duration = 5.0
 [resource]
 script = ExtResource("1_6u80u")
 person_name = "Tourist"
+person_type = 9
 entry_messages = Array[ExtResource("4_r1ake")]([SubResource("Resource_r1ake"), SubResource("Resource_kdf30"), SubResource("Resource_gycxn"), SubResource("Resource_pqpcu"), SubResource("Resource_auswx"), SubResource("Resource_vlhpy"), SubResource("Resource_lf4gj")])
 avatar = SubResource("Resource_r73l3")
 entry_message_audio = ExtResource("4_kdf30")

@@ -3,6 +3,7 @@ extends Resource
 class_name PersonResource
 
 @export var person_name: String
+@export var person_type: Enums.PersonType
 @export var entry_messages: Array[DialogueLine]:
 	set(value):
 		entry_messages = value
@@ -11,3 +12,4 @@ class_name PersonResource
 				entry_messages[i] = DialogueLine.new()
 @export var avatar: Avatar
 @export var entry_message_audio: AudioStream
+@export var entry_message_audio_played: bool

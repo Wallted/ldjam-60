@@ -7,6 +7,8 @@ signal message_sent(
 	avatar: Texture2D,
 )
 
+signal monologue_started(person_type: Enums.PersonType)
+signal monologue_ended()
 
 func send_message(
 	author: Enums.PersonType,

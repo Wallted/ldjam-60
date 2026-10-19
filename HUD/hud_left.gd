@@ -13,6 +13,8 @@ var _test_button_pressed: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DialogManagier.message_sent.connect(send_message)
+	DialogManagier.monologue_ended.connect(_on_monologue_end)
+	DialogManagier.monologue_started.connect(_on_monologue_start)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,21 +73,24 @@ func queue_message(
 			send_message(person_type, message, duration)
 	)
 
-
-func _on_game_level_changed(person_type: Enums.PersonType) -> void:
+func _on_monologue_end() -> void:
 	if current_level_person == null:
 		return
-	var resource = ResourceManagier.get_resource(person_type)
-	current_level_person.resource = resource
-	current_level_person.update()
 
 	dialog_stream.stop()
 	for child in message_timers.get_children():
 		child.stop()
 		child.emit_signal("timeout")
-	if resource.entry_message_audio:
+		
+		
+func _on_monologue_start(person_type: Enums.PersonType) -> void:
+	var resource = ResourceManagier.get_resource(person_type)
+	current_level_person.resource = resource
+	
+	if resource.entry_message_audio and not resource.entry_message_audio_played:
 		dialog_stream.stream = resource.entry_message_audio
 		dialog_stream.play()
+		resource.entry_message_audio_played = true
 
 	for dialogue_line in resource.entry_messages:
 		if dialogue_line.is_spoken:
