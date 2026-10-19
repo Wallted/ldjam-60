@@ -45,7 +45,7 @@ class_name Person
 		if not value:
 			status = PersonStatus.ASLEEP
 		else:
-			status = PersonStatus.IDLE
+			status = PersonStatus.TALKING
 
 @onready var current_state: TextureRect = %CurrentState
 @onready var talking_indicator: PanelContainer = %TalkingIndicator
