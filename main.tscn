@@ -111,6 +111,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD" unique_id=1901270043]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
