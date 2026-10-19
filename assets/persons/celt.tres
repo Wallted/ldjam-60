@@ -4,13 +4,38 @@
 [ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_ssvx5"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_kkk1n"]
 [ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_r57vc"]
+[ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_kkk1n"]
 
 [sub_resource type="Resource" id="Resource_5813k"]
 script = ExtResource("2_kkk1n")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
+[sub_resource type="Resource" id="Resource_kkk1n"]
+script = ExtResource("4_kkk1n")
+message = "Druid told me that this place will link us to cosmic beings..."
+
+[sub_resource type="Resource" id="Resource_r57vc"]
+script = ExtResource("4_kkk1n")
+message = "But from what he said it's just a stone circle!"
+
+[sub_resource type="Resource" id="Resource_rbwjm"]
+script = ExtResource("4_kkk1n")
+message = "But I bet our descendants will pay for tickets to see it. Mark my words!"
+
+[sub_resource type="Resource" id="Resource_q30jn"]
+script = ExtResource("4_kkk1n")
+message = "AND WHY DOESN'T IT HAVE A BUILD MANUAL!"
+
+[sub_resource type="Resource" id="Resource_x510s"]
+script = ExtResource("4_kkk1n")
+message = "Like... Where this stone is supposed to go?"
+
+[sub_resource type="Resource" id="Resource_uftbc"]
+script = ExtResource("4_kkk1n")
+message = "Ohh that's why..."
+
 [resource]
 script = ExtResource("1_5qo7x")
 person_name = "Celt"
-entry_messages = Array[String](["Druid told me that this place will link us to cosmic beings...", "But from what he said it's just a stone circle!", "But I bet our descendants will pay for tickets to see it. Mark my words!", "AND WHY DOESN'T IT HAVE A BUILD MANUAL!", "Like... Where this stone is supposed to go?", "Ohh that's why..."])
+entry_messages = Array[ExtResource("4_kkk1n")]([SubResource("Resource_kkk1n"), SubResource("Resource_r57vc"), SubResource("Resource_rbwjm"), SubResource("Resource_q30jn"), SubResource("Resource_x510s"), SubResource("Resource_uftbc")])
 avatar = SubResource("Resource_5813k")

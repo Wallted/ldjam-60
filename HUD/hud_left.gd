@@ -3,20 +3,24 @@ class_name HUDLeft
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
-@onready var test_button: Button = $Button
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 @onready var current_level_person: Person = $CurrentLevelPerson
 
+var _test_button_pressed: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	test_button.pressed.connect(DialogManagier._send_test_message)
 	DialogManagier.message_sent.connect(send_message)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	if Input.is_key_pressed(KEY_W):
+		if not _test_button_pressed:
+			DialogManagier._send_test_message()
+		_test_button_pressed = true
+	else:
+		_test_button_pressed = false
 
 
 func send_message(
@@ -34,7 +38,7 @@ func send_message(
 	speech_bubble.author = resource.person_name
 	speech_bubble.duration = duration
 	chat_window.add_child(speech_bubble)
-	speech_bubble.avatar.texture = resource.avatar
+	speech_bubble.avatar.texture = resource.avatar.idle
 	get_tree().create_timer(.01).timeout.connect(
 		func () -> void:
 			scroll_container.set_deferred(

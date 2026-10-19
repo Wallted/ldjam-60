@@ -37,13 +37,6 @@ on sadfsdfsdfsdfsdfs
 some longer text
 and longer linessssssssssssssssssssssssssssssssss"
 
-[node name="Button" type="Button" parent="." unique_id=1452632014]
-layout_mode = 0
-offset_left = 324.0
-offset_top = 10.0
-offset_right = 377.0
-offset_bottom = 57.0
-
 [node name="CurrentLevelPerson" parent="." unique_id=1468336816 instance=ExtResource("3_2ihca")]
 layout_mode = 1
 anchors_preset = 5

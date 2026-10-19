@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dsg3xifai5267" path="res://HUD/img/sisyphus_asleep.png" id="1_w3n15"]
 [ext_resource type="Texture2D" uid="uid://de5hay1ye2bw0" path="res://HUD/img/sisyphus_awake.png" id="2_2om0t"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_rbiw4"]
+[ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_2om0t"]
 
 [sub_resource type="Resource" id="Resource_w2xfa"]
 script = ExtResource("3_rbiw4")
@@ -12,8 +13,32 @@ idle = ExtResource("2_2om0t")
 talking = ExtResource("2_2om0t")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
+[sub_resource type="Resource" id="Resource_2om0t"]
+script = ExtResource("4_2om0t")
+message = "Argh! Cursed stone!..."
+
+[sub_resource type="Resource" id="Resource_rbiw4"]
+script = ExtResource("4_2om0t")
+message = "I've been dealing with it for centuries!..."
+
+[sub_resource type="Resource" id="Resource_rhshc"]
+script = ExtResource("4_2om0t")
+message = "But you know what?..."
+
+[sub_resource type="Resource" id="Resource_r5d7j"]
+script = ExtResource("4_2om0t")
+message = "I think this is the worst infrastructure I've seen in my life! Come on..."
+
+[sub_resource type="Resource" id="Resource_266j5"]
+script = ExtResource("4_2om0t")
+message = "Alright my guy... One more time up the hill and we'll go for a beer..."
+
+[sub_resource type="Resource" id="Resource_70ayv"]
+script = ExtResource("4_2om0t")
+message = "Wait... I'm inside? Neat! I can work like a hamster now!\""
+
 [resource]
 script = ExtResource("1_22yw1")
 person_name = "Sisyphus"
-entry_messages = Array[String](["Argh! Cursed stone!...", "I've been dealing with it for centuries!...", "But you know what?...", "I think this is the worst infrastructure I've seen in my life! Come on...", "Alright my guy... One more time up the hill and we'll go for a beer...", "Wait... I'm inside? Neat! I can work like a hamster now!"])
+entry_messages = Array[ExtResource("4_2om0t")]([SubResource("Resource_2om0t"), SubResource("Resource_rbiw4"), SubResource("Resource_rhshc"), SubResource("Resource_r5d7j"), SubResource("Resource_266j5"), SubResource("Resource_70ayv")])
 avatar = SubResource("Resource_w2xfa")

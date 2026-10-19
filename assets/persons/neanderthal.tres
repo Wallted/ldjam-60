@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://citdf1hya4uuw" path="res://HUD/img/neanderthal_asleep.png" id="1_bh0uq"]
 [ext_resource type="Texture2D" uid="uid://bcl5jk8an51n8" path="res://HUD/img/neanderthal_awake.png" id="2_oxe5u"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_5mtkb"]
+[ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_oxe5u"]
 
 [sub_resource type="Resource" id="Resource_yuk71"]
 script = ExtResource("3_5mtkb")
@@ -12,8 +13,24 @@ idle = ExtResource("2_oxe5u")
 talking = ExtResource("2_oxe5u")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
+[sub_resource type="Resource" id="Resource_oxe5u"]
+script = ExtResource("4_oxe5u")
+message = "Who touch my meat!"
+
+[sub_resource type="Resource" id="Resource_5mtkb"]
+script = ExtResource("4_oxe5u")
+message = "You! You friend?... You no run! You fight me! Me strongest..."
+
+[sub_resource type="Resource" id="Resource_iknqq"]
+script = ExtResource("4_oxe5u")
+message = "Me take rock! Rock smash paper!"
+
+[sub_resource type="Resource" id="Resource_bvxdk"]
+script = ExtResource("4_oxe5u")
+message = "Why sky bright!?"
+
 [resource]
 script = ExtResource("1_3jrlc")
 person_name = "Neanderthal"
-entry_messages = Array[String](["Who touch my meat!", "You! You friend?... You no run! You fight me! Me strongest...", "Me take rock! Rock smash paper!", "Why sky bright!?"])
+entry_messages = Array[ExtResource("4_oxe5u")]([SubResource("Resource_oxe5u"), SubResource("Resource_5mtkb"), SubResource("Resource_iknqq"), SubResource("Resource_bvxdk")])
 avatar = SubResource("Resource_yuk71")
