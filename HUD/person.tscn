@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://doije4hanbllc" path="res://HUD/person.gd" id="1_w2xfa"]
 [ext_resource type="Resource" uid="uid://7wh55wb1dohc" path="res://assets/persons/icarus.tres" id="2_c5fji"]
-[ext_resource type="Texture2D" uid="uid://b3xklui4uq0f6" path="res://HUD/img/icarus_awake.png" id="3_yuk71"]
+[ext_resource type="Texture2D" uid="uid://by4p2wcb2s7wk" path="res://HUD/img/icarus_asleep.png" id="3_yuk71"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8veb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-shadow_color = Color(0.21176471, 0.96862745, 0.1882353, 0.26666668)
+shadow_color = Color(0.30980393, 0.96862745, 0.1882353, 0.26666668)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuk71"]
+bg_color = Color(0.31764707, 0.7058824, 0, 0)
+shadow_color = Color(0.6745098, 0.70980394, 0.050980393, 0.49803922)
 shadow_size = 8
 
 [node name="PersonAvatar" type="PanelContainer" unique_id=152484833]
@@ -16,6 +21,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2xfa")
 resource = ExtResource("2_c5fji")
+type = 4
+is_solved = null
 
 [node name="CurrentState" type="TextureRect" parent="." unique_id=152030736]
 unique_name_in_owner = true
@@ -36,3 +43,10 @@ visible = false
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g8veb")
+
+[node name="SolvedIndicator" type="PanelContainer" parent="MarginContainer" unique_id=684938730]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yuk71")

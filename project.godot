@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://n4cbk1qo6eke"
 
 DialogManagier="*uid://cb7d0gsgwmep5"
 GameState="*uid://c71jl8mf55xx7"
+AvatarManagier="*uid://bd8fwambaxysq"
 
 [display]
 

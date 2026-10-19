@@ -4,6 +4,7 @@ class_name GameRoom
 signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
+signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
 @export
 var person_name: Enums.PersonType
@@ -29,7 +30,11 @@ var doors: Array[Door]
 var gateways: Array[Gateway]
 
 var room_finished: bool
-var room_powered: bool
+var room_powered: bool:
+	set(value):
+		if room_powered != value:
+			room_powered_changed.emit(person_name, value)
+		room_powered = value
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -108,15 +113,16 @@ func _setup_gateways() -> void:
 		gateway_list.append(_tile)
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
+	var _room_powered = room_powered
 	if gateway_list.size() > 0:
-		room_powered = true
+		_room_powered = true
 		for _gateway in gateway_list:
-			room_powered = room_powered and _gateway.is_tile_powered()
+			_room_powered = _room_powered and _gateway.is_tile_powered()
 
-		if not room_finished and room_powered:
+		if not room_finished and _room_powered:
 			signal_finished.emit(self)
 			room_finished = true
-
+	room_powered = _room_powered
 	return room_powered
 
 func get_size() -> Vector2:
