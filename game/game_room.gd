@@ -127,7 +127,7 @@ func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	return res_coord
 
 func disable_room() -> void:
-	sprite_2d.material.set("shader_parameter/selected",	false);
+	update_hover_shader(false)
 	room_area_entered = false
 	room_area.input_pickable = false
 	for _item in tile_list:
@@ -145,7 +145,7 @@ func set_as_pickable() -> void:
 	for resp in out:
 		var room : GameRoom = resp['collider'].get_parent() as GameRoom
 		if room and room.zoom_level == zoom_level :
-			room.sprite_2d.material.set("shader_parameter/selected", true);
+			room.update_hover_shader(true)
 			room.room_area_entered = true
 
 func enable_tiles() -> void:
@@ -214,6 +214,12 @@ func rotate_room() -> void:
 
 	for _t in tile_list:
 		_t.rotate_tile()
+ 
+func update_hover_shader(selected: bool) -> void:
+	sprite_2d.material.set("shader_parameter/selected", selected)
+	for _child in child_room_list:
+		var _room : GameRoom = _child
+		_room.update_hover_shader(selected)
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
@@ -236,10 +242,10 @@ func _on_room_area_mouse_entered() -> void:
 	room_area_entered = true
 	for _t in tile_list:
 		_t.modulate = Color.WHITE
-	sprite_2d.material.set("shader_parameter/selected",	true);
+	update_hover_shader(true)
 
 func _on_room_area_mouse_exited() -> void:
 	room_area_entered = false
-	sprite_2d.material.set("shader_parameter/selected",	false);
+	update_hover_shader(false)
 	for _t in tile_list:
 		_t.modulate = Color.WHITE
