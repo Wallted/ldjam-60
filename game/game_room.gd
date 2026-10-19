@@ -1,10 +1,11 @@
 extends Node2D
 class_name GameRoom
 
-signal request_focus
+signal request_focus()
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
+signal room_unlocked_signal
 signal room_area_entered_changed
 
 signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
@@ -13,6 +14,19 @@ signal request_door_prune(outside_tile: Tile)
 
 @export
 var person_name: Enums.PersonType
+
+@export # DEBUG
+var room_unlocked: bool :
+	set(value):
+		if not parent_room:
+			return
+		if parent_room.room_unlocked:
+			return
+		if value and not room_unlocked:
+			GameState.set_zoom_tween(2.0)
+			parent_room.request_focus.emit()
+		if value:
+			room_unlocked = value
 
 @export_group("Grid")
 @export
@@ -128,6 +142,17 @@ func _setup_rocks() -> void:
 		RoomManager._trim_paths_of_neighbors(_rock.coord, self)
 		var _tile = get_tile(_rock.coord)
 		_tile.enable_rock(_rock)
+
+func check_is_room_unlocked() -> void:
+	if room_unlocked:
+		return 
+	if door_list.size() > 0:
+		var _room_unlocked = true
+		for _door in door_list:
+			_room_unlocked = _room_unlocked and _door.is_tile_powered()
+		
+		room_unlocked = _room_unlocked
+
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
 	var _room_powered = room_powered

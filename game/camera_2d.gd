@@ -27,8 +27,9 @@ func tween_zoom_room(room : GameRoom) -> Signal:
 		tween.kill()
 
 	tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property(self, 'position', room.position, 0.5).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, 'zoom', _calculate_zoom(room), 0.5).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(action_progress, 'progress', 1.0, 0.5).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, 'position', room.position, GameState.zoom_tween_value).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, 'zoom', _calculate_zoom(room), GameState.zoom_tween_value).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(action_progress, 'progress', 1.0, GameState.zoom_tween_value).set_trans(Tween.TRANS_LINEAR)
 	tween.parallel()
+	GameState.set_zoom_tween(0.5)
 	return tween.finished
