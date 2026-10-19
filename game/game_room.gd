@@ -7,6 +7,10 @@ signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 signal room_area_entered_changed
 
+signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
+signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
+signal request_door_prune(outside_tile: Tile)
+
 @export
 var person_name: Enums.PersonType
 
@@ -43,6 +47,7 @@ var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
 var room_area_entered: bool
 
+var outside_doors: Dictionary[Tile, Object] # ignore the values, just use keys
 var door_list: Array[Tile]
 var gateway_list: Array[Tile]
 
@@ -103,8 +108,10 @@ func _setup_doors() -> void:
 		var _tile = get_tile(_door.coord)
 		_tile.enable_door(
 			Enums.get_direction(_door.side),
-			Enums.get_direction(_door.orientation),
 		)
+		# top level door has energy from nowhere
+		if parent_room == null:
+			_tile.is_flow_tip = true
 		door_list.append(_tile)
 
 func _setup_gateways() -> void:
@@ -140,18 +147,18 @@ func get_tile(coord: Vector2, in_local_coords := false) -> Tile:
 				return _t
 	return null
 
-func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
-	var neighbours : Array[Tile] = []
-	var neigbour_coords = [
-		coord + Vector2.UP,
-		coord + Vector2.DOWN,
-		coord + Vector2.RIGHT,
-		coord + Vector2.LEFT,
-	]
-	for _tile in tile_list:
-		if _tile.coords in neigbour_coords:
-			neighbours.append(_tile)
-	return neighbours
+#func get_neighbour_tiles(coord: Vector2) -> Array[Tile]:
+	#var neighbours : Array[Tile] = []
+	#var neigbour_coords = [
+		#coord + Vector2.UP,
+		#coord + Vector2.DOWN,
+		#coord + Vector2.RIGHT,
+		#coord + Vector2.LEFT,
+	#]
+	#for _tile in tile_list:
+		#if _tile.coords in neigbour_coords:
+			#neighbours.append(_tile)
+	#return neighbours
 
 func translate_to_parent_tile(_tile: Tile, _debug: bool = false) -> Vector2:
 	if not parent_room:
@@ -191,28 +198,30 @@ func update_parent(_disconnect: bool = false) -> void:
 	if not parent_room:
 		return
 
-	for door_tile in door_list:
-		if door_tile.is_source_exit:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
-			if follow_tile:
-				if _disconnect:
-					follow_tile.has_energy = true
-					follow_tile.is_source_exit = false
-				else:
-					follow_tile.has_energy = true
-					follow_tile.is_source_exit = true
+	door_list.sort_custom(func(a: Tile, _b: Tile): return _disconnect != a.is_flow_base)
 
-		if door_tile.is_source_entry:
-			var parent_tile_coords: Vector2 = translate_to_parent_tile(door_tile)
-			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
-			if follow_tile:
-				if _disconnect:
-					door_tile.has_energy = true
-					follow_tile.is_source_entry = false
-				else:
-					door_tile.has_energy = true
-					follow_tile.is_source_entry = true
+	for door_tile in door_list:
+		var follow_tile := _fetch_outside_door_tile(door_tile)
+		if follow_tile:
+			if _disconnect:
+				if follow_tile.is_flow_base and door_tile.is_flow_tip:
+					# todo: direct door-to-door tiles
+					request_unpower_door.emit(follow_tile.local_coords, parent_room)
+				door_tile.linked_door_tiles.erase(follow_tile)
+				follow_tile.linked_door_tiles.erase(door_tile)
+				if follow_tile.linked_door_tiles.is_empty():
+					parent_room.outside_doors.erase(follow_tile)
+					follow_tile.is_outside_door = false
+			else:
+				request_door_prune.emit(follow_tile)
+				door_tile.linked_door_tiles.get_or_add(follow_tile)
+				follow_tile.linked_door_tiles.get_or_add(door_tile)
+				parent_room.outside_doors.get_or_add(follow_tile)
+				follow_tile.is_outside_door = true
+				if follow_tile.is_flow_base:
+					# todo: direct door-to-door tiles
+					follow_tile.is_flow_base = false # gonna be true in a sec down there
+					request_power_door.emit(follow_tile.local_coords, parent_room)
 
 var tween: Tween
 var rotating = false
@@ -239,12 +248,13 @@ func reset_parent():
 	reparent(%RoomManager.get_parent())
 
 func rotate_room() -> void:
+	
+	update_parent(true)
+	
 	for child in child_room_list:
 		child.parent_offset = Vector2(-child.parent_offset.y, child.parent_offset.x)
 		child.reparent(self)
 		child.rotate_room()
-
-	update_parent(true)
 
 	for _t in tile_list:
 		_t.rotate_tile()
@@ -254,6 +264,14 @@ func update_hover_shader(selected: bool) -> void:
 	for _child in child_room_list:
 		var _room : GameRoom = _child
 		_room.update_hover_shader(selected)
+
+
+func _fetch_outside_door_tile(inside_door_tile: Tile) -> Tile:
+	if parent_room == null:
+		return null
+	var parent_tile_coords: Vector2 = translate_to_parent_tile(inside_door_tile)
+	return parent_room.get_tile(parent_tile_coords - inside_door_tile.door_orientation)
+
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass

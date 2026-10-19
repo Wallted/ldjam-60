@@ -8,6 +8,13 @@
 [ext_resource type="Script" uid="uid://ce4p6kiokhrtc" path="res://game/gateway_resource.gd" id="6_u5opy"]
 [ext_resource type="Texture2D" uid="uid://rcf51jdb0ww7" path="res://icon.svg" id="7_y36n6"]
 
+[sub_resource type="Resource" id="Resource_7cios"]
+script = ExtResource("4_ryrav")
+coord = Vector2(0, 4)
+side = 3
+orientation = 2
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
 [sub_resource type="Resource" id="Resource_bvpig"]
 script = ExtResource("4_ryrav")
 coord = Vector2(0, 4)
@@ -71,6 +78,7 @@ scale_ratio = 5
 parent_offset = Vector2(1, 1)
 parent_base = Vector2(0, 0)
 zoom_level = 3
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_7cios")])
 
 [node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
