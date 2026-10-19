@@ -11,6 +11,8 @@ const PATH_DOOR: Texture2D = preload("uid://drtfmet3qy7g4")
 #@export
 #var door_texture: Texture2D
 
+var door_sprite: Sprite2D
+
 var coords: Vector2
 var local_coords: Vector2
 var door_orientation: Vector2
@@ -26,6 +28,7 @@ var west_path: PathSegment
 
 var parent_room: GameRoom
 var enabled: bool
+
 
 func _ready() -> void:
 	local_coords = coords
@@ -66,6 +69,8 @@ func enable_door(_side: Vector2) -> void:
 	door.position = _side * Vector2(128, 128)
 	door.z_index += 1
 	add_child(door)
+	door_sprite = door
+	set_door_sprite(true, false)
 
 var active_gateway = Sprite2D
 func enable_gateway(_gateway: Gateway) -> void:
@@ -117,3 +122,12 @@ func is_tile_powered() -> bool:
 		return true
 
 	return false
+
+
+func set_door_sprite(inactive: bool, powered: bool) -> void:
+	if inactive:
+		door_sprite.self_modulate = Color(0.1, 0.1, 0.1, 0.33)
+	elif powered:
+		door_sprite.self_modulate = Color("ffffffff")
+	else:
+		door_sprite.self_modulate = Color("362414ff")

@@ -5,33 +5,23 @@
 [ext_resource type="Script" uid="uid://crrlec2d1bx6b" path="res://game/room_manager.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://h802i5fumcjv" path="res://game/game_room.tscn" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door_resource.gd" id="4_ryrav"]
+[ext_resource type="Script" uid="uid://bldlq4k3nokd8" path="res://game/path_resource.gd" id="6_j8tme"]
 [ext_resource type="Script" uid="uid://ce4p6kiokhrtc" path="res://game/gateway_resource.gd" id="6_u5opy"]
 [ext_resource type="Texture2D" uid="uid://ciqqfrm1n4n6y" path="res://img/gateway.png" id="7_l8g03"]
 [ext_resource type="Script" uid="uid://fcj36or2snhq" path="res://game/rock_resource.gd" id="8_y36n6"]
 [ext_resource type="Texture2D" uid="uid://bawlc4rhqoug2" path="res://img/rock_tile.png" id="9_j8tme"]
 
-[sub_resource type="Resource" id="Resource_7cios"]
-script = ExtResource("4_ryrav")
-coord = Vector2(0, 4)
-side = 3
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_bvpig"]
-script = ExtResource("4_ryrav")
-coord = Vector2(0, 4)
-side = 3
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
 [sub_resource type="Resource" id="Resource_m75es"]
 script = ExtResource("4_ryrav")
-coord = Vector2(1, 0)
+coord = Vector2(0, 1)
+side = 3
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
-[sub_resource type="Resource" id="Resource_fc0e3"]
-script = ExtResource("4_ryrav")
-coord = Vector2(7, 8)
-side = 1
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+[sub_resource type="Resource" id="Resource_bowy6"]
+script = ExtResource("6_j8tme")
+coord = Vector2(0, 2)
+north_not_west = true
+metadata/_custom_type_script = "uid://bldlq4k3nokd8"
 
 [sub_resource type="Resource" id="Resource_fhkfd"]
 script = ExtResource("4_ryrav")
@@ -95,48 +85,18 @@ script = ExtResource("1_e2o6t")
 unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="FullRoom" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
-person_name = 6
-room_unlocked = true
-scale_ratio = 5
-parent_offset = Vector2(1, 1)
-parent_base = Vector2(0, 0)
-zoom_level = 3
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_7cios")])
-
-[node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
-scale = Vector2(1, 1)
-person_name = 8
-room_unlocked = true
-scale_ratio = 3
-parent_base = Vector2(4, 4)
-zoom_level = 2
-parent_room = NodePath("../FullRoom")
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
-
-[node name="FirstRoom2p5" parent="." unique_id=325990417 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
-person_name = 9
-scale_ratio = 2
-parent_offset = Vector2(2, 2)
+[node name="FirstRoom2p5" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
+person_name = 1
+scale_ratio = 1
 zoom_level = 1
-parent_room = NodePath("../FirstRoom3")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es")])
-
-[node name="FirstRoom2" parent="." unique_id=707941366 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
-scale = Vector2(1, 1)
-person_name = 2
-scale_ratio = 2
-parent_offset = Vector2(-2, -2)
-zoom_level = 1
-parent_room = NodePath("../FirstRoom3")
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fc0e3")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_bowy6")])
 
 [node name="FirstRoom1" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 position = Vector2(-1, 0)
 scale = Vector2(1, 1)
-person_name = 4
-scale_ratio = 1
-parent_offset = Vector2(-1, -1)
+person_name = 9
+parent_offset = Vector2(-2, -2)
 parent_room = NodePath("../FirstRoom2p5")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_dxrkv"), SubResource("Resource_u5opy"), SubResource("Resource_y36n6")])
