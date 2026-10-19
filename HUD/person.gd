@@ -7,8 +7,17 @@ class_name Person
 		resource = value
 		person_name = resource.person_name
 		avatar = resource.avatar
+		is_discovered = resource.is_discovered
 		self.status = self.status
+		
 @export var preview_only: bool = false
+@export var is_discovered: bool = false:
+	set(value):
+		resource.is_discovered = value
+		is_discovered = value
+		if is_discovered and undiscovered_indicator != null:
+			print('setter', is_discovered)
+			undiscovered_indicator.hide()
 @export var status: PersonStatus = PersonStatus.ASLEEP:
 	set(value):
 		status = value
@@ -27,11 +36,13 @@ class_name Person
 		return resource.is_solved
 	set(value):
 		resource.is_solved = value
-		solved_indicator.visible = resource.is_solved
+		if solved_indicator:
+			solved_indicator.visible = resource.is_solved
 
 @onready var current_state: TextureRect = %CurrentState
 @onready var talking_indicator: PanelContainer = %TalkingIndicator
 @onready var solved_indicator: PanelContainer = %SolvedIndicator
+@onready var undiscovered_indicator: PanelContainer = %UndiscoveredIndicator
 
 enum PersonStatus {
 	ASLEEP,
@@ -47,6 +58,9 @@ func _ready() -> void:
 	person_name = resource.person_name
 	avatar = resource.avatar
 	self.status = status  # refresh status when it's available
+	if preview_only or is_discovered:
+		undiscovered_indicator.hide()
+	
 
 
 func set_asleep() -> void:
