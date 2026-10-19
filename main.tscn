@@ -219,6 +219,7 @@ theme_override_font_sizes/font_size = 48
 text = "PLAY"
 
 [node name="EndScreen" type="Control" parent="CanvasLayer" unique_id=1909849355]
+unique_name_in_owner = true
 visible = false
 layout_mode = 3
 anchors_preset = 15
