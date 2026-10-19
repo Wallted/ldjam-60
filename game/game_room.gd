@@ -223,12 +223,6 @@ func update_hover_shader(selected: bool) -> void:
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
-	#for _t in tile_list:
-		#_t.modulate = Color.WHITE
-	#if _tile:
-		#for t in get_neighbour_tiles(_tile.coords):
-			#t.modulate = Color.AQUA
-		#_tile.modulate = Color.AQUAMARINE
 
 func _on_tile_mouse_exited(_tile: Area2D) -> void:
 	pass
@@ -240,12 +234,8 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 
 func _on_room_area_mouse_entered() -> void:
 	room_area_entered = true
-	for _t in tile_list:
-		_t.modulate = Color.WHITE
 	update_hover_shader(true)
 
 func _on_room_area_mouse_exited() -> void:
 	room_area_entered = false
 	update_hover_shader(false)
-	for _t in tile_list:
-		_t.modulate = Color.WHITE
