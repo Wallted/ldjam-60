@@ -66,6 +66,7 @@ func enable_cutscene():
 	
 func disable_cutscene():
 	state = GameState.State.ACTION_FREE
+	DialogManagier.monologue_ended.emit()
 	skip_button.visible = false
 
 func set_state(new_state: State) -> void:

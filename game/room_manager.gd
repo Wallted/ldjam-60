@@ -45,6 +45,7 @@ func _ready() -> void:
 			_room.request_unpower_door.connect(_try_unpower_a_door)
 			_room.request_power_door.connect(_try_power_a_door)
 			_room.request_door_prune.connect(_door_prune)
+			_room.request_place_path.connect(_place_path_setup.bind(_room))
 			_room.room_powered_changed.connect(_on_room_power_changed)
 			_room.room_area_entered_changed.connect(func (): hide_cursor())
 
@@ -57,6 +58,9 @@ func _ready() -> void:
 
 	for room in room_list:
 		room.update_parent()
+	
+	assert(currently_focused_room != null)
+	level_changed.emit.call_deferred(currently_focused_room.person_name)
 
 
 func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
@@ -326,6 +330,10 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(not follow_tile.is_flow_base and not follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = true
+		if follow_tile.is_inside_door:
+			follow_tile.set_door_sprite(false, true)
+		else:
+			source_tile.set_door_sprite(false, true)
 		# todo: propagate to another door (check linked_door_tiles size)
 		_power_a_segment(_get_a_segment_in_a_tile(follow_tile), follow_tile.local_coords)
 
@@ -339,6 +347,10 @@ func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> v
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = false
+		if follow_tile.is_inside_door:
+			follow_tile.set_door_sprite(false, false)
+		else:
+			source_tile.set_door_sprite(false, false)
 		# todo: propagate to another door
 		_unpower_a_segment(_get_a_segment_in_a_tile(follow_tile))
 
@@ -354,3 +366,10 @@ func _door_prune(outside_tile: Tile) -> void:
 		_path_cursor = path_cursor_cache
 	if outside_tile.is_tile_powered():
 		outside_tile.is_flow_base = true
+
+
+func _place_path_setup(path: Path, room: GameRoom) -> void:
+	var tile = room.get_tile(path.coord)
+	_path_cursor = tile.north_path if path.north_not_west else tile.west_path
+	_path_cursor.is_hovered = true
+	_try_place_path_segment()

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b3xklui4uq0f6" path="res://HUD/img/icarus_awake.png" id="2_6tgb8"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_cfaak"]
 [ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_6tgb8"]
+[ext_resource type="AudioStream" uid="uid://54g034vc4n5d" path="res://assets/audio/ikardialog.ogg" id="4_cfaak"]
 
 [sub_resource type="Resource" id="Resource_yuk71"]
 script = ExtResource("3_cfaak")
@@ -20,22 +21,31 @@ message = "\"You shouldn't forget about your limitations...\""
 [sub_resource type="Resource" id="Resource_cfaak"]
 script = ExtResource("4_6tgb8")
 message = "I guess my father was right..."
+timestamp = 4.0
 
 [sub_resource type="Resource" id="Resource_7vqlv"]
 script = ExtResource("4_6tgb8")
 message = "But he didn't mention anything about stones! Ha-ha! That'll show him..."
+timestamp = 7.0
+duration = 6.0
 
 [sub_resource type="Resource" id="Resource_pl6e5"]
 script = ExtResource("4_6tgb8")
 message = "Well, well, well! This one looks kind of like a sun..."
+timestamp = 14.0
+duration = 6.0
 
 [sub_resource type="Resource" id="Resource_ttjuj"]
 script = ExtResource("4_6tgb8")
 message = "Huh... Falling upwards? That's surely new..."
+timestamp = 20.0
+duration = 4.0
 
 [sub_resource type="Resource" id="Resource_xevba"]
 script = ExtResource("4_6tgb8")
 message = "Oh I messed up again, didn't I?\""
+timestamp = 25.0
+duration = 4.0
 
 [resource]
 script = ExtResource("1_bvoud")
@@ -43,4 +53,4 @@ person_name = "Icarus"
 person_type = 4
 entry_messages = Array[ExtResource("4_6tgb8")]([SubResource("Resource_6tgb8"), SubResource("Resource_cfaak"), SubResource("Resource_7vqlv"), SubResource("Resource_pl6e5"), SubResource("Resource_ttjuj"), SubResource("Resource_xevba")])
 avatar = SubResource("Resource_yuk71")
-is_discovered = true
+entry_message_audio = ExtResource("4_cfaak")
