@@ -61,8 +61,13 @@ layout_mode = 0
 [node name="Help" parent="CanvasLayer/HUD" unique_id=2005726561 instance=ExtResource("6_dg77c")]
 top_level = true
 layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_right = 900.0
 offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD" unique_id=1901270043]
 layout_mode = 1
@@ -161,6 +166,28 @@ offset_top = -43.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "next"
+
+[node name="Label" type="Label" parent="CanvasLayer/TitleScreen" unique_id=1040147722]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "dijupijej"
+
+[node name="SkipButton" type="Button" parent="CanvasLayer" unique_id=966491088]
+visible = false
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -15.5
+offset_right = 53.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SKIP DIALOG"
 
 [node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
 visible = false
