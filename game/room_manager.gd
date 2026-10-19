@@ -2,6 +2,7 @@ extends Node2D
 
 signal level_changed(person_type: Enums.PersonType)
 signal room_finished(room: GameRoom)
+signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
 var room_list : Array[GameRoom]
 var currently_focused_room: GameRoom
@@ -31,6 +32,7 @@ func _ready() -> void:
 			_room.request_focus.connect(_on_focus_request.bind(_room))
 			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
+			_room.room_powered_changed.connect(_on_room_power_changed)
 
 	_snap_rooms_together()
 	room_list.reverse()
@@ -38,6 +40,9 @@ func _ready() -> void:
 	GameState.set_state(GameState.State.ACTION_FREE)
 
 	focus_on_room_action(room_list[0], false)
+
+func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
+	room_powered_changed.emit(person_type, powered)
 
 func _process(_delta: float) -> void:
 	for room in room_list:
