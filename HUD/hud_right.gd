@@ -34,3 +34,11 @@ func _on_monologue_end() -> void:
 		if person.is_talking():
 			print('> ', person)
 			person.set_idle()
+
+
+func _on_game_room_powered_changed(person_type: Enums.PersonType, powered: bool) -> void:
+	print('test')
+	for person in grid_container.get_children():
+		person = person as Person
+		if person.type == person_type:
+			person.is_solved = powered

@@ -118,3 +118,4 @@ gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_dxrkv"), SubReso
 
 [connection signal="level_changed" from="RoomManager" to="." method="_on_room_manager_level_changed"]
 [connection signal="room_finished" from="RoomManager" to="." method="_on_room_manager_room_finished"]
+[connection signal="room_powered_changed" from="RoomManager" to="." method="_on_room_manager_room_powered_changed"]

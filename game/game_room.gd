@@ -4,6 +4,8 @@ class_name GameRoom
 signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
+signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
+signal room_area_entered_changed
 
 signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
@@ -33,7 +35,11 @@ var doors: Array[Door]
 var gateways: Array[Gateway]
 
 var room_finished: bool
-var room_powered: bool
+var room_powered: bool:
+	set(value):
+		if room_powered != value:
+			room_powered_changed.emit(person_name, value)
+		room_powered = value
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -115,15 +121,16 @@ func _setup_gateways() -> void:
 		gateway_list.append(_tile)
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
+	var _room_powered = room_powered
 	if gateway_list.size() > 0:
-		room_powered = true
+		_room_powered = true
 		for _gateway in gateway_list:
-			room_powered = room_powered and _gateway.is_tile_powered()
+			_room_powered = _room_powered and _gateway.is_tile_powered()
 
-		if not room_finished and room_powered:
+		if not room_finished and _room_powered:
 			signal_finished.emit(self)
 			room_finished = true
-
+	room_powered = _room_powered
 	return room_powered
 
 func get_size() -> Vector2:
@@ -279,6 +286,7 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 
 func _on_room_area_mouse_entered() -> void:
 	room_area_entered = true
+	room_area_entered_changed.emit()
 	update_hover_shader(true)
 
 func _on_room_area_mouse_exited() -> void:

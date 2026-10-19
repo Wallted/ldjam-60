@@ -73,20 +73,9 @@ func queue_message(
 			send_message(person_type, message, duration)
 	)
 
-func _on_monologue_end() -> void:
-	if current_level_person == null:
-		return
 
-	dialog_stream.stop()
-	for child in message_timers.get_children():
-		child.stop()
-		child.emit_signal("timeout")
-		
-		
 func _on_monologue_start(person_type: Enums.PersonType) -> void:
 	var resource = ResourceManagier.get_resource(person_type)
-	current_level_person.resource = resource
-	
 	if resource.entry_message_audio and not resource.entry_message_audio_played:
 		dialog_stream.stream = resource.entry_message_audio
 		dialog_stream.play()
@@ -102,3 +91,18 @@ func _on_monologue_start(person_type: Enums.PersonType) -> void:
 			dialogue_line.timestamp
 		)
 		dialogue_line.is_spoken = true
+
+
+func _on_monologue_end() -> void:
+	if current_level_person == null:
+		return
+
+	dialog_stream.stop()
+	for child in message_timers.get_children():
+		child.stop()
+		child.emit_signal("timeout")
+
+
+func _on_game_level_changed(person_type: Enums.PersonType) -> void:
+	var resource = ResourceManagier.get_resource(person_type)
+	current_level_person.resource = resource

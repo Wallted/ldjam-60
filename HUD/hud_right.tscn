@@ -92,6 +92,7 @@ type = 9
 [node name="Archaeologist" parent="GridContainer" unique_id=30209375 instance=ExtResource("2_ccku2")]
 layout_mode = 2
 resource = ExtResource("4_gm5x8")
+type = 0
 
 [node name="Michelangelo" parent="GridContainer" unique_id=1189271323 instance=ExtResource("2_ccku2")]
 layout_mode = 2
@@ -110,7 +111,6 @@ type = 3
 
 [node name="Icarus" parent="GridContainer" unique_id=451458892 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-type = 4
 
 [node name="Sisyphus" parent="GridContainer" unique_id=1644210309 instance=ExtResource("2_ccku2")]
 layout_mode = 2

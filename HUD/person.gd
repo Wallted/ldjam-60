@@ -22,9 +22,16 @@ class_name Person
 @export var type: Enums.PersonType:
 	get():
 		return resource.person_type
+@export var is_solved: bool:
+	get():
+		return resource.is_solved
+	set(value):
+		resource.is_solved = value
+		solved_indicator.visible = resource.is_solved
 
 @onready var current_state: TextureRect = %CurrentState
 @onready var talking_indicator: PanelContainer = %TalkingIndicator
+@onready var solved_indicator: PanelContainer = %SolvedIndicator
 
 enum PersonStatus {
 	ASLEEP,
