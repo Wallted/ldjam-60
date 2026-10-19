@@ -68,7 +68,7 @@ func enable_door(_side: Vector2) -> void:
 
 func enable_gateway(_gateway: Gateway) -> void:
 	var gateway = Sprite2D.new()
-	gateway.scale *= 0.25
+	gateway.scale *= 0.67
 	gateway.texture = _gateway.texture
 	add_child(gateway)
 
