@@ -29,6 +29,7 @@ var doors: Array[Door]
 var gateways: Array[Gateway]
 
 var room_finished: bool
+var room_powered: bool
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -107,13 +108,16 @@ func _setup_gateways() -> void:
 		gateway_list.append(_tile)
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
-	if not room_finished and gateway_list.size() > 0:
+	if gateway_list.size() > 0:
+		room_powered = true
 		for _gateway in gateway_list:
-			if not _gateway.is_tile_powered():
-				return false
-		signal_finished.emit(self)
-		room_finished = true
-	return room_finished
+			room_powered = room_powered and _gateway.is_tile_powered()
+
+		if not room_finished and room_powered:
+			signal_finished.emit(self)
+			room_finished = true
+
+	return room_powered
 
 func get_size() -> Vector2:
 	return room_size * scale
