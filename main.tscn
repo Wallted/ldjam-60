@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://bkkrnwmeyogai" path="res://help.tscn" id="6_dg77c"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://2e2p40e4cd3i" path="res://title_screen.gd" id="9_dg77c"]
 
 [node name="Main" type="Node" unique_id=665793303]
 script = ExtResource("1_efxa6")
@@ -104,6 +105,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("9_dg77c")
+duration = 10.0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleScreen" unique_id=961756532]
 layout_mode = 1
@@ -115,12 +118,16 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TitleTextScrollContainer" type="ScrollContainer" parent="CanvasLayer/TitleScreen" unique_id=1784492556]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TitleScreen" unique_id=1520306389]
 layout_mode = 0
-offset_right = 1152.0
+offset_right = 1000.0
 offset_bottom = 648.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="TitleText" type="Label" parent="CanvasLayer/TitleScreen/TitleTextScrollContainer" unique_id=1040147722]
+[node name="TitleText" type="RichTextLabel" parent="CanvasLayer/TitleScreen/MarginContainer" unique_id=2133776224]
 layout_mode = 2
 text = "Some things are older than memory itself.
 They witnessed the rise and fall of entire civilizations and endured long after the people who once held them turned to dust.
@@ -134,24 +141,22 @@ The stone sat in a glass case, carefully sealed away from curious hands. No mark
 
 Just a stone...
 
-And it should've stayed that way...
-
 On the way back the glass case slipped and shattered against the ground.
 The stone rolled out onto the floor.
 You picked it up with your bare hands...
 
 The world disappeared.
 No light. No sound. No ground. No stone.
-As if you were inside of it...
 
-Something beyod the darkness stirs.
-Something ancient.
+Something beyond the darkness stirs.
 Something that has waited far longer than you can imagine.
 You are not alone here.
 
 And then you see it...
 
 "
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/TitleScreen" unique_id=172084907]
