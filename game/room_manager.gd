@@ -1,4 +1,5 @@
 extends Node2D
+class_name RoomManager
 
 signal level_changed(person_type: Enums.PersonType)
 signal room_finished(room: GameRoom)
@@ -190,7 +191,7 @@ func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
 		_trim_paths_of_neighbors(tile.local_coords, room)
 
 
-func _trim_paths_of_neighbors(unavailable_tile_local_coords: Vector2, room: GameRoom) -> void:
+static func _trim_paths_of_neighbors(unavailable_tile_local_coords: Vector2, room: GameRoom) -> void:
 	var south_tile := room.get_tile(unavailable_tile_local_coords + Vector2.DOWN, true)
 	var east_tile := room.get_tile(unavailable_tile_local_coords + Vector2.RIGHT, true)
 	if south_tile != null:

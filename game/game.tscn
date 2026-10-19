@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://5qdsl01hgnkk" path="res://game/door_resource.gd" id="4_ryrav"]
 [ext_resource type="Script" uid="uid://ce4p6kiokhrtc" path="res://game/gateway_resource.gd" id="6_u5opy"]
 [ext_resource type="Texture2D" uid="uid://rcf51jdb0ww7" path="res://icon.svg" id="7_y36n6"]
+[ext_resource type="Script" uid="uid://fcj36or2snhq" path="res://game/rock_resource.gd" id="8_y36n6"]
 
 [sub_resource type="Resource" id="Resource_7cios"]
 script = ExtResource("4_ryrav")
@@ -60,6 +61,11 @@ metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
 script = ExtResource("6_u5opy")
 coord = Vector2(0, 3)
 metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
+
+[sub_resource type="Resource" id="Resource_l8g03"]
+script = ExtResource("8_y36n6")
+coord = Vector2(5, 5)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
 
 [node name="Game" type="Node2D" unique_id=1995553335]
 script = ExtResource("1_fc0e3")
@@ -115,6 +121,7 @@ parent_offset = Vector2(-1, -1)
 parent_room = NodePath("../FirstRoom2p5")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_dxrkv"), SubResource("Resource_u5opy"), SubResource("Resource_y36n6")])
+rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_l8g03")])
 
 [connection signal="level_changed" from="RoomManager" to="." method="_on_room_manager_level_changed"]
 [connection signal="room_finished" from="RoomManager" to="." method="_on_room_manager_room_finished"]
