@@ -33,6 +33,7 @@ func _ready() -> void:
 			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
 			_room.room_powered_changed.connect(_on_room_power_changed)
+			_room.room_area_entered_changed.connect(func (): hide_cursor())
 
 	_snap_rooms_together()
 	room_list.reverse()

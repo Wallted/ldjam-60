@@ -5,6 +5,7 @@ signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
+signal room_area_entered_changed
 
 @export
 var person_name: Enums.PersonType
@@ -267,6 +268,7 @@ func _on_room_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 
 func _on_room_area_mouse_entered() -> void:
 	room_area_entered = true
+	room_area_entered_changed.emit()
 	update_hover_shader(true)
 
 func _on_room_area_mouse_exited() -> void:
