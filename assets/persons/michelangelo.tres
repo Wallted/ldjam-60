@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_w2xfa"]
 script = ExtResource("2_sbco0")
 asleep = ExtResource("1_sbco0")
-idle = ExtResource("1_sbco0")
+idle = ExtResource("3_dojhd")
 talking = ExtResource("3_dojhd")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 

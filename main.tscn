@@ -254,9 +254,9 @@ script = ExtResource("12_dg77c")
 
 [connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_level_changed"]
 [connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_level_changed"]
-[connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_room_powered_changed"]
 [connection signal="placed_powered_path" from="Game" to="MainAudioStream/SFXStream" method="_on_game_placed_powered_path"]
 [connection signal="placed_unpowered_path" from="Game" to="MainAudioStream/SFXStream" method="_on_game_placed_unpowered_path"]
+[connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_room_powered_changed"]
 [connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_room_powered_changed"]
 [connection signal="rotate_room" from="Game" to="MainAudioStream/SFXStream" method="_on_game_rotate_room"]
 [connection signal="unplace_path" from="Game" to="MainAudioStream/SFXStream" method="_on_game_unplace_path"]

@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_c5fji"]
 script = ExtResource("1_0llkg")
 asleep = ExtResource("1_hjdi6")
-idle = ExtResource("1_hjdi6")
+idle = ExtResource("3_htm7g")
 talking = ExtResource("3_htm7g")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 

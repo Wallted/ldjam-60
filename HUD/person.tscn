@@ -56,7 +56,6 @@ layout_mode = 2
 
 [node name="UndiscoveredIndicator" type="PanelContainer" parent="MarginContainer" unique_id=1678280011]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a23f0")
 
