@@ -4,11 +4,12 @@ class_name Tile
 signal path_hover(entered: bool, north_not_west: bool)
 
 const PATH_SEGMENT = preload("uid://cl1vkv2b6kioq")
+const PATH_DOOR: Texture2D = preload("uid://drtfmet3qy7g4")
 
-@export
-var has_energy: bool
-@export
-var door_texture: Texture2D
+#@export
+#var has_energy: bool
+#@export
+#var door_texture: Texture2D
 
 var coords: Vector2
 var local_coords: Vector2
@@ -58,24 +59,26 @@ func _init_path_segments() -> void:
 func enable_door(_side: Vector2) -> void:
 	is_inside_door = true
 	var door = Sprite2D.new()
-	door.scale *= 0.5
-	door.texture = door_texture
+	door.scale *= Vector2(1.0, 30.0/87.0)
+	door.texture = PATH_DOOR
 	door_orientation = -_side
-	door.rotate(PI/2.0 + door_orientation.angle())
-	door.position = _side * Vector2(128, 128) / 2.5
+	door.rotate(PI + door_orientation.angle())
+	door.position = _side * Vector2(128, 128)
+	door.z_index += 1
 	add_child(door)
 
 func enable_gateway(_gateway: Gateway) -> void:
 	var gateway = Sprite2D.new()
-	gateway.scale *= 0.25
+	gateway.scale *= 0.67
 	gateway.texture = _gateway.texture
 	add_child(gateway)
 
 func enable_rock(_rock: Rock) -> void:
 	var rock = Sprite2D.new()
-	rock.modulate = Color.BLACK
+	rock.self_modulate = Color(0.13, 0.092, 0.066, 1.0)
 	rock.texture = _rock.texture
 	add_child(rock) # todo: switch to multimesh igfuess xfdas
+					# xDDD
 	
 	for _child in get_children():
 		if _child is PathSegment:
