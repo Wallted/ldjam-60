@@ -5,9 +5,10 @@ signal level_changed(person_type: Enums.PersonType)
 @onready var room_manager: Node2D = %RoomManager
 
 func _on_room_manager_room_finished(_room: GameRoom) -> void:
+	prints('room finished:', _room.person_name, _room.name)
 	GameState.set_state(GameState.State.CUTSCENE)
-	# do sth
-	GameState.set_status(GameState.State.ACTION_FREE)
+	await get_tree().create_timer(2.0).timeout
+	GameState.set_state(GameState.State.ACTION_FREE)
 
 func _on_room_manager_level_changed(person_type: Enums.PersonType) -> void:
 	level_changed.emit(person_type)

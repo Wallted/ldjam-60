@@ -20,17 +20,24 @@ var parent_base: Vector2 = Vector2(3, 3)
 @export
 var zoom_level: int
 @export
-var doors: Array[Door]
-
-@export
 var parent_room: GameRoom
+
+@export_group("Elements")
+@export
+var doors: Array[Door]
+@export
+var gateways: Array[Gateway]
+
+var room_finished: bool
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
-var door_list: Array[Tile]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
 var room_area_entered: bool
+
+var door_list: Array[Tile]
+var gateway_list: Array[Tile]
 
 @onready
 var grid: Node2D = $Grid
@@ -52,6 +59,7 @@ func _input(_event: InputEvent) -> void:
 func _ready() -> void:
 	_setup_tiles()
 	_setup_doors()
+	_setup_gateways()
 	(collision_shape_2d.shape as RectangleShape2D).size = room_size
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
@@ -91,6 +99,21 @@ func _setup_doors() -> void:
 			Enums.get_direction(_door.orientation),
 		)
 		door_list.append(_tile)
+
+func _setup_gateways() -> void:
+	for _gateway in gateways:
+		var _tile = get_tile(_gateway.coord)
+		_tile.enable_gateway(_gateway)
+		gateway_list.append(_tile)
+
+func check_is_room_finished(signal_finished: Signal) -> bool:
+	if not room_finished and gateway_list.size() > 0:
+		for _gateway in gateway_list:
+			if not _gateway.is_tile_powered():
+				return false
+		signal_finished.emit(self)
+		room_finished = true
+	return room_finished
 
 func get_size() -> Vector2:
 	return room_size * scale
@@ -163,10 +186,10 @@ func update_parent(_disconnect: bool = false) -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
 			if follow_tile:
 				if _disconnect:
-					follow_tile.has_energy = false
+					follow_tile.has_energy = true
 					follow_tile.is_source_exit = false
 				else:
-					follow_tile.has_energy = door_tile.has_energy
+					follow_tile.has_energy = true
 					follow_tile.is_source_exit = true
 
 		if door_tile.is_source_entry:
@@ -174,10 +197,10 @@ func update_parent(_disconnect: bool = false) -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
 			if follow_tile:
 				if _disconnect:
-					door_tile.has_energy = false
+					door_tile.has_energy = true
 					follow_tile.is_source_entry = false
 				else:
-					door_tile.has_energy = follow_tile.has_energy
+					door_tile.has_energy = true
 					follow_tile.is_source_entry = true
 
 var tween: Tween
