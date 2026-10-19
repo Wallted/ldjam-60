@@ -1,6 +1,6 @@
 extends Control
 
-@onready var text_node: RichTextLabel = $TitleText
+@onready var text_node: RichTextLabel = $MarginContainer/TitleText
 
 @export var duration: float = 0.0
 

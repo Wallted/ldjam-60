@@ -3,7 +3,7 @@ extends Node
 @onready var color_rect: ColorRect = $CanvasLayer/TitleScreen/ColorRect
 @onready var button: Button = $CanvasLayer/TitleScreen/Button
 @onready var title_screen: Control = $CanvasLayer/TitleScreen
-@onready var title_text: RichTextLabel = $CanvasLayer/TitleScreen/TitleText
+@onready var title_text: RichTextLabel = $CanvasLayer/TitleScreen/MarginContainer/TitleText
 
 func _ready() -> void:
 	GameState.pause_game()
