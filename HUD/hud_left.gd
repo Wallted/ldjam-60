@@ -5,6 +5,7 @@ class_name HUDLeft
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 @onready var current_level_person: Person = $CurrentLevelPerson
+@onready var dialog_stream: AudioStreamPlayer = $"../../../MainAudioStream/DialogStream"
 
 var _test_button_pressed: bool = false
 
@@ -54,6 +55,11 @@ func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	var resource = ResourceManagier.get_resource(person_type)
 	current_level_person.resource = resource
 	current_level_person.update()
+
+	dialog_stream.stop()
+	if resource.entry_message_audio:
+		dialog_stream.stream = resource.entry_message_audio
+		dialog_stream.play()
 
 	for dialogue_line in resource.entry_messages:
 		if dialogue_line.is_spoken:

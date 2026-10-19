@@ -8,17 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cl1vkv2b6kioq" path="res://path_segments/path_segment.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
-[ext_resource type="AudioStream" uid="uid://nh0rhmc40k6e" path="res://assets/audio/turists memory dialog.ogg" id="7_kek77"]
-[ext_resource type="AudioStream" uid="uid://bh3yy3hbm1um" path="res://assets/audio/mumblephone.wav" id="8_4c57u"]
-
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_pjyu3"]
-clip_count = 2
-clip_0/name = &"Turists Memory Dialog"
-clip_0/stream = ExtResource("7_kek77")
-clip_0/auto_advance = 0
-clip_1/name = &"Mumblephone"
-clip_1/stream = ExtResource("8_4c57u")
-clip_1/auto_advance = 0
 
 [node name="Main" type="Node" unique_id=665793303]
 
@@ -67,9 +56,8 @@ bus = &"MusicBus"
 script = ExtResource("6_272bh")
 
 [node name="DialogStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=825157408]
-stream = SubResource("AudioStreamInteractive_pjyu3")
 bus = &"DialogBus"
-playback_type = 2
+playback_type = 1
 script = ExtResource("7_5vw27")
 
 [node name="SFXStream" type="AudioStreamPlayer" parent="MainAudioStream" unique_id=470440381]
