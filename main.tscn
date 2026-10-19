@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://uxsywj5kk4up" path="res://main_audio_stream.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://bkkrnwmeyogai" path="res://help.tscn" id="6_dg77c"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://2e2p40e4cd3i" path="res://title_screen.gd" id="9_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dxhyqri2qm8iq" path="res://assets/audio/main/ambientstart.ogg" id="10_ycdy4"]
 [ext_resource type="Script" uid="uid://dyplj67om3a16" path="res://sfx_stream.gd" id="12_dg77c"]
 
@@ -51,7 +52,6 @@ Vector2i(1, 1): {
 "to_time": 1
 }
 }
-[ext_resource type="Script" uid="uid://2e2p40e4cd3i" path="res://title_screen.gd" id="9_dg77c"]
 
 [node name="Main" type="Node" unique_id=665793303]
 script = ExtResource("1_efxa6")
