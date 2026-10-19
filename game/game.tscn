@@ -91,3 +91,4 @@ doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResourc
 parent_room = NodePath("../FirstRoom2p5")
 
 [connection signal="level_changed" from="RoomManager" to="." method="_on_room_manager_level_changed"]
+[connection signal="room_finished" from="RoomManager" to="." method="_on_room_manager_room_finished"]

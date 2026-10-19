@@ -25,7 +25,6 @@ var doors: Array[Door]
 @export
 var parent_room: GameRoom
 
-
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
 var door_list: Array[Tile]
@@ -61,6 +60,7 @@ func _ready() -> void:
 	for i in tile_list.size():
 		var _tile: Node2D = tile_list[i]
 		multi_mesh_instance_2d.multimesh.set_instance_transform_2d(i, _tile.transform)
+	z_index = 100 - zoom_level * 10
 
 func _setup_tiles() -> void:
 	for i in grid_size:
