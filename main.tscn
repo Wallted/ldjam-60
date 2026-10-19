@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b2fmexmangpdu"]
 
+[ext_resource type="Script" uid="uid://qwhxlg3if8xx" path="res://main.gd" id="1_efxa6"]
 [ext_resource type="PackedScene" uid="uid://ufvrqekr7ija" path="res://game/game.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c2maoiq75ypwp" path="res://HUD/hud.gd" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dpb5tvih7c5xv" path="res://HUD/hud_left.tscn" id="4_7mycd"]
@@ -12,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
 
 [node name="Main" type="Node" unique_id=665793303]
+script = ExtResource("1_efxa6")
 
 [node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
 
@@ -89,6 +91,44 @@ grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("5_4c57u")
 
+[node name="TitleScreen" type="Control" parent="CanvasLayer" unique_id=1713245924]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleScreen" unique_id=961756532]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CanvasLayer/TitleScreen" unique_id=172084907]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "next"
+
+[node name="Label" type="Label" parent="CanvasLayer/TitleScreen" unique_id=1040147722]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "dijupijej"
+
 [node name="PathSegmentHeadMasterWorkaroundAnimatorSingleton" parent="." unique_id=178939412 instance=ExtResource("5_lquwl")]
 visible = false
 is_the_head_master_workaround_animator_singleton = true
@@ -109,3 +149,4 @@ bus = &"SFXBus"
 [connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_room_powered_changed"]
 [connection signal="mouse_entered" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/Button" to="." method="_on_title_button_pressed"]
