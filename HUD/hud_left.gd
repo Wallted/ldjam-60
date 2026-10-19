@@ -6,6 +6,7 @@ class_name HUDLeft
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 @onready var current_level_person: Person = $CurrentLevelPerson
 @onready var dialog_stream: AudioStreamPlayer = $"../../../MainAudioStream/DialogStream"
+@onready var message_timers: Node = $MessageTimers
 
 var _test_button_pressed: bool = false
 
@@ -57,11 +58,18 @@ func queue_message(
 	duration: float,
 	delay: float,
 ) -> void:
-	get_tree().create_timer(delay).timeout.connect(
+	var timer := MessageTimer.new()
+	timer.person_type = person_type
+	timer.message = message
+	timer.duration = duration
+	timer.one_shot = true
+	message_timers.add_child(timer)
+	timer.start(delay)
+	timer.timeout.connect(timer.queue_free)
+	timer.timeout.connect(
 		func () -> void:
 			send_message(person_type, message, duration)
 	)
-	_scroll_to_bottom(delay)
 
 
 func _on_game_level_changed(person_type: Enums.PersonType) -> void:
@@ -72,6 +80,9 @@ func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	current_level_person.update()
 
 	dialog_stream.stop()
+	for child in message_timers.get_children():
+		child.stop()
+		child.emit_signal("timeout")
 	if resource.entry_message_audio:
 		dialog_stream.stream = resource.entry_message_audio
 		dialog_stream.play()

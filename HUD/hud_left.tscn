@@ -50,3 +50,5 @@ grow_vertical = 1
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 10)
 preview_only = true
+
+[node name="MessageTimers" type="Node" parent="." unique_id=1737944118]
