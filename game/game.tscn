@@ -76,6 +76,7 @@ script = ExtResource("3_7jktm")
 
 [node name="FullRoom" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
 person_name = 6
+room_unlocked = true
 scale_ratio = 5
 parent_offset = Vector2(1, 1)
 parent_base = Vector2(0, 0)
@@ -85,6 +86,7 @@ doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_7cios")])
 [node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
 person_name = 8
+room_unlocked = true
 scale_ratio = 3
 parent_base = Vector2(4, 4)
 zoom_level = 2

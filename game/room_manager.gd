@@ -17,7 +17,8 @@ var _path_cursor_north_not_west: bool
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and GameState.state == GameState.State.ACTION_FREE:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
-			focus_on_room_action(currently_focused_room.parent_room)
+			if currently_focused_room.room_unlocked:
+				focus_on_room_action(currently_focused_room.parent_room)
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			_try_place_path_segment()
 		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
@@ -55,6 +56,7 @@ func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> voi
 
 
 func _process(_delta: float) -> void:
+	currently_focused_room.check_is_room_unlocked()
 	for room in room_list:
 		room.check_is_room_finished(room_finished)
 

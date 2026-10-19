@@ -5,6 +5,7 @@ enum State {
 	PAUSED,
 	ACTION_FREE,
 	ACTION_PENDING,
+	LEVEL_UNLOCKED,
 }
 
 var state: State :
@@ -18,6 +19,8 @@ var prev_mouse_mode: Input.MouseMode
 var action_progress: ActionProgress
 var label: Label
 var skip_button: Button
+
+var zoom_tween_value : float = 0.5
 
 func _ready() -> void:
 	var main = (get_tree().get_current_scene() as Node)
@@ -62,3 +65,6 @@ func set_state(new_state: State) -> void:
 
 func is_state(new_state: State) -> bool:
 	return state == new_state
+
+func set_zoom_tween(_value: float):
+	zoom_tween_value = _value
