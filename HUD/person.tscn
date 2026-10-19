@@ -28,6 +28,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2xfa")
 resource = ExtResource("2_c5fji")
+is_discovered = true
 type = 4
 
 [node name="CurrentState" type="TextureRect" parent="." unique_id=152030736]
@@ -55,6 +56,7 @@ layout_mode = 2
 
 [node name="UndiscoveredIndicator" type="PanelContainer" parent="MarginContainer" unique_id=1678280011]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a23f0")
 

@@ -42,7 +42,7 @@ func _on_game_room_powered_changed(person_type: Enums.PersonType, powered: bool)
 			person.is_solved = powered
 
 
-func _on_game_level_changed(person_type: Enums.PersonType) -> void:
+func _on_game_level_changed(person_type: Enums.PersonType, powered: bool) -> void:
 	for person in grid_container.get_children():
 		person = person as Person
 		if person.type == person_type:

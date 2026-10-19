@@ -37,6 +37,10 @@ class_name Person
 		resource.is_solved = value
 		if solved_indicator:
 			solved_indicator.visible = resource.is_solved
+		if not value:
+			status = PersonStatus.ASLEEP
+		else:
+			status = PersonStatus.IDLE
 
 @onready var current_state: TextureRect = %CurrentState
 @onready var talking_indicator: PanelContainer = %TalkingIndicator

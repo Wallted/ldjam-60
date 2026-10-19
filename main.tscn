@@ -212,6 +212,7 @@ bus = &"SFXBus"
 
 [connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_level_changed"]
 [connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_level_changed"]
+[connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_room_powered_changed"]
 [connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_room_powered_changed"]
 [connection signal="mouse_entered" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_exited"]
