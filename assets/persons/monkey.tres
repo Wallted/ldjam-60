@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5mcjoixjurmd" path="res://HUD/img/monkey_asleep.png" id="1_mmkyr"]
 [ext_resource type="Texture2D" uid="uid://cm0872hn5ms84" path="res://HUD/img/monkey_awake.png" id="2_80os1"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="3_6purh"]
+[ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_80os1"]
 
 [sub_resource type="Resource" id="Resource_c5fji"]
 script = ExtResource("3_6purh")
@@ -12,8 +13,40 @@ idle = ExtResource("2_80os1")
 talking = ExtResource("2_80os1")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
+[sub_resource type="Resource" id="Resource_80os1"]
+script = ExtResource("4_80os1")
+message = "Monkey Brothers! We will have an 8 hour work day..."
+
+[sub_resource type="Resource" id="Resource_6purh"]
+script = ExtResource("4_80os1")
+message = "You will be able to have private property!"
+
+[sub_resource type="Resource" id="Resource_8obsq"]
+script = ExtResource("4_80os1")
+message = "and BANANA TAXES!!!"
+
+[sub_resource type="Resource" id="Resource_g76bt"]
+script = ExtResource("4_80os1")
+message = "Our group will be rich!"
+
+[sub_resource type="Resource" id="Resource_hx8e2"]
+script = ExtResource("4_80os1")
+message = "Well not richer than me of course."
+
+[sub_resource type="Resource" id="Resource_uc1cp"]
+script = ExtResource("4_80os1")
+message = "And what will we do with communists?"
+
+[sub_resource type="Resource" id="Resource_ucfgp"]
+script = ExtResource("4_80os1")
+message = "That's right! We will take a stone..."
+
+[sub_resource type="Resource" id="Resource_4wkts"]
+script = ExtResource("4_80os1")
+message = "Wait... Did the stone just nationalize me?"
+
 [resource]
 script = ExtResource("1_2go3i")
-name = "Monkey"
-entry_messages = Array[String](["Monkey Brothers! We will have an 8 hour work day...", "You will be able to have private property!", "and BANANA TAXES!!!", "Our group will be rich!", "Well not richer than me of course.", "And what will we do with communists?", "That's right! We will take a stone...", "Wait... Did the stone just nationalize me?"])
+person_name = "Monkey"
+entry_messages = Array[ExtResource("4_80os1")]([SubResource("Resource_80os1"), SubResource("Resource_6purh"), SubResource("Resource_8obsq"), SubResource("Resource_g76bt"), SubResource("Resource_hx8e2"), SubResource("Resource_uc1cp"), SubResource("Resource_ucfgp"), SubResource("Resource_4wkts")])
 avatar = SubResource("Resource_c5fji")

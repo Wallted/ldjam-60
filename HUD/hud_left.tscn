@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_2ihca"]
 [ext_resource type="PackedScene" uid="uid://dsg5bxkh2cocg" path="res://speech_bubble/speech_bubble.tscn" id="1_y81a5"]
-[ext_resource type="Texture2D" uid="uid://c0wmko0smd4yg" path="res://HUD/img/elon_asleep.png" id="3_2ihca"]
+[ext_resource type="PackedScene" uid="uid://bwbjcj7gutp42" path="res://HUD/person.tscn" id="3_2ihca"]
 
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
@@ -37,16 +37,18 @@ on sadfsdfsdfsdfsdfs
 some longer text
 and longer linessssssssssssssssssssssssssssssssss"
 
-[node name="Button" type="Button" parent="." unique_id=1452632014]
-layout_mode = 0
-offset_left = 324.0
-offset_top = 10.0
-offset_right = 377.0
-offset_bottom = 57.0
+[node name="CurrentLevelPerson" parent="." unique_id=1468336816 instance=ExtResource("3_2ihca")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -115.0
+offset_right = 115.0
+offset_bottom = 230.0
+grow_vertical = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 10)
+preview_only = true
 
-[node name="AvatarPreview" type="TextureRect" parent="." unique_id=1344432885]
-layout_mode = 0
-offset_right = 250.0
-offset_bottom = 250.0
-texture = ExtResource("3_2ihca")
-expand_mode = 1
+[node name="MessageTimers" type="Node" parent="." unique_id=1737944118]

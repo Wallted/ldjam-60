@@ -4,13 +4,50 @@
 [ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_t0kak"]
 [ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="2_hw8fs"]
 [ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_hjdi6"]
+[ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_hjdi6"]
 
 [sub_resource type="Resource" id="Resource_c5fji"]
 script = ExtResource("1_0llkg")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
+[sub_resource type="Resource" id="Resource_odm81"]
+script = ExtResource("4_hjdi6")
+message = "God damn it! I've been looking for an exciting expedition from a university for 3 months!..."
+
+[sub_resource type="Resource" id="Resource_hjdi6"]
+script = ExtResource("4_hjdi6")
+message = "How many archaeologists does it take to find everything in the Pyramids?"
+
+[sub_resource type="Resource" id="Resource_htm7g"]
+script = ExtResource("4_hjdi6")
+message = "Feel like they use it to get rid of ambitious people"
+
+[sub_resource type="Resource" id="Resource_ww7oj"]
+script = ExtResource("4_hjdi6")
+message = "Wait a second? What's that glow?..."
+
+[sub_resource type="Resource" id="Resource_kdwfc"]
+script = ExtResource("4_hjdi6")
+message = "What an interesting stone..."
+
+[sub_resource type="Resource" id="Resource_atkoy"]
+script = ExtResource("4_hjdi6")
+message = "I'm going to be famous after all..."
+
+[sub_resource type="Resource" id="Resource_kpq4b"]
+script = ExtResource("4_hjdi6")
+message = "What? Of course it's some sort of an artifact!!!"
+
+[sub_resource type="Resource" id="Resource_nhvx3"]
+script = ExtResource("4_hjdi6")
+message = "That's it! I'm going to Human Resources!"
+
+[sub_resource type="Resource" id="Resource_buxci"]
+script = ExtResource("4_hjdi6")
+message = "After I get out of here..."
+
 [resource]
 script = ExtResource("2_hw8fs")
-name = "Archaeologist"
-entry_messages = Array[String](["God damn it! I've been looking for an exciting expedition from a university for 3 months!...", "And what do they give me?...", "How many archaeologists does it take to find everything in the Pyramids?", "Feel like they use it to get rid of ambitious people.", "Wait a second? What's that glow?...", "What an interesting stone...", "I'm going to be famous after all...", "What? Of course it's some sort of an artifact!!!", "That's it! I'm going to Human Resources!", "After I get out of here..."])
+person_name = "Archaeologist"
+entry_messages = Array[ExtResource("4_hjdi6")]([SubResource("Resource_odm81"), SubResource("Resource_hjdi6"), SubResource("Resource_htm7g"), SubResource("Resource_ww7oj"), SubResource("Resource_kdwfc"), SubResource("Resource_atkoy"), SubResource("Resource_kpq4b"), SubResource("Resource_nhvx3"), SubResource("Resource_buxci")])
 avatar = SubResource("Resource_c5fji")

@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://87f0xxfa8wx5" path="res://assets/persons/michelangelo.tres" id="5_t8lao"]
 [ext_resource type="Resource" uid="uid://jduf3we633ex" path="res://assets/persons/celt.tres" id="6_r5wc1"]
 [ext_resource type="Resource" uid="uid://e0rywutbukxu" path="res://assets/persons/goliath.tres" id="7_4xmd3"]
-[ext_resource type="Resource" uid="uid://7wh55wb1dohc" path="res://assets/persons/icarus.tres" id="8_in65a"]
 [ext_resource type="Resource" uid="uid://bv4nytod4j1nt" path="res://assets/persons/sisyphus.tres" id="9_xgxnq"]
 [ext_resource type="Resource" uid="uid://br7655kp8sprx" path="res://assets/persons/neanderthal.tres" id="10_nub0u"]
 [ext_resource type="Resource" uid="uid://caj77fkltgd7f" path="res://assets/persons/monkey.tres" id="11_wsabk"]
@@ -105,7 +104,6 @@ resource = ExtResource("7_4xmd3")
 
 [node name="Icarus" parent="GridContainer" unique_id=451458892 instance=ExtResource("2_ccku2")]
 layout_mode = 2
-resource = ExtResource("8_in65a")
 
 [node name="Sisyphus" parent="GridContainer" unique_id=1644210309 instance=ExtResource("2_ccku2")]
 layout_mode = 2

@@ -3,43 +3,97 @@ class_name HUDLeft
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
-@onready var test_button: Button = $Button
-@onready var avatar_preview: TextureRect = $AvatarPreview
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
+@onready var current_level_person: Person = $CurrentLevelPerson
+@onready var dialog_stream: AudioStreamPlayer = $"../../../MainAudioStream/DialogStream"
+@onready var message_timers: Node = $MessageTimers
 
+var _test_button_pressed: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	test_button.pressed.connect(DialogManagier._send_test_message)
 	DialogManagier.message_sent.connect(send_message)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	if Input.is_key_pressed(KEY_W):
+		if not _test_button_pressed:
+			DialogManagier._send_test_message()
+		_test_button_pressed = true
+	else:
+		_test_button_pressed = false
 
+
+func _scroll_to_bottom(delay: float = 0.0) -> void:
+	get_tree().create_timer(delay + .01).timeout.connect(
+		func () -> void:
+			scroll_container.set_deferred(
+				"scroll_vertical",
+				scroll_container.get_v_scroll_bar().max_value + 200,
+			)
+	)
 
 func send_message(
-	author: String = 'Mariusz Pudzianowski',
-	message: String = 'Polska guroooooooom\nxD\nxD\nxD',
+	author: Enums.PersonType,
+	message: String = '',
 	duration: float = 0.0,
-	avatar: Texture2D = null,
 ):
+	var resource = ResourceManagier.get_resource(author)
+
 	var last_message = chat_window.get_child(-1) as SpeechBubble
 	if last_message != null:
 		last_message.force_display()
 	var speech_bubble = SPEECH_BUBBLE.instantiate() as SpeechBubble
 	speech_bubble.text = message
-	speech_bubble.author = author
+	speech_bubble.author = resource.person_name
 	speech_bubble.duration = duration
 	chat_window.add_child(speech_bubble)
-	if avatar != null:
-		speech_bubble.avatar.texture = avatar
-		avatar_preview.texture = avatar
-	get_tree().create_timer(.01).timeout.connect(
+	speech_bubble.avatar.texture = resource.avatar.idle
+	_scroll_to_bottom()
+
+func queue_message(
+	person_type: Enums.PersonType,
+	message: String,
+	duration: float,
+	delay: float,
+) -> void:
+	var timer := MessageTimer.new()
+	timer.person_type = person_type
+	timer.message = message
+	timer.duration = duration
+	timer.one_shot = true
+	message_timers.add_child(timer)
+	timer.start(delay)
+	timer.timeout.connect(timer.queue_free)
+	timer.timeout.connect(
 		func () -> void:
-			scroll_container.set_deferred(
-				"scroll_vertical", 
-				scroll_container.get_v_scroll_bar().max_value + 200,
-			)
+			send_message(person_type, message, duration)
 	)
+
+
+func _on_game_level_changed(person_type: Enums.PersonType) -> void:
+	if current_level_person == null:
+		return
+	var resource = ResourceManagier.get_resource(person_type)
+	current_level_person.resource = resource
+	current_level_person.update()
+
+	dialog_stream.stop()
+	for child in message_timers.get_children():
+		child.stop()
+		child.emit_signal("timeout")
+	if resource.entry_message_audio:
+		dialog_stream.stream = resource.entry_message_audio
+		dialog_stream.play()
+
+	for dialogue_line in resource.entry_messages:
+		if dialogue_line.is_spoken:
+			continue
+		queue_message(
+			person_type,
+			dialogue_line.message,
+			dialogue_line.duration,
+			dialogue_line.timestamp
+		)
+		dialogue_line.is_spoken = true

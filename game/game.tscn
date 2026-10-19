@@ -49,6 +49,7 @@ unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
 [node name="FullRoom" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
+person_name = 6
 scale_ratio = 5
 parent_offset = Vector2(1, 1)
 parent_base = Vector2(0, 0)
@@ -56,6 +57,7 @@ zoom_level = 3
 
 [node name="FirstRoom3" parent="." unique_id=1763571355 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
+person_name = 8
 scale_ratio = 3
 parent_base = Vector2(4, 4)
 zoom_level = 2
@@ -63,6 +65,7 @@ doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_bvpig")])
 parent_room = NodePath("../FullRoom")
 
 [node name="FirstRoom2p5" parent="." unique_id=325990417 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 9
 scale_ratio = 2
 parent_offset = Vector2(2, 2)
 zoom_level = 1
@@ -71,6 +74,7 @@ parent_room = NodePath("../FirstRoom3")
 
 [node name="FirstRoom2" parent="." unique_id=707941366 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 scale = Vector2(1, 1)
+person_name = 2
 scale_ratio = 2
 parent_offset = Vector2(-2, -2)
 zoom_level = 1
@@ -80,7 +84,11 @@ parent_room = NodePath("../FirstRoom3")
 [node name="FirstRoom1" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 position = Vector2(-1, 0)
 scale = Vector2(1, 1)
+person_name = 4
 scale_ratio = 1
 parent_offset = Vector2(-1, -1)
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm")])
 parent_room = NodePath("../FirstRoom2p5")
+
+[connection signal="level_changed" from="RoomManager" to="." method="_on_room_manager_level_changed"]
+[connection signal="room_finished" from="RoomManager" to="." method="_on_room_manager_room_finished"]

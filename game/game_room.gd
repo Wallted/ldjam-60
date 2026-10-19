@@ -5,6 +5,9 @@ signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 
+@export
+var person_name: Enums.PersonType
+
 @export_group("Grid")
 @export
 var grid_size : int = 9
@@ -21,7 +24,6 @@ var doors: Array[Door]
 
 @export
 var parent_room: GameRoom
-
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
@@ -41,6 +43,7 @@ var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 @onready
 var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
 
+@onready var multi_mesh_instance_2d: MultiMeshInstance2D = $MultiMeshInstance2D
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
@@ -54,6 +57,10 @@ func _ready() -> void:
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
 	if parent_room:
 		parent_room.child_room_list.append(self)
+	for i in tile_list.size():
+		var _tile: Node2D = tile_list[i]
+		multi_mesh_instance_2d.multimesh.set_instance_transform_2d(i, _tile.transform)
+	z_index = 100 - zoom_level * 10
 
 func _setup_tiles() -> void:
 	for i in grid_size:
@@ -67,11 +74,8 @@ func _setup_tiles() -> void:
 			_tile.position = Vector2(_x, _y) + tile_size / 2.0
 			_tile.scale /= grid_size
 
-			_tile.mouse_entered.connect(_on_tile_mouse_entered.bind(_tile))
-			_tile.mouse_exited.connect(_on_tile_mouse_exited.bind(_tile))
 			_tile.path_hover.connect(path_hover.emit.bind(_tile))
-			_tile.input_event.connect(_on_tile_input_event.bind(_tile))
-			_tile.input_pickable = false
+			_tile.enabled = false
 
 			tile_list.append(_tile)
 			grid.add_child(_tile)
@@ -127,8 +131,8 @@ func disable_room() -> void:
 	room_area_entered = false
 	room_area.input_pickable = false
 	for _item in tile_list:
-		var _tile : Area2D = _item
-		_tile.input_pickable = false
+		var _tile : Tile = _item
+		_tile.enabled = false
 
 func set_as_pickable() -> void:
 	room_area.input_pickable = true
@@ -146,8 +150,8 @@ func set_as_pickable() -> void:
 
 func enable_tiles() -> void:
 	for _item in tile_list:
-		var _tile : Area2D = _item
-		_tile.input_pickable = true
+		var _tile : Tile = _item
+		_tile.enabled = true
 
 func update_parent(_disconnect: bool = false) -> void:
 	if not parent_room:
@@ -210,11 +214,6 @@ func rotate_room() -> void:
 
 	for _t in tile_list:
 		_t.rotate_tile()
-
-func _on_tile_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, tile: Tile) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			tile.has_energy = !tile.has_energy
 
 func _on_tile_mouse_entered(_tile: Tile) -> void:
 	pass
