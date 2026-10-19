@@ -11,6 +11,8 @@ signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_door_prune(outside_tile: Tile)
 
+signal request_place_path(path: Path)
+
 @export
 var person_name: Enums.PersonType
 
@@ -50,6 +52,8 @@ var doors: Array[Door]
 var gateways: Array[Gateway]
 @export
 var rocks: Array[Rock]
+@export
+var paths: Array[Path]
 
 var room_finished: bool
 var room_powered: bool:
@@ -90,6 +94,7 @@ func _ready() -> void:
 	_setup_doors()
 	_setup_gateways()
 	_setup_rocks()
+	_setup_paths.call_deferred()
 	(collision_shape_2d.shape as RectangleShape2D).size = room_size
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
@@ -143,6 +148,10 @@ func _setup_rocks() -> void:
 		RoomManager._trim_paths_of_neighbors(_rock.coord, self)
 		var _tile = get_tile(_rock.coord)
 		_tile.enable_rock(_rock)
+
+func _setup_paths() -> void:
+	for _path in paths:
+		request_place_path.emit(_path)
 
 func check_is_room_unlocked() -> void:
 	if room_unlocked:

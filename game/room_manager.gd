@@ -45,6 +45,7 @@ func _ready() -> void:
 			_room.request_unpower_door.connect(_try_unpower_a_door)
 			_room.request_power_door.connect(_try_power_a_door)
 			_room.request_door_prune.connect(_door_prune)
+			_room.request_place_path.connect(_place_path_setup.bind(_room))
 			_room.room_powered_changed.connect(_on_room_power_changed)
 			_room.room_area_entered_changed.connect(func (): hide_cursor())
 
@@ -365,3 +366,10 @@ func _door_prune(outside_tile: Tile) -> void:
 		_path_cursor = path_cursor_cache
 	if outside_tile.is_tile_powered():
 		outside_tile.is_flow_base = true
+
+
+func _place_path_setup(path: Path, room: GameRoom) -> void:
+	var tile = room.get_tile(path.coord)
+	_path_cursor = tile.north_path if path.north_not_west else tile.west_path
+	_path_cursor.is_hovered = true
+	_try_place_path_segment()
