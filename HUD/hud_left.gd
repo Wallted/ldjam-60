@@ -51,5 +51,12 @@ func send_message(
 func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	if current_level_person == null:
 		return
-	current_level_person.resource = ResourceManagier.get_resource(person_type)
+	var resource = ResourceManagier.get_resource(person_type)
+	current_level_person.resource = resource
 	current_level_person.update()
+
+	for dialogue_line in resource.entry_messages:
+		if dialogue_line.is_spoken:
+			continue
+		send_message(person_type, dialogue_line.message)
+		dialogue_line.is_spoken = true
