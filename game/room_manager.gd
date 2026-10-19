@@ -33,6 +33,7 @@ func _ready() -> void:
 			_room.path_hover.connect(_on_path_mouse_event)
 			_room.request_unpower_door.connect(_try_unpower_a_door)
 			_room.request_power_door.connect(_try_power_a_door)
+			_room.request_door_prune.connect(_door_prune)
 
 	_snap_rooms_together()
 	room_list.reverse()
@@ -308,3 +309,16 @@ func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> v
 		follow_tile.is_flow_tip = false
 		# todo: propagate to another door
 		_unpower_a_segment(_get_a_segment_in_a_tile(follow_tile))
+
+
+func _door_prune(outside_tile: Tile) -> void:
+	if _tile_placed_paths_count(outside_tile.local_coords, outside_tile.parent_room) > 1:
+		var path_cursor_cache := _path_cursor
+		var target_segment := _get_a_segment_in_a_tile(outside_tile)
+		while target_segment != null:
+			_path_cursor = target_segment
+			_try_unplace_path_segment()
+			target_segment = _get_a_segment_in_a_tile(outside_tile)
+		_path_cursor = path_cursor_cache
+	if outside_tile.is_tile_powered():
+		outside_tile.is_flow_base = true
