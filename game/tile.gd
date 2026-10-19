@@ -74,7 +74,7 @@ func enable_gateway(_gateway: Gateway) -> void:
 
 func enable_rock(_rock: Rock) -> void:
 	var rock = Sprite2D.new()
-	rock.modulate = Color.BLACK
+	rock.self_modulate = Color(0.13, 0.092, 0.066, 1.0)
 	rock.texture = _rock.texture
 	add_child(rock) # todo: switch to multimesh igfuess xfdas
 					# xDDD
