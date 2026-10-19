@@ -10,3 +10,4 @@ class_name PersonResource
 			if entry_messages[i] == null:
 				entry_messages[i] = DialogueLine.new()
 @export var avatar: Avatar
+@export var entry_message_audio: AudioStream

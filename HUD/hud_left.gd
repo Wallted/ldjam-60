@@ -5,6 +5,8 @@ class_name HUDLeft
 @onready var chat_window: Control = $ScrollContainer/ChatWindow
 const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 @onready var current_level_person: Person = $CurrentLevelPerson
+@onready var dialog_stream: AudioStreamPlayer = $"../../../MainAudioStream/DialogStream"
+@onready var message_timers: Node = $MessageTimers
 
 var _test_button_pressed: bool = false
 
@@ -23,6 +25,15 @@ func _process(_delta: float) -> void:
 		_test_button_pressed = false
 
 
+func _scroll_to_bottom(delay: float = 0.0) -> void:
+	get_tree().create_timer(delay + .01).timeout.connect(
+		func () -> void:
+			scroll_container.set_deferred(
+				"scroll_vertical",
+				scroll_container.get_v_scroll_bar().max_value + 200,
+			)
+	)
+
 func send_message(
 	author: Enums.PersonType,
 	message: String = '',
@@ -39,17 +50,50 @@ func send_message(
 	speech_bubble.duration = duration
 	chat_window.add_child(speech_bubble)
 	speech_bubble.avatar.texture = resource.avatar.idle
-	get_tree().create_timer(.01).timeout.connect(
+	_scroll_to_bottom()
+
+func queue_message(
+	person_type: Enums.PersonType,
+	message: String,
+	duration: float,
+	delay: float,
+) -> void:
+	var timer := MessageTimer.new()
+	timer.person_type = person_type
+	timer.message = message
+	timer.duration = duration
+	timer.one_shot = true
+	message_timers.add_child(timer)
+	timer.start(delay)
+	timer.timeout.connect(timer.queue_free)
+	timer.timeout.connect(
 		func () -> void:
-			scroll_container.set_deferred(
-				"scroll_vertical",
-				scroll_container.get_v_scroll_bar().max_value + 200,
-			)
+			send_message(person_type, message, duration)
 	)
 
 
 func _on_game_level_changed(person_type: Enums.PersonType) -> void:
 	if current_level_person == null:
 		return
-	current_level_person.resource = ResourceManagier.get_resource(person_type)
+	var resource = ResourceManagier.get_resource(person_type)
+	current_level_person.resource = resource
 	current_level_person.update()
+
+	dialog_stream.stop()
+	for child in message_timers.get_children():
+		child.stop()
+		child.emit_signal("timeout")
+	if resource.entry_message_audio:
+		dialog_stream.stream = resource.entry_message_audio
+		dialog_stream.play()
+
+	for dialogue_line in resource.entry_messages:
+		if dialogue_line.is_spoken:
+			continue
+		queue_message(
+			person_type,
+			dialogue_line.message,
+			dialogue_line.duration,
+			dialogue_line.timestamp
+		)
+		dialogue_line.is_spoken = true
