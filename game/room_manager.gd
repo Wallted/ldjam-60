@@ -57,6 +57,9 @@ func _ready() -> void:
 
 	for room in room_list:
 		room.update_parent()
+	
+	assert(currently_focused_room != null)
+	level_changed.emit.call_deferred(currently_focused_room.person_name)
 
 
 func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
@@ -326,6 +329,10 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(not follow_tile.is_flow_base and not follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = true
+		if follow_tile.is_inside_door:
+			follow_tile.set_door_sprite(false, true)
+		else:
+			source_tile.set_door_sprite(false, true)
 		# todo: propagate to another door (check linked_door_tiles size)
 		_power_a_segment(_get_a_segment_in_a_tile(follow_tile), follow_tile.local_coords)
 
@@ -339,6 +346,10 @@ func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> v
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = false
+		if follow_tile.is_inside_door:
+			follow_tile.set_door_sprite(false, false)
+		else:
+			source_tile.set_door_sprite(false, false)
 		# todo: propagate to another door
 		_unpower_a_segment(_get_a_segment_in_a_tile(follow_tile))
 

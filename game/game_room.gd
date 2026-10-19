@@ -16,8 +16,8 @@ var person_name: Enums.PersonType
 
 @export # DEBUG
 var room_unlocked: bool :
-	get():
-		return true # delete this to enable feature
+	#get():
+		#return true # delete this to enable feature
 	set(value):
 		if not parent_room:
 			return

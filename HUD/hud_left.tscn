@@ -29,6 +29,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpeechBubble" parent="ScrollContainer/ChatWindow" unique_id=35894961 instance=ExtResource("1_y81a5")]
+visible = false
 custom_minimum_size = Vector2(30, 128)
 layout_mode = 2
 author = ""
@@ -49,5 +50,6 @@ grow_horizontal = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 10)
 preview_only = true
+is_discovered = true
 
 [node name="MessageTimers" type="Node" parent="." unique_id=1737944118]
