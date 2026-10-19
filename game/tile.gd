@@ -84,7 +84,7 @@ func switch_gateway(_active: bool) -> void:
 	if _active:
 		active_gateway.visible = true
 	else:
-		active_gateway.visible = true
+		active_gateway.visible = false
 
 func enable_rock(_rock: Rock) -> void:
 	var rock = Sprite2D.new()
