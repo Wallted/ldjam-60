@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_W):
 		if not _test_button_pressed:
-			DialogManagier._send_test_message()
+			$"../../EndScreen".show()
 		_test_button_pressed = true
 	else:
 		_test_button_pressed = false

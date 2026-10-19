@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bkkrnwmeyogai" path="res://help.tscn" id="6_dg77c"]
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://2e2p40e4cd3i" path="res://title_screen.gd" id="9_dg77c"]
+[ext_resource type="Script" uid="uid://fogyw0tjrr4j" path="res://end_screen.gd" id="10_vivmo"]
 [ext_resource type="AudioStream" uid="uid://dxhyqri2qm8iq" path="res://assets/audio/main/ambientstart.ogg" id="10_ycdy4"]
 [ext_resource type="Script" uid="uid://dyplj67om3a16" path="res://sfx_stream.gd" id="12_dg77c"]
 
@@ -216,6 +217,41 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(-10, -10)
 theme_override_font_sizes/font_size = 48
 text = "PLAY"
+
+[node name="EndScreen" type="Control" parent="CanvasLayer" unique_id=1909849355]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_vivmo")
+
+[node name="Black" type="ColorRect" parent="CanvasLayer/EndScreen" unique_id=121461039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/EndScreen" unique_id=357620790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="thx" type="RichTextLabel" parent="CanvasLayer/EndScreen/MarginContainer" unique_id=1457055727]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-50, -50)
+text = "Thanks for playing the game"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="SkipButton" type="Button" parent="CanvasLayer" unique_id=966491088]
 visible = false
