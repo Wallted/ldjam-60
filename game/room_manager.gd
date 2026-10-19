@@ -323,6 +323,8 @@ func _path_segment_tip_local_coords(segment: PathSegment) -> Vector2:
 
 func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> void:
 	var source_tile: Tile = room.get_tile(source_tile_local_coords, true)
+	if not room.room_unlocked and not room.room_powered and source_tile.is_inside_door:
+		return
 	assert(not source_tile.is_flow_tip and not source_tile.is_flow_base)
 	if source_tile.is_inside_door or source_tile.is_outside_door:
 		source_tile.is_flow_base = true
@@ -340,6 +342,8 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 
 func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> void:
 	var source_tile: Tile = room.get_tile(source_tile_local_coords, true)
+	if not room.room_unlocked and not room.room_powered and source_tile.is_inside_door:
+		return
 	if source_tile.is_inside_door or source_tile.is_outside_door:
 		assert(source_tile.is_flow_base)
 		source_tile.is_flow_base = false
