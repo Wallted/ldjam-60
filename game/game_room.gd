@@ -5,7 +5,6 @@ signal request_focus()
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
-signal room_unlocked_signal
 signal room_area_entered_changed
 
 signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
