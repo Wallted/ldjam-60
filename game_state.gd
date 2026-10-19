@@ -25,7 +25,8 @@ func pause_game():
 	if state == GameState.State.PAUSED:
 		return
 	get_tree().paused = true
-	action_progress.visible = false
+	if action_progress:
+		action_progress.visible = false
 	prev_state = state
 	state = State.PAUSED
 
