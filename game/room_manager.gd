@@ -31,6 +31,8 @@ func _ready() -> void:
 			_room.request_focus.connect(_on_focus_request.bind(_room))
 			_room.request_rotate.connect(_on_rotate_request.bind(_room))
 			_room.path_hover.connect(_on_path_mouse_event)
+			_room.request_unpower_door.connect(_try_unpower_a_door)
+			_room.request_power_door.connect(_try_power_a_door)
 
 	_snap_rooms_together()
 	room_list.reverse()
@@ -291,7 +293,7 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(not follow_tile.is_flow_base and not follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = true
-		# todo: propagate to another door
+		# todo: propagate to another door (check linked_door_tiles size)
 		_power_a_segment(_get_a_segment_in_a_tile(follow_tile), follow_tile.local_coords)
 
 

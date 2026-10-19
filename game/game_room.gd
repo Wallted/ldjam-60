@@ -4,6 +4,8 @@ class_name GameRoom
 signal request_focus
 signal request_rotate
 signal path_hover(entered: bool, north_not_west: bool, tile: Tile)
+signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
+signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
 
 @export
 var person_name: Enums.PersonType
@@ -187,24 +189,32 @@ func update_parent(_disconnect: bool = false) -> void:
 	if not parent_room:
 		return
 
+	door_list.sort_custom(func(a: Tile, b: Tile): return _disconnect != a.is_flow_base)
+
 	for door_tile in door_list:
 		var follow_tile := _fetch_outside_door_tile(door_tile)
 		if follow_tile:
 			if _disconnect:
+				#if door_tile.is_flow_base and follow_tile.is_flow_tip:
+					#request_unpower_door.emit(door_tile.local_coords, self)
+				if follow_tile.is_flow_base and door_tile.is_flow_tip:
+					# todo: direct door-to-door tiles
+					request_unpower_door.emit(follow_tile.local_coords, parent_room)
+					follow_tile.is_flow_base = true
 				door_tile.linked_door_tiles.erase(follow_tile)
 				follow_tile.linked_door_tiles.erase(door_tile)
 				if follow_tile.linked_door_tiles.is_empty():
 					parent_room.outside_doors.erase(follow_tile)
 					follow_tile.is_outside_door = false
-				#door_tile.has_energy = false
-				#follow_tile.is_source_entry = false
 			else:
 				door_tile.linked_door_tiles.get_or_add(follow_tile)
 				follow_tile.linked_door_tiles.get_or_add(door_tile)
 				parent_room.outside_doors.get_or_add(follow_tile)
 				follow_tile.is_outside_door = true
-				#door_tile.has_energy = follow_tile.has_energy
-				#follow_tile.is_source_entry = true
+				if follow_tile.is_flow_base:
+					# todo: direct door-to-door tiles
+					follow_tile.is_flow_base = false
+					request_power_door.emit(follow_tile.local_coords, parent_room)
 
 var tween: Tween
 var rotating = false
@@ -231,12 +241,13 @@ func reset_parent():
 	reparent(%RoomManager.get_parent())
 
 func rotate_room() -> void:
+	
+	update_parent(true)
+	
 	for child in child_room_list:
 		child.parent_offset = Vector2(-child.parent_offset.y, child.parent_offset.x)
 		child.reparent(self)
 		child.rotate_room()
-
-	update_parent(true)
 
 	for _t in tile_list:
 		_t.rotate_tile()

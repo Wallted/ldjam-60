@@ -14,9 +14,6 @@ var coords: Vector2
 var local_coords: Vector2
 var door_orientation: Vector2
 
-#var is_source_exit: bool
-#var is_source_entry: bool
-
 var linked_door_tiles: Dictionary[Tile, Object] # ignore the values, just use keys
 var is_inside_door := false
 var is_outside_door := false
@@ -58,9 +55,6 @@ func _init_path_segments() -> void:
 		north_path.is_north_not_west = true
 		add_child(north_path)
 
-#func is_door() -> bool:
-	#return door_orientation != Vector2.ZERO
-
 func enable_door(_side: Vector2) -> void:
 	is_inside_door = true
 	var door = Sprite2D.new()
@@ -70,11 +64,6 @@ func enable_door(_side: Vector2) -> void:
 	door.rotate(PI/2.0 + door_orientation.angle())
 	door.position = _side * Vector2(128, 128) / 2.5
 	add_child(door)
-	#var _follow_tile = coords + door_orientation
-	#is_source_exit = _follow_tile != _follow_tile.clamp(Vector2.ZERO, Vector2(8.0, 8.0))
-#
-	#_follow_tile = coords - door_orientation
-	#is_source_entry = _follow_tile != clamp(_follow_tile, Vector2.ZERO, Vector2(8.0, 8.0))
 
 func enable_gateway(_gateway: Gateway) -> void:
 	var gateway = Sprite2D.new()
