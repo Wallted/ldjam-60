@@ -64,6 +64,7 @@ func enable_door(_side: Vector2) -> void:
 	door_orientation = -_side
 	door.rotate(PI + door_orientation.angle())
 	door.position = _side * Vector2(128, 128)
+	door.z_index += 1
 	add_child(door)
 
 func enable_gateway(_gateway: Gateway) -> void:
