@@ -22,6 +22,8 @@ var skip_button: Button
 
 var zoom_tween_value : float = 0.5
 
+var button_tween: Tween
+
 func _ready() -> void:
 	var main = (get_tree().get_current_scene() as Node)
 	await main.ready
@@ -52,6 +54,12 @@ func unpause_game():
 
 func enable_cutscene():
 	state = GameState.State.CUTSCENE
+	if button_tween:
+		button_tween.kill()
+	button_tween = get_tree().create_tween()
+	skip_button.modulate.a = 0.0
+	button_tween.tween_property(skip_button, "modulate:a", 0.0, 1.5)
+	button_tween.tween_property(skip_button, "modulate:a", Color.WHITE.a, 0.5)
 	skip_button.visible = true
 	if not skip_button.is_connected('pressed', disable_cutscene):
 		skip_button.pressed.connect(disable_cutscene)
