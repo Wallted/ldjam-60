@@ -29,6 +29,8 @@ var parent_room: GameRoom
 var doors: Array[Door]
 @export
 var gateways: Array[Gateway]
+@export
+var rocks: Array[Rock]
 
 var room_finished: bool
 var room_powered: bool:
@@ -67,6 +69,7 @@ func _ready() -> void:
 	_setup_tiles()
 	_setup_doors()
 	_setup_gateways()
+	_setup_rocks()
 	(collision_shape_2d.shape as RectangleShape2D).size = room_size
 	(sprite_2d.texture as PlaceholderTexture2D).size = room_size
 	scale = Vector2.ONE * pow(3.0, scale_ratio)
@@ -112,6 +115,12 @@ func _setup_gateways() -> void:
 		var _tile = get_tile(_gateway.coord)
 		_tile.enable_gateway(_gateway)
 		gateway_list.append(_tile)
+
+func _setup_rocks() -> void:
+	for _rock in rocks:
+		RoomManager._trim_paths_of_neighbors(_rock.coord, self)
+		var _tile = get_tile(_rock.coord)
+		_tile.enable_rock(_rock)
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
 	var _room_powered = room_powered

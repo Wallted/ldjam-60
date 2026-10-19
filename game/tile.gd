@@ -74,6 +74,16 @@ func enable_gateway(_gateway: Gateway) -> void:
 	gateway.texture = _gateway.texture
 	add_child(gateway)
 
+func enable_rock(_rock: Rock) -> void:
+	var rock = Sprite2D.new()
+	rock.modulate = Color.BLACK
+	rock.texture = _rock.texture
+	add_child(rock) # todo: switch to multimesh igfuess xfdas
+	
+	for _child in get_children():
+		if _child is PathSegment:
+			_child.queue_free()
+
 func rotate_tile() -> void:
 	var offset = Vector2(4.0, 4.0)
 	var temp_coord = coords - offset
