@@ -16,7 +16,6 @@ class_name Person
 		resource.is_discovered = value
 		is_discovered = value
 		if is_discovered and undiscovered_indicator != null:
-			print('setter', is_discovered)
 			undiscovered_indicator.hide()
 @export var status: PersonStatus = PersonStatus.ASLEEP:
 	set(value):
