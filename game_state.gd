@@ -20,7 +20,7 @@ var action_progress: ActionProgress
 var label: Label
 var skip_button: Button
 
-var zoom_tween_value : float
+var zoom_tween_value : float = 0.5
 
 func _ready() -> void:
 	var main = (get_tree().get_current_scene() as Node)
