@@ -5,3 +5,5 @@ class_name Gateway
 var coord: Vector2
 @export
 var texture: Texture2D = preload("uid://ciqqfrm1n4n6y")
+@export
+var active_texture: Texture2D = preload("res://img/Bysk_bezta.png")

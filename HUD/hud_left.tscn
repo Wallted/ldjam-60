@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://u4ulo85n4q2g" path="res://HUD/hud_left.gd" id="1_2ihca"]
 [ext_resource type="PackedScene" uid="uid://dsg5bxkh2cocg" path="res://speech_bubble/speech_bubble.tscn" id="1_y81a5"]
 [ext_resource type="PackedScene" uid="uid://bwbjcj7gutp42" path="res://HUD/person.tscn" id="3_2ihca"]
+[ext_resource type="Texture2D" uid="uid://d1f72x4eh8r" path="res://assets/avatar_preview/avatar_bg.png" id="3_fo1go"]
+[ext_resource type="Texture2D" uid="uid://nobb4y5abibi" path="res://assets/avatar_preview/avatar_border.png" id="5_26kp8"]
 
 [node name="HUDLeft" type="Control" unique_id=488148864]
 layout_mode = 3
@@ -38,6 +40,12 @@ on sadfsdfsdfsdfsdfs
 some longer text
 and longer linessssssssssssssssssssssssssssssssss"
 
+[node name="AvatarBackground" type="TextureRect" parent="." unique_id=491232003]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 250.0
+texture = ExtResource("3_fo1go")
+
 [node name="CurrentLevelPerson" parent="." unique_id=1468336816 instance=ExtResource("3_2ihca")]
 layout_mode = 1
 anchors_preset = 5
@@ -51,5 +59,11 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(0, 10)
 preview_only = true
 is_discovered = true
+
+[node name="AvatarBorder" type="TextureRect" parent="." unique_id=1606582440]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 250.0
+texture = ExtResource("5_26kp8")
 
 [node name="MessageTimers" type="Node" parent="." unique_id=1737944118]

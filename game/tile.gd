@@ -72,11 +72,24 @@ func enable_door(_side: Vector2) -> void:
 	door_sprite = door
 	set_door_sprite(true, false)
 
+var active_gateway = Sprite2D
 func enable_gateway(_gateway: Gateway) -> void:
 	var gateway = Sprite2D.new()
 	gateway.scale *= 0.67
 	gateway.texture = _gateway.texture
 	add_child(gateway)
+	active_gateway = Sprite2D.new()
+	active_gateway.visible = false
+	active_gateway.texture = _gateway.active_texture
+	var tween = create_tween().set_loops()
+	tween.tween_property(active_gateway, "rotation", active_gateway.rotation + TAU, 2.0).from(active_gateway.rotation)
+	add_child(active_gateway)
+	
+func switch_gateway(_active: bool) -> void:
+	if _active:
+		active_gateway.visible = true
+	else:
+		active_gateway.visible = false
 
 func enable_rock(_rock: Rock) -> void:
 	var rock = Sprite2D.new()
