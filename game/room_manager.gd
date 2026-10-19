@@ -271,6 +271,7 @@ func _power_a_segment(target: PathSegment, source_tile_local_coords: Vector2) ->
 func _unpower_a_segment(target: PathSegment) -> void:
 	while target != null and target.is_powered:
 		target.set_powered(false)
+		_try_unpower_a_door(_path_segment_tip_local_coords(target), target.get_parent().parent_room)
 		target = _get_segment_endpoint(target, false)
 
 
@@ -290,4 +291,18 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
 		assert(not follow_tile.is_flow_base and not follow_tile.is_flow_tip)
 		follow_tile.is_flow_tip = true
+		# todo: propagate to another door
 		_power_a_segment(_get_a_segment_in_a_tile(follow_tile), follow_tile.local_coords)
+
+
+func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> void:
+	var source_tile: Tile = room.get_tile(source_tile_local_coords, true)
+	if source_tile.is_inside_door or source_tile.is_outside_door:
+		assert(source_tile.is_flow_base)
+		source_tile.is_flow_base = false
+	if not source_tile.linked_door_tiles.is_empty():
+		var follow_tile: Tile = source_tile.linked_door_tiles.keys()[0]
+		assert(follow_tile.is_flow_tip)
+		follow_tile.is_flow_tip = false
+		# todo: propagate to another door
+		_unpower_a_segment(_get_a_segment_in_a_tile(follow_tile))
