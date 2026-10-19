@@ -19,6 +19,9 @@ func start_monologue(person_type: Enums.PersonType) -> void:
 		return
 	monologue_started.emit(person_type)
 
+func end_monologue() -> void:
+	monologue_ended.emit()
+
 func send_message(
 	author: Enums.PersonType,
 	message: String = '',

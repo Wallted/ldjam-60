@@ -15,6 +15,7 @@ func _ready() -> void:
 	DialogManagier.message_sent.connect(send_message)
 	DialogManagier.monologue_ended.connect(_on_monologue_end)
 	DialogManagier.monologue_started.connect(_on_monologue_start)
+	dialog_stream.finished.connect(func (): DialogManagier.end_monologue())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -24,8 +24,8 @@ func _ready():
 
 func _on_room_manager_room_finished(_room: GameRoom) -> void:
 	prints('room finished:', _room.person_name, _room.name)
-	GameState.enable_cutscene()
 	DialogManagier.monologue_ended.emit()
+	GameState.enable_cutscene()
 	DialogManagier.start_monologue(_room.person_name)
 
 func _on_room_manager_level_changed(person_type: Enums.PersonType, powered: bool) -> void:
