@@ -5,6 +5,14 @@ signal level_changed(person_type: Enums.PersonType)
 signal room_finished(room: GameRoom)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
+# audio
+signal placed_powered_path
+signal placed_unpowered_path
+signal unplace_path
+signal rotate_room
+signal zoom_in_room
+signal zoom_out_room
+
 var room_list : Array[GameRoom]
 var currently_focused_room: GameRoom
 
@@ -93,6 +101,7 @@ func finish_room() -> void:
 	room_finished.emit(currently_focused_room)
 
 func rotate_room_action(room) -> void:
+	rotate_room.emit()
 	if not GameState.is_state(GameState.State.ACTION_FREE):
 		return
 
@@ -106,6 +115,12 @@ func _finish_rotation_updates(room: GameRoom) -> void:
 
 
 func focus_on_room_action(target_room: GameRoom, tween: bool = true):
+	if currently_focused_room != null:
+		if target_room.zoom_level > currently_focused_room.zoom_level:
+			zoom_out_room.emit()
+		else:
+			zoom_in_room.emit()
+	
 	if not GameState.is_state(GameState.State.ACTION_FREE):
 		return
 
@@ -175,8 +190,12 @@ func _try_place_path_segment() -> void:
 		assert(not parent_tile.is_flow_tip or not neighbor_tile.is_flow_tip or front_endpoint == null or not front_endpoint.is_powered or back_endpoint == null or not back_endpoint.is_powered)
 		if parent_tile.is_flow_tip or (back_endpoint != null and back_endpoint.is_powered):
 			_power_a_segment(_path_cursor, parent_tile.local_coords)
+			placed_powered_path.emit()
 		elif neighbor_tile.is_flow_tip or(front_endpoint != null and front_endpoint.is_powered):
 			_power_a_segment(_path_cursor, _path_segment_tip_local_coords(_path_cursor))
+			placed_powered_path.emit()
+		else:
+			placed_unpowered_path.emit()
 
 
 func _try_unplace_path_segment() -> void:
@@ -184,6 +203,7 @@ func _try_unplace_path_segment() -> void:
 		_unpower_a_segment(_path_cursor)
 		_path_cursor.has_backward_flow = false
 		_path_cursor.set_placed(false)
+		unplace_path.emit()
 
 
 func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
