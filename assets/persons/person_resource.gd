@@ -12,3 +12,4 @@ class_name PersonResource
 				entry_messages[i] = DialogueLine.new()
 @export var avatar: Avatar
 @export var entry_message_audio: AudioStream
+@export var entry_message_audio_played: bool

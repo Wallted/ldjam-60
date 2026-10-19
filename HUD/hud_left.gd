@@ -87,9 +87,10 @@ func _on_monologue_start(person_type: Enums.PersonType) -> void:
 	var resource = ResourceManagier.get_resource(person_type)
 	current_level_person.resource = resource
 	
-	if resource.entry_message_audio:
+	if resource.entry_message_audio and not resource.entry_message_audio_played:
 		dialog_stream.stream = resource.entry_message_audio
 		dialog_stream.play()
+		resource.entry_message_audio_played = true
 
 	for dialogue_line in resource.entry_messages:
 		if dialogue_line.is_spoken:
