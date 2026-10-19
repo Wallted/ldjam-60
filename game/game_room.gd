@@ -186,10 +186,10 @@ func update_parent(_disconnect: bool = false) -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords + door_tile.door_orientation)
 			if follow_tile:
 				if _disconnect:
-					follow_tile.has_energy = false
+					follow_tile.has_energy = true
 					follow_tile.is_source_exit = false
 				else:
-					follow_tile.has_energy = door_tile.has_energy
+					follow_tile.has_energy = true
 					follow_tile.is_source_exit = true
 
 		if door_tile.is_source_entry:
@@ -197,10 +197,10 @@ func update_parent(_disconnect: bool = false) -> void:
 			var follow_tile = parent_room.get_tile(parent_tile_coords - door_tile.door_orientation)
 			if follow_tile:
 				if _disconnect:
-					door_tile.has_energy = false
+					door_tile.has_energy = true
 					follow_tile.is_source_entry = false
 				else:
-					door_tile.has_energy = follow_tile.has_energy
+					door_tile.has_energy = true
 					follow_tile.is_source_entry = true
 
 var tween: Tween
