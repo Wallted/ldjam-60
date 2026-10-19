@@ -110,6 +110,45 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="TitleTextScrollContainer" type="ScrollContainer" parent="CanvasLayer/TitleScreen" unique_id=1784492556]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TitleText" type="Label" parent="CanvasLayer/TitleScreen/TitleTextScrollContainer" unique_id=1040147722]
+layout_mode = 2
+text = "Some things are older than memory itself.
+They witnessed the rise and fall of entire civilizations and endured long after the people who once held them turned to dust.
+History remembers great kings, the mighty heroes and events that shaped our world.
+But history rarely remembers the things that were there all along.
+You've always been curious about things others overlook.
+This time it was just a stone.
+You saw it at an auction. An unusual stone, smooth and strangely beautiful. There was something about it the made it hard to look away.
+It wasn't expensive so you took it.
+The stone sat in a glass case, carefully sealed away from curious hands. No markings. No known origin.
+
+Just a stone...
+
+And it should've stayed that way...
+
+On the way back the glass case slipped and shattered against the ground.
+The stone rolled out onto the floor.
+You picked it up with your bare hands...
+
+The world disappeared.
+No light. No sound. No ground. No stone.
+As if you were inside of it...
+
+Something beyod the darkness stirs.
+Something ancient.
+Something that has waited far longer than you can imagine.
+You are not alone here.
+
+And then you see it...
+
+"
+horizontal_alignment = 1
+
 [node name="Button" type="Button" parent="CanvasLayer/TitleScreen" unique_id=172084907]
 layout_mode = 1
 anchors_preset = 3
@@ -117,8 +156,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -43.0
-offset_top = -31.0
+offset_left = -71.0
+offset_top = -43.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "next"
@@ -162,6 +201,7 @@ script = ExtResource("7_5vw27")
 bus = &"SFXBus"
 
 [connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDLeft" method="_on_game_level_changed"]
+[connection signal="level_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_level_changed"]
 [connection signal="room_powered_changed" from="Game" to="CanvasLayer/HUD/HUDRight" method="_on_game_room_powered_changed"]
 [connection signal="mouse_entered" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/HUD/HUDGame" to="Game" method="_on_hud_game_mouse_exited"]

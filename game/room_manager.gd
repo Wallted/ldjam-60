@@ -46,6 +46,7 @@ func _ready() -> void:
 	GameState.set_state(GameState.State.ACTION_FREE)
 
 	focus_on_room_action(room_list[0], false)
+
 	for room in room_list:
 		room.update_parent()
 
