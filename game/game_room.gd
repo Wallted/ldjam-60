@@ -161,7 +161,7 @@ func _setup_paths() -> void:
 
 func check_is_room_unlocked() -> void:
 	if room_unlocked:
-		return 
+		return
 	if door_list.size() > 0:
 		var _room_unlocked = false
 		for _door in door_list:

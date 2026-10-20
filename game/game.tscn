@@ -18,11 +18,126 @@ coord = Vector2(0, 1)
 side = 3
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
+[sub_resource type="Resource" id="Resource_3vho3"]
+script = ExtResource("6_u5opy")
+coord = Vector2(6, 1)
+metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
+
+[sub_resource type="Resource" id="Resource_qf6n1"]
+script = ExtResource("6_u5opy")
+coord = Vector2(2, 7)
+metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
+
+[sub_resource type="Resource" id="Resource_jdpby"]
+script = ExtResource("8_y36n6")
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_58yx1"]
+script = ExtResource("8_y36n6")
+coord = Vector2(4, 0)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_vsp63"]
+script = ExtResource("8_y36n6")
+coord = Vector2(0, 4)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_b686c"]
+script = ExtResource("8_y36n6")
+coord = Vector2(4, 4)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_hbvmx"]
+script = ExtResource("8_y36n6")
+coord = Vector2(8, 4)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_fegy3"]
+script = ExtResource("8_y36n6")
+coord = Vector2(8, 8)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_pvdu1"]
+script = ExtResource("8_y36n6")
+coord = Vector2(4, 8)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_8bboj"]
+script = ExtResource("8_y36n6")
+coord = Vector2(1, 5)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_q52ks"]
+script = ExtResource("8_y36n6")
+coord = Vector2(2, 5)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_jucfl"]
+script = ExtResource("8_y36n6")
+coord = Vector2(3, 5)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
 [sub_resource type="Resource" id="Resource_bowy6"]
 script = ExtResource("6_j8tme")
 coord = Vector2(0, 2)
 north_not_west = true
 metadata/_custom_type_script = "uid://bldlq4k3nokd8"
+
+[sub_resource type="Resource" id="Resource_dxwpq"]
+script = ExtResource("4_ryrav")
+coord = Vector2(1, 0)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_mhvfb"]
+script = ExtResource("4_ryrav")
+coord = Vector2(8, 4)
+side = 2
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_cf130"]
+script = ExtResource("4_ryrav")
+coord = Vector2(7, 0)
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_5e03w"]
+script = ExtResource("6_u5opy")
+coord = Vector2(2, 2)
+metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
+
+[sub_resource type="Resource" id="Resource_posua"]
+script = ExtResource("8_y36n6")
+coord = Vector2(4, 0)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_gvtgv"]
+script = ExtResource("8_y36n6")
+coord = Vector2(3, 1)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_5ywmu"]
+script = ExtResource("8_y36n6")
+coord = Vector2(1, 3)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_mhp6k"]
+script = ExtResource("8_y36n6")
+coord = Vector2(0, 4)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_vkvnp"]
+script = ExtResource("8_y36n6")
+coord = Vector2(7, 7)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_urpib"]
+script = ExtResource("8_y36n6")
+coord = Vector2(6, 8)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_cieqw"]
+script = ExtResource("8_y36n6")
+coord = Vector2(8, 6)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
 
 [sub_resource type="Resource" id="Resource_fhkfd"]
 script = ExtResource("4_ryrav")
@@ -65,22 +180,22 @@ script = ExtResource("8_y36n6")
 coord = Vector2(2, 2)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
 
-[sub_resource type="Resource" id="Resource_3vho3"]
+[sub_resource type="Resource" id="Resource_ln7ps"]
 script = ExtResource("8_y36n6")
 coord = Vector2(6, 6)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
 
-[sub_resource type="Resource" id="Resource_qf6n1"]
+[sub_resource type="Resource" id="Resource_pxxsx"]
 script = ExtResource("8_y36n6")
 coord = Vector2(7, 7)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
 
-[sub_resource type="Resource" id="Resource_vsp63"]
+[sub_resource type="Resource" id="Resource_u8s88"]
 script = ExtResource("8_y36n6")
 coord = Vector2(8, 8)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
 
-[sub_resource type="Resource" id="Resource_b686c"]
+[sub_resource type="Resource" id="Resource_leid8"]
 script = ExtResource("8_y36n6")
 coord = Vector2(3, 4)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
@@ -106,16 +221,21 @@ script = ExtResource("1_e2o6t")
 unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="R1" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
-parent_offset = Vector2(2, 2)
-parent_room = NodePath("../R01")
-
 [node name="R01" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
 person_name = 5
 scale_ratio = 1
 zoom_level = 1
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_3vho3"), SubResource("Resource_qf6n1")])
+rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_jdpby"), SubResource("Resource_58yx1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hbvmx"), SubResource("Resource_fegy3"), SubResource("Resource_pvdu1"), SubResource("Resource_8bboj"), SubResource("Resource_q52ks"), SubResource("Resource_jucfl")])
 paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_bowy6")])
+
+[node name="R1" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+parent_offset = Vector2(2, 2)
+parent_room = NodePath("../R01")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_dxwpq"), SubResource("Resource_mhvfb"), SubResource("Resource_cf130")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_5e03w")])
+rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_posua"), SubResource("Resource_gvtgv"), SubResource("Resource_5ywmu"), SubResource("Resource_mhp6k"), SubResource("Resource_vkvnp"), SubResource("Resource_urpib"), SubResource("Resource_cieqw")])
 
 [node name="R0" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 position = Vector2(-1, 0)
@@ -125,7 +245,7 @@ parent_offset = Vector2(-2, -2)
 parent_room = NodePath("../R01")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm"), SubResource("Resource_4cobl")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_dxrkv"), SubResource("Resource_u5opy")])
-rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_ll60o"), SubResource("Resource_j3pel"), SubResource("Resource_g28q7"), SubResource("Resource_3vho3"), SubResource("Resource_qf6n1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hb504"), SubResource("Resource_ee6o4")])
+rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_ll60o"), SubResource("Resource_j3pel"), SubResource("Resource_g28q7"), SubResource("Resource_ln7ps"), SubResource("Resource_pxxsx"), SubResource("Resource_u8s88"), SubResource("Resource_leid8"), SubResource("Resource_hb504"), SubResource("Resource_ee6o4")])
 
 [connection signal="level_changed" from="RoomManager" to="." method="_on_room_manager_level_changed"]
 [connection signal="room_finished" from="RoomManager" to="." method="_on_room_manager_room_finished"]
