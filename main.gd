@@ -5,7 +5,14 @@ extends Node
 @onready var title_screen: Control = $CanvasLayer/TitleScreen
 @onready var title_text: RichTextLabel = $CanvasLayer/TitleScreen/MarginContainer/TitleText
 
+@onready var fade_in: ColorRect = $CanvasLayer/FadeIn
+
 func _ready() -> void:
+	var tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(fade_in, 'color:a', 0.0, 7.0).set_trans(Tween.TRANS_LINEAR)
+	tween.finished.connect(func (): fade_in.queue_free())
+
 	GameState.pause_game()
 	$MainAudioStream.play()
 
