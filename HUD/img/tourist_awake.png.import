@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djt4o420wvuig"
-path="res://.godot/imported/placeholder_3_idle.png-7e11426642d07a1702265465aab9473b.ctex"
+uid="uid://cjv8fj7inj2xt"
+path="res://.godot/imported/tourist_awake.png-d2a2ee69a2146fa227f8cd5f6a2f78f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/placeholder_3_idle.png"
-dest_files=["res://.godot/imported/placeholder_3_idle.png-7e11426642d07a1702265465aab9473b.ctex"]
+source_file="res://HUD/img/tourist_awake.png"
+dest_files=["res://.godot/imported/tourist_awake.png-d2a2ee69a2146fa227f8cd5f6a2f78f7.ctex"]
 
 [params]
 
