@@ -30,6 +30,9 @@ var room_unlocked: bool :
 		if value and not room_unlocked:
 			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
+			for _door in door_list:
+				if not _door.is_flow_base and not _door.is_flow_tip:
+					_door.set_door_sprite(false, false)
 		if value:
 			room_unlocked = value
 
@@ -160,9 +163,9 @@ func check_is_room_unlocked() -> void:
 	if room_unlocked:
 		return 
 	if door_list.size() > 0:
-		var _room_unlocked = true
+		var _room_unlocked = false
 		for _door in door_list:
-			_room_unlocked = _room_unlocked and _door.is_tile_powered()
+			_room_unlocked = _room_unlocked or _door.is_flow_base
 		
 		room_unlocked = _room_unlocked
 
@@ -246,9 +249,7 @@ func enable_tiles() -> void:
 func update_parent(_disconnect: bool = false) -> void:
 	if not parent_room:
 		return
-
-	door_list.sort_custom(func(a: Tile, _b: Tile): return _disconnect != a.is_flow_base)
-
+	
 	for door_tile in door_list:
 		var follow_tile := _fetch_outside_door_tile(door_tile)
 		if follow_tile:
@@ -256,21 +257,28 @@ func update_parent(_disconnect: bool = false) -> void:
 				if follow_tile.is_flow_base and door_tile.is_flow_tip:
 					# todo: direct door-to-door tiles
 					request_unpower_door.emit(follow_tile.local_coords, parent_room)
-				door_tile.linked_door_tiles.erase(follow_tile)
-				follow_tile.linked_door_tiles.erase(door_tile)
-				if follow_tile.linked_door_tiles.is_empty():
-					parent_room.outside_doors.erase(follow_tile)
-					follow_tile.is_outside_door = false
 			else:
 				request_door_prune.emit(follow_tile)
 				door_tile.linked_door_tiles.get_or_add(follow_tile)
 				follow_tile.linked_door_tiles.get_or_add(door_tile)
 				parent_room.outside_doors.get_or_add(follow_tile)
 				follow_tile.is_outside_door = true
+	
+	for door_tile in door_list:
+		var follow_tile := _fetch_outside_door_tile(door_tile)
+		if follow_tile:
+			if _disconnect:
+				door_tile.linked_door_tiles.erase(follow_tile)
+				follow_tile.linked_door_tiles.erase(door_tile)
+				if follow_tile.linked_door_tiles.is_empty():
+					parent_room.outside_doors.erase(follow_tile)
+					follow_tile.is_outside_door = false
+			else:
 				if follow_tile.is_flow_base:
 					# todo: direct door-to-door tiles
 					follow_tile.is_flow_base = false # gonna be true in a sec down there
 					request_power_door.emit(follow_tile.local_coords, parent_room)
+
 
 var tween: Tween
 var rotating = false
