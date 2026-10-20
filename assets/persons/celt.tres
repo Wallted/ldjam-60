@@ -1,14 +1,17 @@
 [gd_resource type="Resource" script_class="PersonResource" format=3 uid="uid://jduf3we633ex"]
 
 [ext_resource type="Script" uid="uid://ckiddi47ks54w" path="res://assets/persons/person_resource.gd" id="1_5qo7x"]
-[ext_resource type="Texture2D" uid="uid://cjilmcj7xjcec" path="res://img/placeholder_1_idle.png" id="1_kkk1n"]
+[ext_resource type="Texture2D" uid="uid://tq21q057gor3" path="res://HUD/img/grzeszamknienty.png" id="1_r57vc"]
 [ext_resource type="Script" uid="uid://b2hdefaktpid6" path="res://assets/persons/avatar.gd" id="2_kkk1n"]
-[ext_resource type="Texture2D" uid="uid://qjj6t7nh1atq" path="res://img/placeholder_1_talking_2.png" id="3_r57vc"]
+[ext_resource type="Texture2D" uid="uid://bdua5f7eccwkk" path="res://HUD/img/grzesotwarty.png" id="2_rbwjm"]
 [ext_resource type="Script" uid="uid://wr2j5o31je5k" path="res://assets/persons/dialogue_line.gd" id="4_kkk1n"]
 [ext_resource type="AudioStream" uid="uid://c7cvr7embchko" path="res://assets/audio/celtdialog.ogg" id="4_r57vc"]
 
 [sub_resource type="Resource" id="Resource_5813k"]
 script = ExtResource("2_kkk1n")
+asleep = ExtResource("1_r57vc")
+idle = ExtResource("2_rbwjm")
+talking = ExtResource("2_rbwjm")
 metadata/_custom_type_script = "uid://b2hdefaktpid6"
 
 [sub_resource type="Resource" id="Resource_kkk1n"]
