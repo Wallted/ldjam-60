@@ -77,6 +77,9 @@ var room_powered: bool:
 		if room_powered != value:
 			room_powered_changed.emit(person_name, value)
 		room_powered = value
+		if room_powered and person_name == GameState.credits_person:
+			GameState.set_state(GameState.State.FINISHED)
+
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]

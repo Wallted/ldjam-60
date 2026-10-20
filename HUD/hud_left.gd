@@ -85,8 +85,8 @@ func _on_monologue_start(person_type: Enums.PersonType) -> void:
 func _on_monologue_end() -> void:
 	if current_level_person == null:
 		return
-
-	if current_level_person.resource.person_type == Enums.PersonType.ELON:
+	
+	if GameState.state == GameState.State.FINISHED:
 		GameState.show_credits()
 
 	dialog_stream.stop()
