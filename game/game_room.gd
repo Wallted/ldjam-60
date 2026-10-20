@@ -36,7 +36,6 @@ var room_unlocked: bool :
 					_room.room_unlocked = true
 		if value:
 			room_unlocked = value
-			GameState.room_unlocked_signal.emit(parent_room.person_name)
 
 @export_group("Grid")
 @export
@@ -62,7 +61,18 @@ var rocks: Array[Rock]
 @export
 var paths: Array[Path]
 
-var room_finished: bool
+var room_discovered: bool : 
+	set(value):
+		if value and not room_discovered:
+			GameState.room_unlocked_signal.emit(person_name)
+		room_discovered = value
+
+var room_finished: bool :
+	set(value):
+		if value and not room_finished:
+			frame.modulate = Color.WHITE * 1.5
+		room_finished = value
+
 var room_powered: bool:
 	set(value):
 		if room_powered != value:
@@ -89,14 +99,16 @@ var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 @onready
 var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
+@onready var frame: Sprite2D = $Frame
 
 @onready var multi_mesh_instance_2d: MultiMeshInstance2D = $MultiMeshInstance2D
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
+	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating and room_finished:
 		request_rotate.emit()
 
 func _ready() -> void:
+	frame.modulate = Color.DARK_GOLDENROD
 	_setup_tiles()
 	_setup_doors()
 	_setup_gateways()

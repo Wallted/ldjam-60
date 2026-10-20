@@ -133,6 +133,7 @@ func focus_on_room_action(target_room: GameRoom, tween: bool = true):
 		return
 
 	currently_focused_room = target_room
+	target_room.room_discovered = true
 
 	for room in room_list:
 		room.disable_room()
