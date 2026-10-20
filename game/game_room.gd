@@ -11,6 +11,8 @@ signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_door_prune(outside_tile: Tile)
 
+
+
 signal request_place_path(path: Path)
 
 @export
@@ -25,13 +27,16 @@ var room_unlocked: bool :
 			return
 		if parent_room.room_unlocked:
 			return
-		if not room_powered:
-			return
 		if value and not room_unlocked:
 			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
+			for _child in parent_room.child_room_list:
+				var _room : GameRoom = _child
+				if _child != self:
+					_room.room_unlocked = true
 		if value:
 			room_unlocked = value
+			GameState.room_unlocked_signal.emit(parent_room.person_name)
 
 @export_group("Grid")
 @export
@@ -164,6 +169,8 @@ func check_is_room_unlocked() -> void:
 		for _door in door_list:
 			_room_unlocked = _room_unlocked and _door.is_tile_powered()
 		
+		if not room_powered:
+			return
 		room_unlocked = _room_unlocked
 
 

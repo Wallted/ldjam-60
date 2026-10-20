@@ -11,6 +11,7 @@ const ODDYMIACZ = preload("uid://dmyc208cgyl31")
 func _ready() -> void:
 	DialogManagier.monologue_started.connect(_on_monologue_start)
 	DialogManagier.monologue_ended.connect(_on_monologue_end)
+	GameState.room_unlocked_signal.connect(_on_game_room_unlocked)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,10 +46,20 @@ func _on_game_room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
 
 func _on_game_level_changed(person_type: Enums.PersonType, _powered: bool) -> void:
+	#for person in grid_container.get_children():
+		#person = person as Person
+		#if person.type == person_type:
+			#if not person.is_discovered:
+				#sfx_stream.stream = ODDYMIACZ
+				#sfx_stream.play()
+			#person.is_discovered = true
+	pass
+
+func _on_game_room_unlocked(person_type: Enums.PersonType):
 	for person in grid_container.get_children():
 		person = person as Person
 		if person.type == person_type:
-			if not person.is_discovered:
+			if not person.is_discovered and not person_type == Enums.PersonType.TOURIST:
 				sfx_stream.stream = ODDYMIACZ
 				sfx_stream.play()
 			person.is_discovered = true
