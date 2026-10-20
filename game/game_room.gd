@@ -107,7 +107,7 @@ var shake_tween: Tween
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
-		if room_finished and false:
+		if room_finished:
 			request_rotate.emit()
 		else:
 			if shake_tween:
