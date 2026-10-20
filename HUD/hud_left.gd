@@ -86,9 +86,6 @@ func _on_monologue_end() -> void:
 	if current_level_person == null:
 		return
 	
-	if GameState.state == GameState.State.FINISHED:
-		GameState.show_credits()
-
 	dialog_stream.stop()
 	for child in message_timers.get_children():
 		child.stop()
