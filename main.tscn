@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://dkcfc85dw6qoi" path="res://dialog_stream.gd" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://2e2p40e4cd3i" path="res://title_screen.gd" id="9_dg77c"]
 [ext_resource type="Script" uid="uid://fogyw0tjrr4j" path="res://end_screen.gd" id="10_vivmo"]
-[ext_resource type="AudioStream" uid="uid://dxhyqri2qm8iq" path="res://assets/audio/main/ambientstart.ogg" id="10_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://bunoy4xehc5kq" path="res://new_audio_stream_interactive.tres" id="11_w48qg"]
 [ext_resource type="Script" uid="uid://dyplj67om3a16" path="res://sfx_stream.gd" id="12_dg77c"]
 
