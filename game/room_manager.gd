@@ -60,6 +60,7 @@ func _ready() -> void:
 		room.update_parent()
 	
 	assert(currently_focused_room != null)
+	GameState.room_unlocked_signal.emit.call_deferred(currently_focused_room.person_name)
 	level_changed.emit.call_deferred(currently_focused_room.person_name, false)
 
 
@@ -132,6 +133,7 @@ func focus_on_room_action(target_room: GameRoom, tween: bool = true):
 		return
 
 	currently_focused_room = target_room
+	target_room.room_discovered = true
 
 	for room in room_list:
 		room.disable_room()

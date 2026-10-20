@@ -11,6 +11,8 @@ signal request_unpower_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_power_door(source_tile_local_coords: Vector2, room: GameRoom)
 signal request_door_prune(outside_tile: Tile)
 
+
+
 signal request_place_path(path: Path)
 
 @export
@@ -25,14 +27,15 @@ var room_unlocked: bool :
 			return
 		if parent_room.room_unlocked:
 			return
-		if not room_powered:
-			return
 		if value and not room_unlocked:
 			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
 			for _door in door_list:
 				if not _door.is_flow_base and not _door.is_flow_tip:
 					_door.set_door_sprite(false, false)
+			room_unlocked = true
+			for _child in parent_room.child_room_list:
+				_child.room_unlocked = true
 		if value:
 			room_unlocked = value
 
@@ -60,7 +63,18 @@ var rocks: Array[Rock]
 @export
 var paths: Array[Path]
 
-var room_finished: bool
+var room_discovered: bool : 
+	set(value):
+		if value and not room_discovered:
+			GameState.room_unlocked_signal.emit(person_name)
+		room_discovered = value
+
+var room_finished: bool :
+	set(value):
+		if value and not room_finished:
+			frame.modulate = Color.WHITE * 1.5
+		room_finished = value
+
 var room_powered: bool:
 	set(value):
 		if room_powered != value:
@@ -87,14 +101,16 @@ var collision_shape_2d: CollisionShape2D = $RoomArea/CollisionShape2D
 var sprite_2d: Sprite2D = $RoomArea/SelectedShader
 @onready
 var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
+@onready var frame: Sprite2D = $Frame
 
 @onready var multi_mesh_instance_2d: MultiMeshInstance2D = $MultiMeshInstance2D
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
+	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating and room_finished:
 		request_rotate.emit()
 
 func _ready() -> void:
+	frame.modulate = Color.DARK_GOLDENROD
 	_setup_tiles()
 	_setup_doors()
 	_setup_gateways()
@@ -167,6 +183,8 @@ func check_is_room_unlocked() -> void:
 		for _door in door_list:
 			_room_unlocked = _room_unlocked or _door.is_flow_base
 		
+		if not room_powered:
+			return
 		room_unlocked = _room_unlocked
 
 
