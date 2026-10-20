@@ -28,7 +28,6 @@ var room_unlocked: bool :
 		if parent_room.room_unlocked:
 			return
 		if value and not room_unlocked:
-			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
 			for _child in parent_room.child_room_list:
 				var _room : GameRoom = _child
@@ -192,8 +191,9 @@ func check_is_room_unlocked() -> void:
 		
 		if not room_powered:
 			return
+		if _room_unlocked:
+			GameState.set_zoom_tween(2.0)
 		room_unlocked = _room_unlocked
-
 
 func check_is_room_finished(signal_finished: Signal) -> bool:
 	var _room_powered = room_powered
