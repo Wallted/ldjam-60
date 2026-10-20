@@ -85,7 +85,6 @@ func _on_monologue_start(person_type: Enums.PersonType) -> void:
 func _on_monologue_end() -> void:
 	if current_level_person == null:
 		return
-	
 	dialog_stream.stop()
 	for child in message_timers.get_children():
 		child.stop()
