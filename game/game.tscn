@@ -18,6 +18,24 @@ coord = Vector2(0, 1)
 side = 3
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
+[sub_resource type="Resource" id="Resource_64wtb"]
+script = ExtResource("4_ryrav")
+coord = Vector2(0, 7)
+side = 3
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_0rekh"]
+script = ExtResource("4_ryrav")
+coord = Vector2(1, 8)
+side = 1
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
+[sub_resource type="Resource" id="Resource_281ou"]
+script = ExtResource("4_ryrav")
+coord = Vector2(8, 1)
+side = 2
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
+
 [sub_resource type="Resource" id="Resource_3vho3"]
 script = ExtResource("6_u5opy")
 coord = Vector2(6, 1)
@@ -75,6 +93,11 @@ metadata/_custom_type_script = "uid://fcj36or2snhq"
 [sub_resource type="Resource" id="Resource_jucfl"]
 script = ExtResource("8_y36n6")
 coord = Vector2(3, 5)
+metadata/_custom_type_script = "uid://fcj36or2snhq"
+
+[sub_resource type="Resource" id="Resource_ta815"]
+script = ExtResource("8_y36n6")
+coord = Vector2(4, 6)
 metadata/_custom_type_script = "uid://fcj36or2snhq"
 
 [sub_resource type="Resource" id="Resource_bowy6"]
@@ -225,9 +248,9 @@ script = ExtResource("3_7jktm")
 person_name = 5
 scale_ratio = 1
 zoom_level = 1
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es")])
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es"), SubResource("Resource_64wtb"), SubResource("Resource_0rekh"), SubResource("Resource_281ou")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_3vho3"), SubResource("Resource_qf6n1")])
-rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_jdpby"), SubResource("Resource_58yx1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hbvmx"), SubResource("Resource_fegy3"), SubResource("Resource_pvdu1"), SubResource("Resource_8bboj"), SubResource("Resource_q52ks"), SubResource("Resource_jucfl")])
+rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_jdpby"), SubResource("Resource_58yx1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hbvmx"), SubResource("Resource_fegy3"), SubResource("Resource_pvdu1"), SubResource("Resource_8bboj"), SubResource("Resource_q52ks"), SubResource("Resource_jucfl"), SubResource("Resource_ta815")])
 paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_bowy6")])
 
 [node name="R1" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]

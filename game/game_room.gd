@@ -196,6 +196,8 @@ func check_is_room_finished(signal_finished: Signal) -> bool:
 			var _is_tile_powered = _gateway.is_tile_powered()
 			_room_powered = _room_powered and _is_tile_powered
 			_gateway.switch_gateway(_is_tile_powered)
+		for _child in child_room_list:
+			_room_powered = _room_powered and _child.room_powered
 
 		if not room_finished and _room_powered:
 			signal_finished.emit(self)
