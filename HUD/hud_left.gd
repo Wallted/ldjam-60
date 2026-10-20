@@ -8,25 +8,12 @@ const SPEECH_BUBBLE = preload("uid://dsg5bxkh2cocg")
 @onready var dialog_stream: AudioStreamPlayer = $"../../../MainAudioStream/DialogStream"
 @onready var message_timers: Node = $MessageTimers
 
-var _test_button_pressed: bool = false
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DialogManagier.message_sent.connect(send_message)
 	DialogManagier.monologue_ended.connect(_on_monologue_end)
 	DialogManagier.monologue_started.connect(_on_monologue_start)
 	dialog_stream.finished.connect(func (): DialogManagier.end_monologue())
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_W):
-		if not _test_button_pressed:
-			$"../../EndScreen".show()
-			$"../../EndScreen".fade_in()
-		_test_button_pressed = true
-	else:
-		_test_button_pressed = false
 
 
 func _scroll_to_bottom(delay: float = 0.0) -> void:
@@ -98,6 +85,9 @@ func _on_monologue_start(person_type: Enums.PersonType) -> void:
 func _on_monologue_end() -> void:
 	if current_level_person == null:
 		return
+
+	if current_level_person.resource.person_type == Enums.PersonType.ELON:
+		GameState.show_credits()
 
 	dialog_stream.stop()
 	for child in message_timers.get_children():
