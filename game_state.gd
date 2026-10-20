@@ -74,6 +74,11 @@ func force_quit_cutscene():
 	end_cutscene()
 	DialogManagier.monologue_ended.emit()
 
+func show_credits():
+	state = GameState.State.CUTSCENE
+	%EndScreen.show()
+	%EndScreen.fade_in()
+
 func set_state(new_state: State) -> void:
 	state = new_state
 
