@@ -277,11 +277,10 @@ script = ExtResource("1_e2o6t")
 unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="R8" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+[node name="R8" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
 person_name = 2
 scale_ratio = 8
 zoom_level = 8
-parent_room = NodePath("")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
 paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
@@ -361,6 +360,7 @@ rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_posua"), SubResourc
 position = Vector2(-1, 0)
 scale = Vector2(1, 1)
 person_name = 9
+is_starting_room = true
 parent_offset = Vector2(-2, -2)
 parent_room = NodePath("../R01")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm"), SubResource("Resource_4cobl")])

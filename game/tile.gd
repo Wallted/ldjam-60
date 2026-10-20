@@ -23,6 +23,8 @@ var is_outside_door := false
 var is_flow_base := false
 var is_flow_tip := false
 
+var is_rock: bool
+
 var north_path: PathSegment
 var west_path: PathSegment
 
@@ -44,14 +46,14 @@ func remove_path(north_not_west: bool):
 		west_path.queue_free()
 
 func _init_path_segments() -> void:
-	if coords.x > 0:
+	if coords.x > 0 and not west_path:
 		west_path = PATH_SEGMENT.instantiate()
 		west_path.position = Vector2.ZERO
 		west_path.rotation = -0.5*TAU
 		west_path.mouse_event.connect(path_hover.emit.bind(false))
 		west_path.is_north_not_west = false
 		add_child(west_path)
-	if coords.y > 0:
+	if coords.y > 0 and not north_path:
 		north_path = PATH_SEGMENT.instantiate()
 		north_path.position = Vector2.ZERO
 		north_path.rotation = -0.25*TAU
@@ -92,12 +94,14 @@ func switch_gateway(_active: bool) -> void:
 		active_gateway.visible = false
 
 func enable_rock(_rock: Rock) -> void:
+	is_rock = true
+
 	var rock = Sprite2D.new()
 	rock.self_modulate = Color(0.13, 0.092, 0.066, 1.0)
 	rock.texture = _rock.texture
 	add_child(rock) # todo: switch to multimesh igfuess xfdas
 					# xDDD
-	
+
 	for _child in get_children():
 		if _child is PathSegment:
 			_child.queue_free()

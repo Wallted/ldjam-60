@@ -17,11 +17,13 @@ signal request_place_path(path: Path)
 
 @export
 var person_name: Enums.PersonType
+@export
+var is_starting_room: bool
 
 @export # DEBUG
 var room_unlocked: bool :
-	#get():
-		#return true # delete this to enable feature
+	get():
+		return true # delete this to enable feature
 	set(value):
 		if not parent_room:
 			return
@@ -85,6 +87,7 @@ var room_powered: bool:
 
 var _tile_scene = preload("res://game/tile.tscn")
 var tile_list: Array[Tile]
+var missing_tile_local_coord_list: Array[Vector2]
 var room_size : Vector2 = Vector2(128.0, 128.0)
 var child_room_list : Array[GameRoom]
 var room_area_entered: bool
@@ -136,7 +139,7 @@ func _ready() -> void:
 		var _tile: Node2D = tile_list[i]
 		multi_mesh_instance_2d.multimesh.set_instance_transform_2d(i, _tile.transform)
 	z_index = 100 - zoom_level * 10
-
+	
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:
@@ -157,6 +160,26 @@ func _setup_tiles() -> void:
 
 			j+=1
 		i+=1
+
+func switch_room_off() -> void:
+	for _tile in tile_list:
+		for _child in _tile.get_children():
+			if _child is PathSegment:
+				var ps : PathSegment = _child
+				if ps and not ps.is_placed:
+					_child.queue_free()
+
+func switch_room_on() -> void:
+	for _tile in tile_list:
+		if not _tile.is_rock:
+			_tile._init_path_segments()
+
+	for _tile in tile_list:
+		if _tile.is_rock:
+			RoomManager._trim_paths_of_neighbors(_tile.local_coords, self)
+
+	for _local_coord in missing_tile_local_coord_list:
+		RoomManager._trim_paths_of_neighbors(_local_coord, self)
 
 func _setup_doors() -> void:
 	for _door in doors:
@@ -185,6 +208,8 @@ func _setup_rocks() -> void:
 func _setup_paths() -> void:
 	for _path in paths:
 		request_place_path.emit(_path)
+	if not is_starting_room:
+		switch_room_off()
 
 func check_is_room_unlocked() -> void:
 	if room_unlocked:
