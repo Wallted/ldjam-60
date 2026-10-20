@@ -245,6 +245,8 @@ func _tile_placed_paths_count(tile_local_coords: Vector2, room: GameRoom) -> int
 		result += 1
 	if tile.is_inside_door:
 		result += 1
+		if not room.room_finished and not room.room_unlocked and not tile.is_flow_tip:
+			result += 1
 	if tile.is_outside_door:
 		result += tile.linked_door_tiles.size()
 	return result
@@ -377,5 +379,6 @@ func _door_prune(outside_tile: Tile) -> void:
 func _place_path_setup(path: Path, room: GameRoom) -> void:
 	var tile = room.get_tile(path.coord)
 	_path_cursor = tile.north_path if path.north_not_west else tile.west_path
-	_path_cursor.is_hovered = true
+	_path_cursor.set_hovered(true)
 	_try_place_path_segment()
+	_path_cursor.set_hovered(false)
