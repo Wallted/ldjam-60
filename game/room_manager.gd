@@ -72,7 +72,7 @@ func _process(_delta: float) -> void:
 	currently_focused_room.check_is_room_unlocked()
 	for room in room_list:
 		room.check_is_room_finished(room_finished)
-
+		
 func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var dict : Dictionary[int, Array]
 	for room in room_list:
@@ -131,9 +131,13 @@ func focus_on_room_action(target_room: GameRoom, tween: bool = true):
 
 	if not target_room:
 		return
+	
+	if currently_focused_room:
+		currently_focused_room.switch_room_off()
 
 	currently_focused_room = target_room
 	target_room.room_discovered = true
+	target_room.switch_room_on()
 
 	for room in room_list:
 		room.disable_room()
@@ -216,6 +220,7 @@ func _remove_tile(tile_coords: Vector2, room: GameRoom) -> void:
 	var tile := room.get_tile(tile_coords)
 	if tile != null:
 		room.tile_list.erase(tile)
+		room.missing_tile_local_coord_list.append(tile.local_coords)
 		tile.queue_free()
 		_trim_paths_of_neighbors(tile.local_coords, room)
 
@@ -243,12 +248,13 @@ func _tile_placed_paths_count(tile_local_coords: Vector2, room: GameRoom) -> int
 	var east_tile := room.get_tile(tile_local_coords + Vector2.RIGHT, true)
 	if east_tile != null and east_tile.west_path != null and east_tile.west_path.is_placed:
 		result += 1
-	if tile.is_inside_door:
-		result += 1
-		if not room.room_finished and not room.room_unlocked and not tile.is_flow_tip:
+	if tile != null:
+		if tile.is_inside_door:
 			result += 1
-	if tile.is_outside_door:
-		result += tile.linked_door_tiles.size()
+			if not room.room_finished and not room.room_unlocked and not tile.is_flow_tip:
+				result += 1
+		if tile.is_outside_door:
+			result += tile.linked_door_tiles.size()
 	return result
 
 
