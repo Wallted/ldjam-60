@@ -78,8 +78,8 @@ func force_quit_cutscene():
 
 func show_credits():
 	state = GameState.State.CUTSCENE
-	%EndScreen.show()
-	%EndScreen.fade_in()
+	#%EndScreen.show()
+	#%EndScreen.fade_in()
 
 func set_state(new_state: State) -> void:
 	state = new_state

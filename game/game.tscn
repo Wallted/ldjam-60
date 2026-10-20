@@ -12,128 +12,44 @@
 [ext_resource type="Script" uid="uid://fcj36or2snhq" path="res://game/rock_resource.gd" id="8_y36n6"]
 [ext_resource type="Texture2D" uid="uid://bawlc4rhqoug2" path="res://img/rock_tile.png" id="9_j8tme"]
 
-[sub_resource type="Resource" id="Resource_rr8ep"]
+[sub_resource type="Resource" id="Resource_281ou"]
 script = ExtResource("4_ryrav")
 coord = Vector2(0, 1)
 side = 3
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
-[sub_resource type="Resource" id="Resource_ohuyl"]
-script = ExtResource("6_u5opy")
-coord = Vector2(2, 6)
-metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
-
-[sub_resource type="Resource" id="Resource_o3dub"]
-script = ExtResource("6_j8tme")
-coord = Vector2(0, 2)
-north_not_west = true
-metadata/_custom_type_script = "uid://bldlq4k3nokd8"
-
-[sub_resource type="Resource" id="Resource_7tmf6"]
-script = ExtResource("4_ryrav")
-coord = Vector2(0, 4)
-side = 3
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_sisia"]
-script = ExtResource("4_ryrav")
-coord = Vector2(4, 0)
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_xorak"]
-script = ExtResource("6_u5opy")
-coord = Vector2(1, 4)
-metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
-
-[sub_resource type="Resource" id="Resource_4jymc"]
-script = ExtResource("6_u5opy")
-coord = Vector2(4, 1)
-metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
-
-[sub_resource type="Resource" id="Resource_0lgry"]
+[sub_resource type="Resource" id="Resource_iswgq"]
 script = ExtResource("6_u5opy")
 coord = Vector2(4, 7)
 metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
 
-[sub_resource type="Resource" id="Resource_h7iu2"]
-script = ExtResource("6_u5opy")
-coord = Vector2(7, 4)
-metadata/_custom_type_script = "uid://ce4p6kiokhrtc"
-
-[sub_resource type="Resource" id="Resource_8sg4y"]
-script = ExtResource("8_y36n6")
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_vktc5"]
-script = ExtResource("8_y36n6")
-coord = Vector2(1, 1)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_ohnrv"]
-script = ExtResource("8_y36n6")
-coord = Vector2(2, 2)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_kaw54"]
-script = ExtResource("8_y36n6")
-coord = Vector2(6, 6)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_1paru"]
-script = ExtResource("8_y36n6")
-coord = Vector2(7, 7)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_jbuku"]
-script = ExtResource("8_y36n6")
-coord = Vector2(8, 8)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_bq3im"]
-script = ExtResource("8_y36n6")
-coord = Vector2(8, 0)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_weo45"]
-script = ExtResource("8_y36n6")
-coord = Vector2(7, 1)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_3crti"]
-script = ExtResource("8_y36n6")
-coord = Vector2(6, 2)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_fwql0"]
-script = ExtResource("8_y36n6")
-coord = Vector2(2, 6)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_yeywo"]
-script = ExtResource("8_y36n6")
-coord = Vector2(1, 7)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_xi3ba"]
-script = ExtResource("8_y36n6")
-coord = Vector2(0, 8)
-metadata/_custom_type_script = "uid://fcj36or2snhq"
-
-[sub_resource type="Resource" id="Resource_at8vr"]
+[sub_resource type="Resource" id="Resource_7tmf6"]
 script = ExtResource("6_j8tme")
-coord = Vector2(1, 4)
+coord = Vector2(1, 1)
 metadata/_custom_type_script = "uid://bldlq4k3nokd8"
 
-[sub_resource type="Resource" id="Resource_3hog8"]
+[sub_resource type="Resource" id="Resource_sisia"]
 script = ExtResource("6_j8tme")
-coord = Vector2(1, 4)
+coord = Vector2(2, 1)
+metadata/_custom_type_script = "uid://bldlq4k3nokd8"
+
+[sub_resource type="Resource" id="Resource_xorak"]
+script = ExtResource("6_j8tme")
+coord = Vector2(2, 2)
 north_not_west = true
 metadata/_custom_type_script = "uid://bldlq4k3nokd8"
 
-[sub_resource type="Resource" id="Resource_4e2d6"]
+[sub_resource type="Resource" id="Resource_4jymc"]
 script = ExtResource("6_j8tme")
 coord = Vector2(2, 3)
+north_not_west = true
 metadata/_custom_type_script = "uid://bldlq4k3nokd8"
+
+[sub_resource type="Resource" id="Resource_nrbry"]
+script = ExtResource("4_ryrav")
+coord = Vector2(4, 8)
+side = 1
+metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_m75es"]
 script = ExtResource("4_ryrav")
@@ -149,24 +65,8 @@ metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_0rekh"]
 script = ExtResource("4_ryrav")
-coord = Vector2(1, 8)
-side = 1
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_281ou"]
-script = ExtResource("4_ryrav")
 coord = Vector2(8, 1)
 side = 2
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_nrbry"]
-script = ExtResource("4_ryrav")
-coord = Vector2(1, 0)
-metadata/_custom_type_script = "uid://5qdsl01hgnkk"
-
-[sub_resource type="Resource" id="Resource_iswgq"]
-script = ExtResource("4_ryrav")
-coord = Vector2(7, 0)
 metadata/_custom_type_script = "uid://5qdsl01hgnkk"
 
 [sub_resource type="Resource" id="Resource_3vho3"]
@@ -377,31 +277,75 @@ script = ExtResource("1_e2o6t")
 unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="R3" parent="." unique_id=1382508797 instance=ExtResource("3_ryrav")]
+[node name="R8" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 2
+scale_ratio = 8
+zoom_level = 8
+parent_room = NodePath("")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
+
+[node name="R7" parent="." unique_id=139981977 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 6
+scale_ratio = 7
+zoom_level = 7
+parent_room = NodePath("../R8")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
+
+[node name="R6" parent="." unique_id=619185461 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 7
+scale_ratio = 6
+zoom_level = 6
+parent_room = NodePath("../R7")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
+
+[node name="R5" parent="." unique_id=2119337977 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 8
+scale_ratio = 5
+zoom_level = 5
+parent_room = NodePath("../R6")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
+
+[node name="R4" parent="." unique_id=1662217949 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+person_name = 4
+scale_ratio = 4
+zoom_level = 4
+parent_room = NodePath("../R5")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
+
+[node name="R3" parent="." unique_id=1381531946 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 person_name = 3
 scale_ratio = 3
 zoom_level = 3
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_rr8ep")])
-gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_ohuyl")])
-paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_o3dub")])
+parent_room = NodePath("../R4")
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
 
 [node name="R2" parent="." unique_id=579230276 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 person_name = 1
 scale_ratio = 2
-parent_offset = Vector2(-2, -2)
 zoom_level = 2
 parent_room = NodePath("../R3")
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia")])
-gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_xorak"), SubResource("Resource_4jymc"), SubResource("Resource_0lgry"), SubResource("Resource_h7iu2")])
-rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_8sg4y"), SubResource("Resource_vktc5"), SubResource("Resource_ohnrv"), SubResource("Resource_kaw54"), SubResource("Resource_1paru"), SubResource("Resource_jbuku"), SubResource("Resource_bq3im"), SubResource("Resource_weo45"), SubResource("Resource_3crti"), SubResource("Resource_fwql0"), SubResource("Resource_yeywo"), SubResource("Resource_xi3ba")])
-paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_at8vr"), SubResource("Resource_3hog8"), SubResource("Resource_4e2d6")])
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_281ou"), SubResource("Resource_nrbry")])
+gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_iswgq")])
+paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_7tmf6"), SubResource("Resource_sisia"), SubResource("Resource_xorak"), SubResource("Resource_4jymc")])
 
 [node name="R01" parent="." unique_id=325990417 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 person_name = 5
 scale_ratio = 1
 zoom_level = 1
 parent_room = NodePath("../R2")
-doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es"), SubResource("Resource_64wtb"), SubResource("Resource_0rekh"), SubResource("Resource_281ou"), SubResource("Resource_nrbry"), SubResource("Resource_iswgq")])
+doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es"), SubResource("Resource_64wtb"), SubResource("Resource_0rekh")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_3vho3"), SubResource("Resource_qf6n1")])
 rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_jdpby"), SubResource("Resource_58yx1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hbvmx"), SubResource("Resource_fegy3"), SubResource("Resource_pvdu1"), SubResource("Resource_8bboj"), SubResource("Resource_q52ks"), SubResource("Resource_jucfl"), SubResource("Resource_ta815")])
 paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_bowy6")])
