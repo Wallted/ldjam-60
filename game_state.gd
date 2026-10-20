@@ -61,18 +61,18 @@ func enable_cutscene():
 	button_tween.tween_property(skip_button, "modulate:a", 0.0, 1.5)
 	button_tween.tween_property(skip_button, "modulate:a", Color.WHITE.a, 0.5)
 	skip_button.visible = true
-	if not skip_button.is_connected('pressed', disable_cutscene):
-		skip_button.pressed.connect(disable_cutscene)
+	if not skip_button.is_connected('pressed', force_quit_cutscene):
+		skip_button.pressed.connect(force_quit_cutscene)
+	if not DialogManagier.is_connected('monologue_ended', end_cutscene):
+		DialogManagier.monologue_ended.connect(end_cutscene)
 
-func show_credits():
-	state = GameState.State.CUTSCENE
-	%EndScreen.show()
-	%EndScreen.fade_in()
-	
-func disable_cutscene():
+func end_cutscene():
 	state = GameState.State.ACTION_FREE
-	DialogManagier.monologue_ended.emit()
 	skip_button.visible = false
+
+func force_quit_cutscene():
+	end_cutscene()
+	DialogManagier.monologue_ended.emit()
 
 func set_state(new_state: State) -> void:
 	state = new_state

@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ce4p6kiokhrtc" path="res://game/gateway_resource.gd" id="6_u5opy"]
 [ext_resource type="Texture2D" uid="uid://dgmwbx6wmtvc6" path="res://img/Bysk_bezta.png" id="7_j8tme"]
 [ext_resource type="Texture2D" uid="uid://ciqqfrm1n4n6y" path="res://img/gateway.png" id="7_l8g03"]
+[ext_resource type="Texture2D" uid="uid://dgmwbx6wmtvc6" path="res://img/Bysk_bezta.png" id="8_3vho3"]
 [ext_resource type="Script" uid="uid://fcj36or2snhq" path="res://game/rock_resource.gd" id="8_y36n6"]
 [ext_resource type="Texture2D" uid="uid://bawlc4rhqoug2" path="res://img/rock_tile.png" id="9_j8tme"]
 

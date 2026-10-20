@@ -1,7 +1,7 @@
 extends Node2D
 class_name RoomManager
 
-signal level_changed(person_type: Enums.PersonType)
+signal level_changed(person_type: Enums.PersonType, powered: bool)
 signal room_finished(room: GameRoom)
 signal room_powered_changed(person_type: Enums.PersonType, powered: bool)
 
@@ -60,7 +60,7 @@ func _ready() -> void:
 		room.update_parent()
 	
 	assert(currently_focused_room != null)
-	level_changed.emit.call_deferred(currently_focused_room.person_name)
+	level_changed.emit.call_deferred(currently_focused_room.person_name, false)
 
 
 func _on_room_power_changed(person_type: Enums.PersonType, powered: bool) -> void:
@@ -162,7 +162,7 @@ func _on_zoom_finished(target_room: GameRoom) -> void:
 		if room.zoom_level == target_room.zoom_level - 1:
 			room.set_as_pickable()
 	target_room.enable_tiles()
-	level_changed.emit(target_room.person_name)
+	level_changed.emit(target_room.person_name, target_room.room_powered)
 
 func _on_path_mouse_event(entered: bool, north_not_west: bool, tile: Tile) -> void:
 	if tile.enabled:
@@ -323,6 +323,8 @@ func _path_segment_tip_local_coords(segment: PathSegment) -> Vector2:
 
 func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> void:
 	var source_tile: Tile = room.get_tile(source_tile_local_coords, true)
+	if not room.room_unlocked and not room.room_powered and source_tile.is_inside_door:
+		return
 	assert(not source_tile.is_flow_tip and not source_tile.is_flow_base)
 	if source_tile.is_inside_door or source_tile.is_outside_door:
 		source_tile.is_flow_base = true
@@ -340,6 +342,8 @@ func _try_power_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> voi
 
 func _try_unpower_a_door(source_tile_local_coords: Vector2, room: GameRoom) -> void:
 	var source_tile: Tile = room.get_tile(source_tile_local_coords, true)
+	if not room.room_unlocked and not room.room_powered and source_tile.is_inside_door:
+		return
 	if source_tile.is_inside_door or source_tile.is_outside_door:
 		assert(source_tile.is_flow_base)
 		source_tile.is_flow_base = false

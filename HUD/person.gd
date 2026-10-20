@@ -42,6 +42,10 @@ class_name Person
 		resource.is_solved = value
 		if solved_indicator:
 			solved_indicator.visible = resource.is_solved
+		if not value:
+			status = PersonStatus.ASLEEP
+		else:
+			status = PersonStatus.TALKING
 
 @onready var current_state: TextureRect = %CurrentState
 @onready var talking_indicator: PanelContainer = %TalkingIndicator
@@ -64,16 +68,10 @@ func _ready() -> void:
 	self.status = status  # refresh status when it's available
 	if preview_only or is_discovered:
 		undiscovered_indicator.hide()
-	
-
-
-func set_asleep() -> void:
-	status = PersonStatus.ASLEEP
-	talking_indicator.hide()
-
 
 func set_idle() -> void:
 	status = PersonStatus.IDLE
+	print('idle')
 	talking_indicator.hide()
 
 

@@ -25,6 +25,8 @@ var room_unlocked: bool :
 			return
 		if parent_room.room_unlocked:
 			return
+		if not room_powered:
+			return
 		if value and not room_unlocked:
 			GameState.set_zoom_tween(2.0)
 			parent_room.request_focus.emit()
@@ -135,6 +137,7 @@ func _setup_doors() -> void:
 		# top level door has energy from nowhere
 		if parent_room == null:
 			_tile.is_flow_tip = true
+			_tile.set_door_sprite(false, true)
 		door_list.append(_tile)
 
 func _setup_gateways() -> void:
