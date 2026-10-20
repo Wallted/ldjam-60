@@ -13,6 +13,8 @@ signal rotate_room
 signal zoom_in_room
 signal zoom_out_room
 
+@export
+var credits_person: Enums.PersonType
 
 func _ready():
 	room_manager.placed_powered_path.connect(placed_powered_path.emit)
@@ -21,6 +23,7 @@ func _ready():
 	room_manager.rotate_room.connect(rotate_room.emit)
 	room_manager.zoom_in_room.connect(zoom_in_room.emit)
 	room_manager.zoom_out_room.connect(zoom_out_room.emit)
+	GameState.credits_person = credits_person
 
 func _on_room_manager_room_finished(_room: GameRoom) -> void:
 	prints('room finished:', _room.person_name, _room.name)

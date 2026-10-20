@@ -20,6 +20,7 @@
 script = ExtResource("1_efxa6")
 
 [node name="Game" parent="." unique_id=1995553335 instance=ExtResource("1_ig7tw")]
+credits_person = 9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=66122121]
 

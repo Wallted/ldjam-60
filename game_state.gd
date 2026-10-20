@@ -6,9 +6,12 @@ enum State {
 	ACTION_FREE,
 	ACTION_PENDING,
 	LEVEL_UNLOCKED,
+	FINISHED,
 }
 
 signal room_unlocked_signal(person: Enums.PersonType)
+
+var credits_person: Enums.PersonType
 
 var state: State :
 	set(_state):
@@ -25,6 +28,7 @@ var skip_button: Button
 var zoom_tween_value : float = 0.5
 
 var button_tween: Tween
+var end_screen: Control
 
 func _ready() -> void:
 	var main = (get_tree().get_current_scene() as Node)
@@ -33,6 +37,7 @@ func _ready() -> void:
 	action_progress = main.get_node("CanvasLayer").get_node('ActionProgress')
 	label = main.get_node("CanvasLayer/HUD/Label")
 	skip_button = main.get_node("CanvasLayer/SkipButton")
+	end_screen = main.get_node("CanvasLayer/EndScreen")
 
 func pause_game():
 	if state == GameState.State.PAUSED:
@@ -69,6 +74,8 @@ func enable_cutscene():
 		DialogManagier.monologue_ended.connect(end_cutscene)
 
 func end_cutscene():
+	if state == GameState.State.FINISHED:
+		show_credits()
 	state = GameState.State.ACTION_FREE
 	skip_button.visible = false
 
@@ -77,9 +84,8 @@ func force_quit_cutscene():
 	DialogManagier.monologue_ended.emit()
 
 func show_credits():
-	state = GameState.State.CUTSCENE
-	%EndScreen.show()
-	%EndScreen.fade_in()
+	end_screen.show()
+	end_screen.fade_in()
 
 func set_state(new_state: State) -> void:
 	state = new_state
