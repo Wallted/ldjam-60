@@ -103,9 +103,18 @@ var action_progress: ActionProgress = $"../../CanvasLayer/ActionProgress"
 
 @onready var multi_mesh_instance_2d: MultiMeshInstance2D = $MultiMeshInstance2D
 
+var shake_tween: Tween
+
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating and room_finished:
-		request_rotate.emit()
+	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
+		if room_finished:
+			request_rotate.emit()
+		else:
+			if shake_tween:
+				shake_tween.kill()
+			shake_tween = get_tree().create_tween()
+			shake_tween.tween_property(multi_mesh_instance_2d, 'modulate', Color.RED, 0.1).set_trans(Tween.TRANS_BOUNCE)
+			shake_tween.tween_property(multi_mesh_instance_2d, 'modulate', Color.WHITE, 0.05).set_trans(Tween.TRANS_BOUNCE)
 
 func _ready() -> void:
 	frame.modulate = Color.DARK_GOLDENROD
@@ -329,6 +338,9 @@ func rotate_room() -> void:
  
 func update_hover_shader(selected: bool) -> void:
 	sprite_2d.material.set("shader_parameter/selected", selected)
+	if not selected and shake_tween:
+		shake_tween.kill()
+		multi_mesh_instance_2d.modulate = Color.WHITE
 	for _child in child_room_list:
 		var _room : GameRoom = _child
 		_room.update_hover_shader(selected)
