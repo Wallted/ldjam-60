@@ -22,8 +22,8 @@ var is_starting_room: bool
 
 @export # DEBUG
 var room_unlocked: bool :
-	get():
-		return true # delete this to enable feature
+	#get():
+		#return true # delete this to enable feature
 	set(value):
 		if not parent_room:
 			return
@@ -139,7 +139,7 @@ func _ready() -> void:
 		var _tile: Node2D = tile_list[i]
 		multi_mesh_instance_2d.multimesh.set_instance_transform_2d(i, _tile.transform)
 	z_index = 100 - zoom_level * 10
-	
+
 func _setup_tiles() -> void:
 	for i in grid_size:
 		for j in grid_size:

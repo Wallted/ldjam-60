@@ -72,7 +72,7 @@ func _process(_delta: float) -> void:
 	currently_focused_room.check_is_room_unlocked()
 	for room in room_list:
 		room.check_is_room_finished(room_finished)
-		
+
 func _snap_rooms_together() -> void: # todo: horrendous, fix it
 	var dict : Dictionary[int, Array]
 	for room in room_list:
