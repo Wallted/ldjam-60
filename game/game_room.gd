@@ -64,6 +64,9 @@ var rocks: Array[Rock]
 @export
 var paths: Array[Path]
 
+func zoom_level_wa() -> bool: # wa: rotating while this far breaks circuit
+	return zoom_level < 2
+
 var room_discovered: bool : 
 	set(value):
 		if value and not room_discovered:
@@ -72,7 +75,7 @@ var room_discovered: bool :
 
 var room_finished: bool :
 	set(value):
-		if value and not room_finished:
+		if value and not room_finished and zoom_level_wa():
 			frame.modulate = Color.WHITE * 1.5
 		room_finished = value
 
@@ -114,7 +117,7 @@ var shake_tween: Tween
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("rotate") and room_area_entered and not rotating:
-		if room_finished:
+		if room_finished and zoom_level_wa():
 			request_rotate.emit()
 		else:
 			if shake_tween:
