@@ -60,6 +60,7 @@ func _ready() -> void:
 		room.update_parent()
 	
 	assert(currently_focused_room != null)
+	GameState.room_unlocked_signal.emit.call_deferred(currently_focused_room.person_name)
 	level_changed.emit.call_deferred(currently_focused_room.person_name, false)
 
 

@@ -8,6 +8,8 @@ enum State {
 	LEVEL_UNLOCKED,
 }
 
+signal room_unlocked_signal(person: Enums.PersonType)
+
 var state: State :
 	set(_state):
 		state = _state
