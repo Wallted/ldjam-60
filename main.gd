@@ -22,6 +22,8 @@ func _on_title_button_pressed() -> void:
 	tween.tween_property(color_rect, 'color:a', 0.0, 0.75).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_callback(_delete)
 	button.visible = false
+	if fade_in:
+		fade_in.visible = false
 	title_text.visible = false
 
 func _delete() -> void:
