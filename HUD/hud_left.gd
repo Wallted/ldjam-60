@@ -25,6 +25,11 @@ func _scroll_to_bottom(delay: float = 0.0) -> void:
 			)
 	)
 
+func force_last_message() -> void:
+	var last_message = chat_window.get_child(-1) as SpeechBubble
+	if last_message != null:
+		last_message.force_display()
+
 func send_message(
 	author: Enums.PersonType,
 	message: String = '',
@@ -32,9 +37,7 @@ func send_message(
 ):
 	var resource = ResourceManagier.get_resource(author)
 
-	var last_message = chat_window.get_child(-1) as SpeechBubble
-	if last_message != null:
-		last_message.force_display()
+	force_last_message()
 	var speech_bubble = SPEECH_BUBBLE.instantiate() as SpeechBubble
 	speech_bubble.text = message
 	speech_bubble.author = resource.person_name
@@ -89,6 +92,7 @@ func _on_monologue_end() -> void:
 	for child in message_timers.get_children():
 		child.stop()
 		child.emit_signal("timeout")
+	force_last_message()
 
 
 func _on_game_level_changed(person_type: Enums.PersonType, powered: bool) -> void:
