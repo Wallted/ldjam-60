@@ -26,7 +26,7 @@ timestamp = 6.0
 
 [sub_resource type="Resource" id="Resource_rbwjm"]
 script = ExtResource("4_kkk1n")
-message = "But I bet our descendants will pay for tickets to see it. Mark my words!"
+message = "I bet our descendants will pay for tickets to see it. Mark my words!"
 timestamp = 10.0
 duration = 6.0
 
