@@ -43,7 +43,7 @@ duration = 4.0
 
 [sub_resource type="Resource" id="Resource_xevba"]
 script = ExtResource("4_6tgb8")
-message = "Oh I messed up again, didn't I?\""
+message = "Oh I messed up again, didn't I?"
 timestamp = 25.0
 duration = 4.0
 
