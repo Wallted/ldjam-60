@@ -106,19 +106,23 @@ script = ExtResource("1_e2o6t")
 unique_name_in_owner = true
 script = ExtResource("3_7jktm")
 
-[node name="FirstMetaRoom" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
-person_name = 1
+[node name="R1" parent="." unique_id=1382508797 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+parent_offset = Vector2(2, 2)
+parent_room = NodePath("../R01")
+
+[node name="R01" parent="." unique_id=325990417 instance=ExtResource("3_ryrav")]
+person_name = 5
 scale_ratio = 1
 zoom_level = 1
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_m75es")])
 paths = Array[ExtResource("6_j8tme")]([SubResource("Resource_bowy6")])
 
-[node name="FirstRoom" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
+[node name="R0" parent="." unique_id=733392714 node_paths=PackedStringArray("parent_room") instance=ExtResource("3_ryrav")]
 position = Vector2(-1, 0)
 scale = Vector2(1, 1)
 person_name = 9
 parent_offset = Vector2(-2, -2)
-parent_room = NodePath("../FirstMetaRoom")
+parent_room = NodePath("../R01")
 doors = Array[ExtResource("4_ryrav")]([SubResource("Resource_fhkfd"), SubResource("Resource_7jktm"), SubResource("Resource_4cobl")])
 gateways = Array[ExtResource("6_u5opy")]([SubResource("Resource_dxrkv"), SubResource("Resource_u5opy")])
 rocks = Array[ExtResource("8_y36n6")]([SubResource("Resource_ll60o"), SubResource("Resource_j3pel"), SubResource("Resource_g28q7"), SubResource("Resource_3vho3"), SubResource("Resource_qf6n1"), SubResource("Resource_vsp63"), SubResource("Resource_b686c"), SubResource("Resource_hb504"), SubResource("Resource_ee6o4")])
